@@ -6,3 +6,7 @@
 .text-shadow {
   text-shadow: 3px 3px 2px rgba(0, 0, 0, 0.5);
 }
+
+.footer-option {
+  @apply font-extralight cursor-pointer hover:text-primary-yellow;
+}

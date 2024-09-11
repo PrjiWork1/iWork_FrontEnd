@@ -1,13 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { HeaderSearchInput } from "./HeaderSearchInput";
 import { HiMiniUserCircle } from "react-icons/hi2";
+import { useState } from "react";
 
 export function Header() {
+  const [isUserLogged, setIsUserLogged] = useState<boolean>(false);
 
-  const navigate = useNavigate();
+  const handleIsUserLogged = () => {
 
-  const handleUserClick = () => {
-    navigate('Login')
   }
 
   return (
@@ -21,9 +21,16 @@ export function Header() {
         <button className="cursor-pointer bg-primary-gray text-primary-yellow p-2 rounded-xl font-extrabold hover:bg-primary-yellow hover:text-primary-gray transition">
           Anunciar
         </button>
-        <div className="flex flex-col items-center">
-          <HiMiniUserCircle size={40} color="#FFC700" cursor={"pointer"} onClick={handleUserClick} />
-        </div>
+        {isUserLogged ? (
+          <Link to="/user">
+            <HiMiniUserCircle size={40} color="#FFC700" />
+        </Link>
+      ) : (
+      <Link to="/login">
+          <HiMiniUserCircle size={40} color="#FFC700" />
+        </Link>
+      )}
+
       </div>
     </div>
   );

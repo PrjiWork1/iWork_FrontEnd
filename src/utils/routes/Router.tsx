@@ -4,7 +4,7 @@ import { Home } from "../../pages/Home/index.tsx";
 import { Register } from "../../pages/Register/index.tsx";
 import { Login } from "../../pages/Login/index.tsx";
 import { NotFound } from "../../pages/NotFound/index.tsx";
-
+import { Ad } from "../../pages/Ad/index.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +14,10 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/ad",
+        element: <Ad />,
       },
     ],
   },

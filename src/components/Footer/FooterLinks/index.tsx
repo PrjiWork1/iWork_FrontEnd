@@ -1,9 +1,13 @@
+import { Link } from "react-router-dom";
+
 export function FooterLinks() {
   return (
     <ul className="text-white flex flex-col gap-4">
       <li className="font-extrabold text-xl">Acesso rápido</li>
       <li>
-        <span className="footer-option">Anunciar</span>
+        <Link to="/ad">
+          <span className="footer-option">Anunciar</span>
+        </Link>
       </li>
       <li>
         <span className="footer-option">Blog</span>

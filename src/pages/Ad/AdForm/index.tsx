@@ -5,11 +5,7 @@ export function AdForm() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      setFileName(file.name);
-    } else {
-      setFileName("Envie aqui sua imagem");
-    }
+    file ? setFileName(file.name) : setFileName("Envie aqui sua imagem");
   };
 
   return (
@@ -25,7 +21,7 @@ export function AdForm() {
         <p className="text-primary-darkgray font-black mb-4">
           Envie aqui a imagem de capa do anúncio
         </p>
-        <div className="flex gap-3 items-center">
+        <div className="flex gap-3 items-center flex-col md:flex-row">
           <div className="relative inline-block">
             <input
               type="file"

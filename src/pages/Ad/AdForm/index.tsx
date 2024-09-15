@@ -1,15 +1,22 @@
 import { useState } from "react";
 
+type Image = {
+  name: string;
+  size: number;
+  lastModified: number;
+  type: string;
+};
+
 export function AdForm() {
-  const [fileName, setFileName] = useState<string>("Envie aqui sua imagem");
+  const [image, setImage] = useState<Image | undefined>(undefined);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    file ? setFileName(file.name) : setFileName("Envie aqui sua imagem");
+    const image: Image | undefined = e.target.files?.[0];
+    setImage(image);
   };
 
   return (
-    <div className="border-2 rounded border-primary-darkgray p-5 my-14">
+    <form className="border-2 rounded border-primary-darkgray p-5 my-14">
       <div className="flex flex-col gap-2">
         <p className="text-primary-darkgray font-black">Nome do anúncio</p>
         <input
@@ -39,10 +46,10 @@ export function AdForm() {
           </div>
 
           <span id="fileName" className="text-gray-700">
-            {fileName}
+            {image ? image.name : "Envie aqui sua imagem"}
           </span>
         </div>
       </div>
-    </div>
+    </form>
   );
 }

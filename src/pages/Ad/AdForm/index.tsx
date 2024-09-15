@@ -12,7 +12,17 @@ export function AdForm() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const image: Image | undefined = e.target.files?.[0];
-    setImage(image);
+    const imageTypes = [
+      "image/png",
+      "image/jpeg",
+      "image/jpg",
+      "image/svg",
+      "image/svg+xml",
+    ];
+
+    if (image && imageTypes.includes(image.type)) {
+      setImage(image);
+    }
   };
 
   return (
@@ -34,6 +44,7 @@ export function AdForm() {
               type="file"
               id="fileInput"
               name="fileInput"
+              accept="image/*"
               className="absolute inset-0 opacity-0 cursor-pointer"
               onChange={handleFileChange}
             />

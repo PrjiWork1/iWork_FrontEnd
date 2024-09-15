@@ -11,7 +11,7 @@ export function Ad() {
       <div className="bg-primary-darkblue text-white font-extrabold text-center py-20 text-3xl">
         Banner Anuncio
       </div>
-      <div className="md:px-20 px-2">
+      <div className="md:px-20 px-2 lg:flex lg:justify-center">
         <AdForm />
       </div>
     </div>

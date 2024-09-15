@@ -10,3 +10,9 @@
 .footer-option {
   @apply font-extralight cursor-pointer hover:text-primary-yellow;
 }
+
+.input-number::-webkit-inner-spin-button,
+.input-number::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

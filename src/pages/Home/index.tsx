@@ -11,7 +11,7 @@ export function Home() {
 
   return (
     <div className="font-inter">
-      <div className="bg-primary-darkblue text-white font-extrabold text-center py-20 text-3xl">
+      <div className="bg-primary-darkblue text-primary-white font-extrabold text-center py-20 text-3xl">
         Banner Home
       </div>
       <div className="md:px-20">

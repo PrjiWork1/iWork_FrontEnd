@@ -16,11 +16,11 @@ export function PopularCategories() {
       </div>
       <div className="mt-10">
         <div className="flex items-center justify-center my-4">
-          <div className="flex-grow border-t border-black"></div>
+          <div className="flex-grow border-t border-primary-black"></div>
           <span className="mx-4 font-extrabold text-center cursor-pointer">
             Ver todas as categorias
           </span>
-          <div className="flex-grow border-t border-black"></div>
+          <div className="flex-grow border-t border-primary-black"></div>
         </div>
       </div>
     </div>

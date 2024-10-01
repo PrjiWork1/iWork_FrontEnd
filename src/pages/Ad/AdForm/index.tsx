@@ -50,7 +50,7 @@ export function AdForm() {
             />
             <label
               htmlFor="adImageInput"
-              className="bg-primary-darkgray border-none font-extrabold text-white py-3 px-8 rounded-lg cursor-pointer"
+              className="bg-primary-darkgray border-none font-extrabold text-primary-white py-3 px-8 rounded-lg cursor-pointer"
             >
               Fazer upload
             </label>
@@ -70,10 +70,10 @@ export function AdForm() {
             htmlFor="adModel1"
             className="border-2 rounded-lg border-primary-darkgray flex flex-col p-3 gap-3 items-center justify-center lg:w-1/4 cursor-pointer group hover:bg-primary-darkgray"
           >
-            <p className="text-primary-darkgray font-black group-hover:text-white">
+            <p className="text-primary-darkgray font-black group-hover:text-primary-white">
               Normal
             </p>
-            <span className="text-primary-darkgray font-medium group-hover:text-white">
+            <span className="text-primary-darkgray font-medium group-hover:text-primary-white">
               O item vendido será exatamente o do título do anúncio cadastrado
               neste formulário
             </span>
@@ -83,10 +83,10 @@ export function AdForm() {
             htmlFor="adModel2"
             className="border-2 rounded-lg border-primary-darkgray flex flex-col p-3 gap-3 items-center justify-center lg:w-1/4 lg:p-4 lg:h-[11.5rem] cursor-pointer group hover:bg-primary-darkgray"
           >
-            <p className="text-primary-darkgray font-black group-hover:text-white">
+            <p className="text-primary-darkgray font-black group-hover:text-primary-white">
               Dinâmico
             </p>
-            <span className="text-primary-darkgray font-medium group-hover:text-white">
+            <span className="text-primary-darkgray font-medium group-hover:text-primary-white">
               Anuncie vários itens, dando opções para que o cliente escolha qual
               item deseja.
             </span>
@@ -153,10 +153,10 @@ export function AdForm() {
             className="border-2 rounded-lg border-primary-darkgray flex flex-col p-3 items-center justify-between w-full lg:w-1/4 lg:p-4 lg:h-[14.4rem] cursor-pointer group hover:bg-primary-darkgray "
           >
             <div className="flex flex-col items-center h-full">
-              <p className="text-primary-darkgray font-black group-hover:text-white lg:mb-5">
+              <p className="text-primary-darkgray font-black group-hover:text-primary-white lg:mb-5">
                 Prata
               </p>
-              <span className="text-primary-darkgray font-medium group-hover:text-white">
+              <span className="text-primary-darkgray font-medium group-hover:text-primary-white">
                 Anúncio Prata <br /> Taxa básica de 9,99%
               </span>
             </div>
@@ -167,10 +167,10 @@ export function AdForm() {
             className="border-2 rounded-lg border-primary-darkgray flex flex-col p-3 gap-3 items-center justify-center w-full lg:w-1/4 lg:p-4 lg:h-[14.4rem] cursor-pointer group hover:bg-primary-darkgray"
           >
             <div className="flex flex-col items-center h-full">
-              <p className="text-primary-darkgray font-black group-hover:text-white lg:mb-5">
+              <p className="text-primary-darkgray font-black group-hover:text-primary-white lg:mb-5">
                 Ouro
               </p>
-              <span className="text-primary-darkgray font-medium group-hover:text-white">
+              <span className="text-primary-darkgray font-medium group-hover:text-primary-white">
                 Anúncio Ouro <br />
                 Destaque na página principal <br />
                 Mais visibilidade <br />
@@ -184,10 +184,10 @@ export function AdForm() {
             className="border-2 rounded-lg border-primary-darkgray flex flex-col p-3 gap-3 items-center justify-center w-full lg:w-1/4 lg:p-4 cursor-pointer group hover:bg-primary-darkgray"
           >
             <div className="flex flex-col items-center h-full">
-              <p className="text-primary-darkgray font-black group-hover:text-white lg:mb-1">
+              <p className="text-primary-darkgray font-black group-hover:text-primary-white lg:mb-1">
                 Diamante
               </p>
-              <span className="text-primary-darkgray font-medium group-hover:text-white">
+              <span className="text-primary-darkgray font-medium group-hover:text-primary-white">
                 Anúncio Diamante <br />
                 Destaque na página principal <br />
                 Destaque nas pesquisas <br />
@@ -247,7 +247,7 @@ export function AdForm() {
         <input
           type="submit"
           value="Anunciar"
-          className="cursor-pointer bg-primary-yellow font-semibold text-primary-darkgray rounded px-3 py-1"
+          className="cursor-pointer bg-primary-yellow font-semibold text-primary-darkgray rounded px-3 py-1 hover:bg-primary-yellow/70 transition"
         />
       </div>
     </form>

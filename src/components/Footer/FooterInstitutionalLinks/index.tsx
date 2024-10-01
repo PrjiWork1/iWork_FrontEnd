@@ -1,6 +1,6 @@
 export function FooterInstitutionalLinks() {
   return (
-    <ul className="text-white flex flex-col gap-4">
+    <ul className="text-primary-white flex flex-col gap-4">
       <li className="font-extrabold text-xl">Institucional</li>
       <li>
         <span className="footer-option">Termos de uso</span>

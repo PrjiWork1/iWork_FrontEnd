@@ -1,6 +1,6 @@
 export function FooterAbout() {
   return (
-    <ul className="text-white flex flex-col gap-4">
+    <ul className="text-primary-white flex flex-col gap-4">
       <li className="font-extrabold text-xl">Sobre</li>
       <li>
         <p className="font-extralight">

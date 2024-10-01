@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function FooterLinks() {
   return (
-    <ul className="text-white flex flex-col gap-4">
+    <ul className="text-primary-white flex flex-col gap-4">
       <li className="font-extrabold text-xl">Acesso rápido</li>
       <li>
         <Link to="/ad">

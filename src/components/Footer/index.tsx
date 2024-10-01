@@ -17,7 +17,7 @@ export function Footer() {
         </div>
       </div>
       <div className="bg-primary-black flex justify-center py-5">
-        <p className="text-white font-light text-center text-sm md:text-base">
+        <p className="text-primary-white font-light text-center text-sm md:text-base">
           © iWORK 2024 | TODOS OS DIREITOS RESERVADOS
         </p>
       </div>

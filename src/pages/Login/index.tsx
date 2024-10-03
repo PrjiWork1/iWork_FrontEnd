@@ -1,18 +1,9 @@
 import { useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { gradient, gradient2 } from "@utils/style/Gradients";
 
 export function Login() {
-  const gradient = `
-  linear-gradient(to top, rgba(4, 191, 104, 0.97), rgba(160, 255, 211, 0.95)), 
-  url("/src/assets/loginPage1.jpeg")
-`;
-
-  const gradient2 = `
-    linear-gradient(to top, rgba(2, 9, 47, 0.97), rgba(2, 9, 47, 0.97)), 
-  url("/src/assets/loginPage2.jpeg")
-  `;
-
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleShowPassword = () => {

@@ -27,9 +27,9 @@ export function Login() {
   };
 
   return (
-    <div className="w-screen h-screen flex font-inter">
+    <div className="w-screen h-screen flex flex-col md:flex-row font-inter">
       <div
-        className="flex-1 bg-cover bg-center flex flex-col items-center justify-center"
+        className="md:flex-1 bg-cover bg-center flex flex-col items-center justify-center p-5 md:p-0 w-full"
         style={{
           backgroundImage: `${gradient}`,
         }}
@@ -45,22 +45,22 @@ export function Login() {
           Ainda não possui uma conta?
         </p>
         <Link to="/register">
-          <button className="cursor-pointer bg-primary-yellow font-bold text-primary-black rounded px-20 py-2 hover:bg-primary-yellow/80 transition">
+          <button className="cursor-pointer bg-primary-yellow font-bold text-primary-black rounded md:px-20 px-3 py-2 hover:bg-primary-yellow/80 transition">
             Crie sua conta agora
           </button>
         </Link>
       </div>
       <div
-        className="flex-1 bg-cover bg-center bg-primary-darkblue flex items-center justify-center"
+        className="md:flex-1 bg-cover bg-center flex items-center justify-center p-5 md:p-0"
         style={{
           backgroundImage: `${gradient2}`,
         }}
       >
         <form
           // onSubmit={handleSubmit(onSubmitFunc)}
-          className="bg-primary-darkblue rounded-xl px-20 py-10 flex flex-col items-center justify-center"
+          className="bg-primary-darkblue rounded-xl p-2 md:px-20 md:py-10 flex flex-col items-center justify-center"
         >
-          <p className="text-primary-white text-5xl mb-10 font-bold tracking-wide">
+          <p className="text-primary-white md:text-5xl text-3xl mb-10 font-bold tracking-wide">
             Login
           </p>
           <button className="bg-primary-darkgreen">login com google</button>
@@ -117,7 +117,7 @@ export function Login() {
             value={"Entrar"}
             className="w-full py-2 rounded text-lg bg-primary-white text-primary-black font-bold hover:opacity-85 transition cursor-pointer"
           />
-          <small className="mt-3 text-primary-white text-xs cursor-pointer hover:underline">
+          <small className="mt-3 mb-3 md:mb-0 text-primary-white text-xs cursor-pointer hover:underline">
             Área de Administrador
           </small>
         </form>

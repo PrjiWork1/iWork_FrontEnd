@@ -54,14 +54,16 @@ export function Login() {
           <p className="text-primary-white md:text-5xl text-3xl mb-10 font-bold tracking-wide">
             Login
           </p>
-          <button className="bg-primary-darkgreen">login com google</button>
-          <div className="flex items-center justify-center my-4 w-full">
+          {/* <button className="bg-primary-darkgreen">
+            login com google
+          </button> */}
+          {/* <div className="flex items-center justify-center my-4 w-full">
             <div className=" border-2 border-primary-white w-full rounded-full"></div>
             <span className="mx-4 font-bold text-primary-white text-center">
               ou
             </span>
             <div className="flex-grow border-2 border-primary-white w-full rounded-full"></div>
-          </div>
+          </div> */}
           <div className="flex flex-col gap-3 mb-10">
             <input
               type="email"

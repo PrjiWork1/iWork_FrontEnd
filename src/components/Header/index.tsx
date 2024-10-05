@@ -26,9 +26,12 @@ export function Header() {
           </button>
         </Link>
         {isUserLogged ? (
-          <Link to="/user">
-            <HiMiniUserCircle size={40} color="#FFC700" />
-          </Link>
+          <div className="flex items-center gap-3">
+            <p className="text-primary-white">Olá nome!</p>
+            <Link to="/user">
+              <HiMiniUserCircle size={40} color="#FFC700" />
+            </Link>
+          </div>
         ) : (
           <Link to="/login">
             <HiMiniUserCircle size={40} color="#FFC700" />

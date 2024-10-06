@@ -20,19 +20,25 @@ export function LoginForm() {
     setDisabledButton((prev) => !prev);
     setTimeout(() => {
       setDisabledButton((prev) => !prev);
-      navigate("/");
     }, 4000);
+    // navigate("/");
+  };
+
+  const onErrorFunc = () => {
+    Object.values(errors).forEach((error) => {
+      notify("error", `${error.message}`);
+    });
   };
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmitFunc)}
+      onSubmit={handleSubmit(onSubmitFunc, onErrorFunc)}
       className="bg-primary-darkblue rounded-xl p-2 md:px-20 md:py-10 flex flex-col items-center justify-center"
     >
       <p className="text-primary-white md:text-5xl text-3xl mb-10 font-bold tracking-wide">
         Login
       </p>
-      {/* <button className="bg-primary-darkgreen">
+      {/* <button className="bg-primary-darkgreen"> 
             login com google
           </button> */}
       {/* <div className="flex items-center justify-center my-4 w-full">
@@ -51,11 +57,6 @@ export function LoginForm() {
             style={{ backgroundColor: "transparent" }}
             {...register("email")}
           />
-          {errors.email && (
-            <small className="text-primary-yellow">
-              {errors.email.message}
-            </small>
-          )}
         </div>
 
         <div className="flex flex-col gap-2">
@@ -79,11 +80,6 @@ export function LoginForm() {
               )}
             </span>
           </div>
-          {errors.password && (
-            <small className="text-primary-yellow">
-              {errors.password.message}
-            </small>
-          )}
         </div>
 
         <div className="flex items-center justify-between mt-3">

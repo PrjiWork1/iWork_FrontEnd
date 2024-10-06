@@ -13,7 +13,9 @@
       "@pages/*": ["pages/*"],
       "@hooks/*": ["hooks/*"],
       "@utils/*": ["utils/*"],
-      "@schemas/*": ["schemas/*"]
+      "@schemas/*": ["schemas/*"],
+      "@types/*": ["types/*"],
+      "@context/*": ["context/*"],
     },
 
     /* Bundler mode */

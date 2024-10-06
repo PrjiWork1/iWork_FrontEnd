@@ -5,6 +5,7 @@ import { notify } from "@utils/notify";
 import { useNavigate } from "react-router-dom";
 import { registerschema } from "@schemas/registerSchema";
 import { useRegisterForm } from "@hooks/useRegisterForm";
+import axiosApi from "@utils/axiosApi";
 
 export function RegisterForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -41,13 +42,50 @@ export function RegisterForm() {
   const navigate = useNavigate();
 
   const onSubmitFunc = (data: registerschema) => {
-    notify("success", "Conta registrada com sucesso!");
-    console.log(data);
     setDisabledButton((prev) => !prev);
+    postUser(data);
+  };
+
+  const postUser = async (data: registerschema) => {
+    try {
+      await axiosApi.post("User/Register", {
+        completeName: `${data.name} ${data.surname}`,
+        userName: `${data.surname}_${data.name}`,
+        // criar uma função para gerar numeros randomicos para adicionar ao username
+        email: data.email,
+        cpf: data.cpf,
+        birthDate: data.birthDate,
+        phoneNumber: data.phone,
+        password: data.password,
+        confirmPassword: data.confirmpassword,
+        role: "User",
+        isActive: true,
+      });
+      setTimeout(() => {
+        loginUser(data);
+      }, 4000);
+    } catch (error) {
+      notify("error", "Ocorreu um erro ao registrar o usuário!");
+    }
     setTimeout(() => {
       setDisabledButton((prev) => !prev);
-    }, 4000);
-    // navigate("/");
+    }, 8000);
+  };
+
+  const loginUser = async (data: registerschema) => {
+    try {
+      const response = await axiosApi.post("User/Login", {
+        email: data.email,
+        password: data.password,
+      });
+      notify("success", "Usuário registrado com sucesso!");
+      sessionStorage.setItem("token_iWork", response.data);
+      setTimeout(() => {
+        navigate("/");
+      }, 4000);
+    } catch (error) {
+      notify("error", "Ocorreu um erro ao realizar o login do usuário!");
+    }
   };
 
   const onErrorFunc = () => {
@@ -55,7 +93,7 @@ export function RegisterForm() {
       notify("error", "Você deve informar seus dados.");
     } else {
       Object.values(errors).forEach((error) => {
-        notify("error", `${error.message}`);
+        notify("error", `${error.message}.`);
       });
     }
   };

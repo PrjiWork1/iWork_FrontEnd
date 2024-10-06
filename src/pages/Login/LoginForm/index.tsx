@@ -1,5 +1,6 @@
 import { useLoginForm } from "@hooks/useLoginForm";
 import { loginschema } from "@schemas/loginSchema";
+import axiosApi from "@utils/axiosApi";
 import { notify } from "@utils/notify";
 import { useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
@@ -15,19 +16,31 @@ export function LoginForm() {
   const handleShowPassword = () => setShowPassword((previous) => !previous);
 
   const onSubmitFunc = (data: loginschema) => {
-    console.log(data.email, data.password);
-    notify("success", "Logado com sucesso!");
     setDisabledButton((prev) => !prev);
-    setTimeout(() => {
-      setDisabledButton((prev) => !prev);
-    }, 4000);
-    // navigate("/");
+    loginUser(data);
   };
 
   const onErrorFunc = () => {
     Object.values(errors).forEach((error) => {
-      notify("error", `${error.message}`);
+      notify("error", `${error.message}.`);
     });
+  };
+
+  const loginUser = async (data: loginschema) => {
+    try {
+      const response = await axiosApi.post("User/Login", {
+        email: data.email,
+        password: data.password,
+      });
+      notify("success", "Logado com sucesso!");
+      sessionStorage.setItem("token_iWork", response.data);
+      setTimeout(() => {
+        setDisabledButton((prev) => !prev);
+        navigate("/");
+      }, 4000);
+    } catch (error) {
+      notify("error", "Ocorreu um erro ao realizar o login do usuário!");
+    }
   };
 
   return (

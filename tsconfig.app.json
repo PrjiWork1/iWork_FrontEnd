@@ -14,8 +14,7 @@
       "@hooks/*": ["hooks/*"],
       "@utils/*": ["utils/*"],
       "@schemas/*": ["schemas/*"],
-      "@types/*": ["types/*"],
-      "@context/*": ["context/*"],
+      "@context/*": ["context/*"]
     },
 
     /* Bundler mode */

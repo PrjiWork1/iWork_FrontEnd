@@ -1,6 +1,6 @@
-import { Category } from "@types/Category";
 import axiosApi from "@utils/axiosApi";
 import { createContext, useEffect, useState } from "react";
+import { Category } from "types/Category";
 
 type ContextProps = {
   children: React.ReactNode;

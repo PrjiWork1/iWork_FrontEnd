@@ -1,6 +1,6 @@
 export type Advertisement = {
-  AdType: NormalAd | DynamicAd;
-  prince: number;
+  // AdType: NormalAd | DynamicAd;
+  price: number;
   stock: number;
   id: string;
   title: string;
@@ -16,6 +16,6 @@ export type Advertisement = {
   isActive: boolean;
 };
 
-interface NormalAd {}
+// interface NormalAd {}
 
-interface DynamicAd {}
+// interface DynamicAd {}

@@ -4,6 +4,6 @@ export type Category = {
   id: string;
   description: string;
   isActive: boolean;
-  normalAdvertisements: Advertisement[];
-  dynamicAdvertisements: Advertisement[];
+  Advertisements: Advertisement[];
+  // dynamicAdvertisements: Advertisement[];
 };

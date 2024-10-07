@@ -20,7 +20,7 @@ export const AdContext = createContext<AdContextType>({
   advertisements: [],
 });
 
-export const AdContextProvider = ({ children }: ContextProps) => {
+export const AdProvider = ({ children }: ContextProps) => {
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
 
   useEffect(() => {
@@ -35,9 +35,7 @@ export const AdContextProvider = ({ children }: ContextProps) => {
           (ad: AdData) => ad.normalAdvertisements
         );
 
-        const newData = allNormalAdvertisements.slice(0, 4);
-
-        setAdvertisements(newData);
+        setAdvertisements(allNormalAdvertisements);
       } catch (error) {
         console.error("Erro ao obter os anúncios: ", error);
       }

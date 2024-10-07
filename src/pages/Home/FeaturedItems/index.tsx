@@ -1,6 +1,7 @@
 import { Card } from "@components/Card";
 import { AdContext } from "@context/AdContext";
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Advertisement } from "types/Advertisement";
 
 export function FeaturedItems() {
@@ -10,7 +11,8 @@ export function FeaturedItems() {
 
   useEffect(() => {
     if (advertisements.length > 0) {
-      setFeaturedAds(advertisements);
+      const adsToShow = advertisements.slice(0, 4);
+      setFeaturedAds(adsToShow);
       setLoading(false);
     }
   }, [advertisements]);
@@ -26,9 +28,9 @@ export function FeaturedItems() {
         ) : (
           <ul className="flex flex-wrap md:justify-center flex-col gap-4 md:flex-row md:gap-20">
             {featuredAds.map((ad: Advertisement) => (
-              <li key={ad.id}>
+              <Link to={`/ad/${ad.id}`} key={ad.id}>
                 <Card advertisement={ad} />
-              </li>
+              </Link>
             ))}
           </ul>
         )}

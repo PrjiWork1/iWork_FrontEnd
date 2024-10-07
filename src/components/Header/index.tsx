@@ -20,7 +20,7 @@ export function Header() {
         <p className="text-primary-yellow font-extrabold text-shadow">
           iWork PRO
         </p>
-        <Link to="/ad">
+        <Link to="/create-ad">
           <button className="cursor-pointer bg-primary-gray text-primary-yellow p-2 rounded-xl font-extrabold hover:bg-primary-yellow hover:text-primary-gray transition">
             Anunciar
           </button>

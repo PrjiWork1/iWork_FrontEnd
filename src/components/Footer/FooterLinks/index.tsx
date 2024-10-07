@@ -5,7 +5,7 @@ export function FooterLinks() {
     <ul className="text-primary-white flex flex-col gap-4">
       <li className="font-extrabold text-xl">Acesso rápido</li>
       <li>
-        <Link to="/ad">
+        <Link to="/create-ad">
           <span className="footer-option">Anunciar</span>
         </Link>
       </li>

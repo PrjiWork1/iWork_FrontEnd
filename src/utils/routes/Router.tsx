@@ -5,6 +5,8 @@ import { Ad } from "@pages/Ad/index.tsx";
 import { Register } from "@pages/Register/index.tsx";
 import { Login } from "@pages/Login/index.tsx";
 import { NotFound } from "@pages/NotFound/index.tsx";
+import { AdProvider } from "@context/AdContext.tsx";
+import { AdItem } from "@pages/AdItem/index.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -16,12 +18,20 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/ad",
+        path: "/create-ad",
         element: <Ad />,
       },
     ],
   },
   { path: "/register", element: <Register /> },
   { path: "/login", element: <Login /> },
+  {
+    path: "/ad/:id",
+    element: (
+      <AdProvider>
+        <AdItem />
+      </AdProvider>
+    ),
+  },
   { path: "/*", element: <NotFound /> },
 ]);

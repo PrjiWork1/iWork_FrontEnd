@@ -3,7 +3,7 @@ import { PopularCategories } from "./PopularCategories";
 import { FeaturedItems } from "./FeaturedItems";
 import { MostPopularItems } from "./MostPopularItems";
 import { InfoCards } from "./InfoCards";
-import { CategoryProvider } from "@context/CategoryContext";
+import { AdContextProvider } from "@context/AdContext";
 
 export function Home() {
   useEffect(() => {
@@ -12,7 +12,7 @@ export function Home() {
 
   return (
     <div>
-      <CategoryProvider>
+      <AdContextProvider>
         <div className="font-inter">
           <div className="bg-primary-darkblue text-primary-white font-extrabold text-center py-20 text-3xl">
             Banner Home
@@ -24,7 +24,7 @@ export function Home() {
             <InfoCards />
           </div>
         </div>
-      </CategoryProvider>
+      </AdContextProvider>
     </div>
   );
 }

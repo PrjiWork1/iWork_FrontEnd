@@ -1,25 +1,19 @@
 import { Card } from "@components/Card";
-import { CategoryContext } from "@context/CategoryContext";
+import { AdContext } from "@context/AdContext";
 import { useContext, useEffect, useState } from "react";
 import { Advertisement } from "types/Advertisement";
 
 export function FeaturedItems() {
   const [featuredAds, setFeaturedAds] = useState<Advertisement[]>([]);
-  const { categories } = useContext(CategoryContext);
-
-  const setAds = () => {
-    const newData = Object.values(categories).flat().slice(0, 4);
-    const mockedData = [
-      { id: "1", title: "teste", userId: "1", price: "10" },
-      { id: "2", title: "design", userId: "2", price: "30" },
-      { id: "3", title: "site", userId: "3", price: "20" },
-    ];
-    setFeaturedAds(mockedData);
-  };
+  const { advertisements } = useContext(AdContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setAds();
-  }, [categories]);
+    if (advertisements.length > 0) {
+      setFeaturedAds(advertisements);
+      setLoading(false);
+    }
+  }, [advertisements]);
 
   return (
     <div className="mb-14">
@@ -27,13 +21,17 @@ export function FeaturedItems() {
         <p className="text-primary-darkgreen font-black mb-5 md:text-center lg:text-start md:text-xl text-2xl">
           Em Destaque
         </p>
-        <ul className="flex flex-wrap md:justify-center flex-col gap-4 md:flex-row md:gap-20">
-          {featuredAds.map((ad: Advertisement) => (
-            <li key={ad.id}>
-              <Card advertisement={ad} />
-            </li>
-          ))}
-        </ul>
+        {loading ? (
+          <p className="text-center text-lg">Carregando...</p>
+        ) : (
+          <ul className="flex flex-wrap md:justify-center flex-col gap-4 md:flex-row md:gap-20">
+            {featuredAds.map((ad: Advertisement) => (
+              <li key={ad.id}>
+                <Card advertisement={ad} />
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

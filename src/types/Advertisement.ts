@@ -5,16 +5,21 @@ export type Advertisement = {
   id: string;
   title: string;
   description: string;
-  urlBanner: number;
+  urlBanner: string;
   type: number;
   iWorkPro: boolean;
   userId: string;
-  // user: null;
+  // user: User;
   categoryId: string;
   advertisementRate: number;
   createdAt: string;
   isActive: boolean;
 };
+
+// interface User {
+//   userId: string;
+//   username: string;
+// }
 
 // interface NormalAd {}
 

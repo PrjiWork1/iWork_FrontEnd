@@ -1,14 +1,17 @@
-import { AdContext } from "@context/AdContext";
+import { AdContext, AdProvider } from "@context/AdContext";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Advertisement } from "types/Advertisement";
+import { AdTopSection } from "./AdTopSection";
+import { AdBottomSection } from "./AdBottomSection";
+import { FeaturedItems } from "@components/FeaturedItems";
 
 export function AdItem() {
   const navigate = useNavigate();
   const { id } = useParams();
   const { advertisements } = useContext(AdContext);
   const [ad, setAd] = useState<Advertisement | null>(null);
-  const [loading, setLoading] = useState(true); // Estado de carregamento
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -34,10 +37,14 @@ export function AdItem() {
   return (
     <div>
       {ad && (
-        <div className="font-poppins flex flex-col gap-5">
-          <p>{ad.title}</p>
-          <p>{ad.id}</p>
-          <p>{ad.createdAt}</p>
+        <div className="font-inter">
+          <AdTopSection ad={ad} />
+          <AdBottomSection ad={ad} />
+          <div className="mt-20 px-10">
+            <AdProvider>
+              <FeaturedItems />
+            </AdProvider>
+          </div>
         </div>
       )}
     </div>

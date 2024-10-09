@@ -119,7 +119,7 @@ export function AdForm() {
           />
         </div>
       </div>
-      <div className="flex flex-col gap-2 mt-3">
+      {/* <div className="flex flex-col gap-2 mt-3">
         <p className="text-primary-darkgray font-black">
           Quantidade em estoque
         </p>
@@ -128,7 +128,7 @@ export function AdForm() {
           defaultValue={1}
           className="input-number border-2 rounded-lg border-primary-darkgray py-2 px-4 text-primary-darkgray font-bold"
         />
-      </div>
+      </div> */}
       <div className="flex flex-col gap-2 mt-3">
         <p className="text-primary-darkgray font-black">Categoria do anúncio</p>
         <select

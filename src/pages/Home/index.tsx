@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { PopularCategories } from "./PopularCategories";
-import { FeaturedItems } from "./FeaturedItems";
 import { MostPopularItems } from "./MostPopularItems";
 import { InfoCards } from "./InfoCards";
 import { AdProvider } from "@context/AdContext";
+import { FeaturedItems } from "@components/FeaturedItems";
 
 export function Home() {
   useEffect(() => {

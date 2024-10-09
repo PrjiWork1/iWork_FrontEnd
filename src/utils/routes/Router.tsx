@@ -21,17 +21,18 @@ export const router = createBrowserRouter([
         path: "/create-ad",
         element: <Ad />,
       },
+      {
+        path: "/ad/:id",
+        element: (
+          <AdProvider>
+            <AdItem />
+          </AdProvider>
+        ),
+      },
     ],
   },
   { path: "/register", element: <Register /> },
   { path: "/login", element: <Login /> },
-  {
-    path: "/ad/:id",
-    element: (
-      <AdProvider>
-        <AdItem />
-      </AdProvider>
-    ),
-  },
+
   { path: "/*", element: <NotFound /> },
 ]);

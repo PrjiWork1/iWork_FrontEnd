@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { HeaderSearchInput } from "./HeaderSearchInput";
 import { HiMiniUserCircle } from "react-icons/hi2";
 import { useState } from "react";
 
@@ -15,7 +14,10 @@ export function Header() {
           iWORK
         </p>
       </Link>
-      <HeaderSearchInput />
+      {/* <input
+        type="search"
+        className="w-50 md:w-[40%] px-3 mt-3 md:mt-0 rounded outline-none focus:ring ring-primary-yellow/90 transition"
+      /> */}
       <div className="flex flex-col md:flex-row text-center mt-3 md:mt-0 items-center justify-around md:w-[30%] gap-2 md:gap-0">
         <p className="text-primary-yellow font-extrabold text-shadow">
           iWork PRO

@@ -1,7 +1,6 @@
 export type Advertisement = {
   // AdType: NormalAd | DynamicAd;
   price: number;
-  stock: number;
   id: string;
   title: string;
   description: string;

@@ -1,3 +1,5 @@
+import { useAdForm } from "@hooks/useAdForm";
+import { adschema } from "@schemas/adSchema";
 import { useState } from "react";
 
 type Image = {
@@ -8,6 +10,7 @@ type Image = {
 };
 
 export function AdForm() {
+  const { register, handleSubmit, errors } = useAdForm();
   const [image, setImage] = useState<Image | undefined>(undefined);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,13 +28,29 @@ export function AdForm() {
     }
   };
 
+  const onSubmitFunc = (data: adschema) => {
+    console.log(data);
+  };
+
+  const onErrorFunc = () => {
+    Object.values(errors).forEach((error) => {
+      alert(error.message);
+    });
+  };
+
+  const [selectedType, setSelectedType] = useState("");
+
   return (
-    <form className="border-2 rounded border-primary-darkgray p-5 my-14 lg:w-2/3">
+    <form
+      className="border-2 rounded border-primary-darkgray p-5 my-14 lg:w-2/3"
+      onSubmit={handleSubmit(onSubmitFunc, onErrorFunc)}
+    >
       <div className="flex flex-col gap-2">
         <p className="text-primary-darkgray font-black">Nome do anúncio</p>
         <input
           type="text"
           className="border-2 rounded-lg border-primary-darkgray py-2 px-4 text-primary-darkgray font-black"
+          {...register("title")}
         />
       </div>
       <div className="flex flex-col gap-2 mt-6">
@@ -43,9 +62,9 @@ export function AdForm() {
             <input
               type="file"
               id="adImageInput"
-              name="adImageInput"
               accept="image/*"
               className="hidden inset-0"
+              // {...register("image")}
               onChange={handleFileChange}
             />
             <label
@@ -61,7 +80,7 @@ export function AdForm() {
           </span>
         </div>
       </div>
-      <div className="flex flex-col gap-2 mt-10">
+      {/* <div className="flex flex-col gap-2 mt-10">
         <p className="text-primary-darkgray font-black mb-4 text-center">
           Modelo do anúncio
         </p>
@@ -106,7 +125,7 @@ export function AdForm() {
             value="Dinamico"
           />
         </div>
-      </div>
+      </div> */}
       <div className="flex flex-col gap-2 mt-6">
         <p className="text-primary-darkgray font-black">Valor do anúncio</p>
         <div className="flex items-center">
@@ -116,6 +135,7 @@ export function AdForm() {
           <input
             type="number"
             className="input-number border-2 rounded-lg border-primary-darkgray py-2 px-10 text-primary-darkgray font-bold w-full"
+            {...register("price")}
           />
         </div>
       </div>
@@ -132,31 +152,58 @@ export function AdForm() {
       <div className="flex flex-col gap-2 mt-3">
         <p className="text-primary-darkgray font-black">Categoria do anúncio</p>
         <select
-          name="adCategory"
           id="adCategory"
           className="border-2 rounded-lg border-primary-darkgray py-2 px-4 text-primary-darkgray font-bold"
+          // {...register("category")}
         >
-          <option value="" hidden>
+          <option value="select" hidden>
             Selecione
           </option>
         </select>
       </div>
       <div className="flex flex-col gap-2 mt-3">
         <p className="text-primary-darkgray font-black">Descrição do anúncio</p>
-        <textarea className="border-2 rounded-lg border-primary-darkgray py-2 px-4 text-primary-darkgray font-bold resize-none h-52"></textarea>
+        <textarea
+          className="border-2 rounded-lg border-primary-darkgray py-2 px-4 text-primary-darkgray font-bold resize-none h-52"
+          {...register("description")}
+        ></textarea>
       </div>
       <div className="flex flex-col gap-2 mt-10">
         <p className="text-primary-darkgray font-black mb-4">Tipo do anúncio</p>
         <div className="flex items-center flex-col md:flex-row justify-between gap-3">
           <label
             htmlFor="adType1"
-            className="border-2 rounded-lg border-primary-darkgray flex flex-col p-3 items-center justify-between w-full lg:w-1/4 lg:p-4 lg:h-[14.4rem] cursor-pointer group hover:bg-primary-darkgray "
+            className={`border-2 rounded-lg border-primary-darkgray flex flex-col p-3 items-center justify-between w-full lg:w-1/4 lg:p-4 lg:h-[14.4rem] cursor-pointer group hover:bg-primary-darkgray transition-colors duration-200 ${
+              selectedType === "Prata"
+                ? "bg-primary-darkgray"
+                : "bg-primary-white"
+            }`}
           >
             <div className="flex flex-col items-center h-full">
-              <p className="text-primary-darkgray font-black group-hover:text-primary-white lg:mb-5">
+              <input
+                type="radio"
+                id="adType1"
+                className="peer hidden"
+                value="Prata"
+                {...register("type")}
+                onChange={(e) => setSelectedType(e.target.value)}
+              />
+              <p
+                className={`font-black group-hover:text-primary-white lg:mb-5 ${
+                  selectedType === "Prata"
+                    ? "text-primary-white"
+                    : "text-primary-darkgray"
+                }`}
+              >
                 Prata
               </p>
-              <span className="text-primary-darkgray font-medium group-hover:text-primary-white">
+              <span
+                className={`font-medium group-hover:text-primary-white ${
+                  selectedType === "Prata"
+                    ? "text-primary-white"
+                    : "text-primary-darkgray"
+                }`}
+              >
                 Anúncio Prata <br /> Taxa básica de 9,99%
               </span>
             </div>
@@ -164,13 +211,37 @@ export function AdForm() {
 
           <label
             htmlFor="adType2"
-            className="border-2 rounded-lg border-primary-darkgray flex flex-col p-3 gap-3 items-center justify-center w-full lg:w-1/4 lg:p-4 lg:h-[14.4rem] cursor-pointer group hover:bg-primary-darkgray"
+            className={`border-2 rounded-lg border-primary-darkgray flex flex-col p-3 gap-3 items-center justify-center w-full lg:w-1/4 lg:p-4 lg:h-[14.4rem] cursor-pointer group hover:bg-primary-darkgray transition-colors duration-200 ${
+              selectedType === "Ouro"
+                ? "bg-primary-darkgray"
+                : "bg-primary-white"
+            }`}
           >
             <div className="flex flex-col items-center h-full">
-              <p className="text-primary-darkgray font-black group-hover:text-primary-white lg:mb-5">
+              <input
+                type="radio"
+                id="adType2"
+                className="peer hidden"
+                value="Ouro"
+                {...register("type")}
+                onChange={(e) => setSelectedType(e.target.value)}
+              />
+              <p
+                className={`font-black group-hover:text-primary-white lg:mb-5 ${
+                  selectedType === "Ouro"
+                    ? "text-primary-white"
+                    : "text-primary-darkgray"
+                }`}
+              >
                 Ouro
               </p>
-              <span className="text-primary-darkgray font-medium group-hover:text-primary-white">
+              <span
+                className={`font-medium group-hover:text-primary-white ${
+                  selectedType === "Ouro"
+                    ? "text-primary-white"
+                    : "text-primary-darkgray"
+                }`}
+              >
                 Anúncio Ouro <br />
                 Destaque na página principal <br />
                 Mais visibilidade <br />
@@ -181,13 +252,37 @@ export function AdForm() {
 
           <label
             htmlFor="adType3"
-            className="border-2 rounded-lg border-primary-darkgray flex flex-col p-3 gap-3 items-center justify-center w-full lg:w-1/4 lg:p-4 cursor-pointer group hover:bg-primary-darkgray"
+            className={`border-2 rounded-lg border-primary-darkgray flex flex-col p-3 gap-3 items-center justify-center w-full lg:w-1/4 lg:p-4 cursor-pointer group hover:bg-primary-darkgray transition-colors duration-200 ${
+              selectedType === "Diamante"
+                ? "bg-primary-darkgray"
+                : "bg-primary-white"
+            }`}
           >
             <div className="flex flex-col items-center h-full">
-              <p className="text-primary-darkgray font-black group-hover:text-primary-white lg:mb-1">
+              <input
+                type="radio"
+                id="adType3"
+                className="peer hidden"
+                value="Diamante"
+                {...register("type")}
+                onChange={(e) => setSelectedType(e.target.value)}
+              />
+              <p
+                className={`font-black group-hover:text-primary-white lg:mb-1 ${
+                  selectedType === "Diamante"
+                    ? "text-primary-white"
+                    : "text-primary-darkgray"
+                }`}
+              >
                 Diamante
               </p>
-              <span className="text-primary-darkgray font-medium group-hover:text-primary-white">
+              <span
+                className={`font-medium group-hover:text-primary-white peer-checked:text-primary-white ${
+                  selectedType === "Diamante"
+                    ? "text-primary-white"
+                    : "text-primary-darkgray"
+                }`}
+              >
                 Anúncio Diamante <br />
                 Destaque na página principal <br />
                 Destaque nas pesquisas <br />
@@ -196,27 +291,6 @@ export function AdForm() {
               </span>
             </div>
           </label>
-          <input
-            type="radio"
-            id="adType1"
-            name="adType"
-            className="hidden"
-            value="Prata"
-          />
-          <input
-            type="radio"
-            id="adType2"
-            name="adType"
-            className="hidden"
-            value="Ouro"
-          />
-          <input
-            type="radio"
-            id="adType3"
-            name="adType"
-            className="hidden"
-            value="Diamante"
-          />
         </div>
       </div>
       <div className="flex flex-col gap-2 mt-6">
@@ -236,7 +310,11 @@ export function AdForm() {
       </div>
       <div className="flex flex-col gap-2 mt-10">
         <div className="flex gap-3 items-center">
-          <input type="checkbox" className="size-6 md:size-5" />
+          <input
+            type="checkbox"
+            className="size-6 md:size-5"
+            {...register("agree")}
+          />
           <p className="text-primary-darkgray font-semibold">
             Li e aceito todos os{" "}
             <span className="text-primary-yellow">Termos de Contrato</span>

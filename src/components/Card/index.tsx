@@ -18,7 +18,7 @@ export function Card({ advertisement }: AdCardProps) {
           R$ {advertisement.price}
         </p>
         <small className="text-black font-medium">
-          @{advertisement.description}
+          @{advertisement.completeName}
         </small>
       </div>
     </div>

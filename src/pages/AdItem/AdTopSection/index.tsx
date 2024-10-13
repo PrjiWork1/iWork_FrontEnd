@@ -29,7 +29,7 @@ export function AdTopSection({ ad }: AdProps) {
         <p className="text-xl">
           Vendas{" "}
           <span className="bg-primary-darkgreen px-2 rounded text-primary-white">
-            3
+            0
           </span>
         </p>
         <div className="flex gap-3">

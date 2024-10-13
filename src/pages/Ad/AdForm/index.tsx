@@ -1,20 +1,19 @@
 import { useAdForm } from "@hooks/useAdForm";
 import { adschema } from "@schemas/adSchema";
+import axiosApi from "@utils/axiosApi";
+import { notify } from "@utils/notify";
 import { useState } from "react";
-
-type Image = {
-  name: string;
-  size: number;
-  lastModified: number;
-  type: string;
-};
+import { useNavigate } from "react-router-dom";
 
 export function AdForm() {
   const { register, handleSubmit, errors } = useAdForm();
-  const [image, setImage] = useState<Image | undefined>(undefined);
+  const [image, setImage] = useState<File | null>(null);
+  const [imagePath, setImagePath] = useState<string>();
+  const [disabledButton, setDisabledButton] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const image: Image | undefined = e.target.files?.[0];
+    const image: File | undefined = e.target.files?.[0];
     const imageTypes = [
       "image/png",
       "image/jpeg",
@@ -28,8 +27,62 @@ export function AdForm() {
     }
   };
 
+  const uploadImage = async () => {
+    if (!image) return;
+
+    const formData = new FormData();
+    formData.append("file", image);
+
+    try {
+      const response = await axiosApi.post("Upload/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      setImagePath(response.data.path);
+    } catch (error) {
+      console.log("Ocorreu um erro subir a imagem à nuvem!");
+    }
+  };
+
   const onSubmitFunc = (data: adschema) => {
-    console.log(data);
+    setDisabledButton((prev) => !prev);
+    uploadImage();
+    setTimeout(() => {
+      postAd(data);
+      setTimeout(() => {
+        setDisabledButton((prev) => !prev);
+        navigate("/");
+      }, 2000);
+    }, 3000);
+  };
+
+  const getAdType = (data: adschema) => {
+    if (data.type === "Prata") return 0;
+    if (data.type === "Ouro") return 1;
+    if (data.type === "Diamante") return 2;
+  };
+
+  const postAd = async (data: adschema) => {
+    console.log(getAdType(data));
+    try {
+      await axiosApi.post("/Advertisement/CreateNormalAdvertisement", {
+        title: data.title,
+        description: data.description,
+        urlBanner: imagePath,
+        type: getAdType(data),
+        iWorkPro: true,
+        userId: "9006bf61-34f3-42e5-98cb-cbed2c1674f0",
+        categoryId: "ac5e18a7-5cea-403d-a434-be44168754d6",
+        createdAt: new Date(),
+        price: data.price,
+        isActive: true,
+      });
+      notify("success", "Seu anúncio foi criado!");
+    } catch (error) {
+      console.error("Erro ao fazer o POST: ", error);
+      notify("error", "Um erro ocorreu ao tentar criar o anúncio.");
+    }
   };
 
   const onErrorFunc = () => {
@@ -64,7 +117,11 @@ export function AdForm() {
               id="adImageInput"
               accept="image/*"
               className="hidden inset-0"
-              // {...register("image")}
+              // {...register("image", {
+              //     onChange: () => {
+              //       handleFileChange;
+              //     },
+              //   })}
               onChange={handleFileChange}
             />
             <label
@@ -139,16 +196,6 @@ export function AdForm() {
           />
         </div>
       </div>
-      {/* <div className="flex flex-col gap-2 mt-3">
-        <p className="text-primary-darkgray font-black">
-          Quantidade em estoque
-        </p>
-        <input
-          type="number"
-          defaultValue={1}
-          className="input-number border-2 rounded-lg border-primary-darkgray py-2 px-4 text-primary-darkgray font-bold"
-        />
-      </div> */}
       <div className="flex flex-col gap-2 mt-3">
         <p className="text-primary-darkgray font-black">Categoria do anúncio</p>
         <select
@@ -185,8 +232,11 @@ export function AdForm() {
                 id="adType1"
                 className="peer hidden"
                 value="Prata"
-                {...register("type")}
-                onChange={(e) => setSelectedType(e.target.value)}
+                {...register("type", {
+                  onChange: (e) => {
+                    setSelectedType(e.target.value);
+                  },
+                })}
               />
               <p
                 className={`font-black group-hover:text-primary-white lg:mb-5 ${
@@ -223,8 +273,11 @@ export function AdForm() {
                 id="adType2"
                 className="peer hidden"
                 value="Ouro"
-                {...register("type")}
-                onChange={(e) => setSelectedType(e.target.value)}
+                {...register("type", {
+                  onChange: (e) => {
+                    setSelectedType(e.target.value);
+                  },
+                })}
               />
               <p
                 className={`font-black group-hover:text-primary-white lg:mb-5 ${
@@ -264,8 +317,11 @@ export function AdForm() {
                 id="adType3"
                 className="peer hidden"
                 value="Diamante"
-                {...register("type")}
-                onChange={(e) => setSelectedType(e.target.value)}
+                {...register("type", {
+                  onChange: (e) => {
+                    setSelectedType(e.target.value);
+                  },
+                })}
               />
               <p
                 className={`font-black group-hover:text-primary-white lg:mb-1 ${
@@ -325,7 +381,8 @@ export function AdForm() {
         <input
           type="submit"
           value="Anunciar"
-          className="cursor-pointer bg-primary-yellow font-semibold text-primary-darkgray rounded px-3 py-1 hover:bg-primary-yellow/70 transition"
+          className="cursor-pointer bg-primary-yellow font-semibold text-primary-darkgray rounded px-3 py-1 hover:bg-primary-yellow/70 transition disabled:bg-primary-white/50 disabled:hover:opacity-100 disabled:cursor-not-allowed"
+          disabled={disabledButton}
         />
       </div>
     </form>

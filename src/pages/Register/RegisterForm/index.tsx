@@ -24,13 +24,6 @@ export function RegisterForm() {
     setCpf(maskCPF(value));
   };
 
-  const [date, setDate] = useState("");
-
-  const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setDate(maskData(value));
-  };
-
   const [phone, setPhone] = useState("");
 
   const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -148,14 +141,10 @@ export function RegisterForm() {
           />
 
           <input
-            type="text"
-            placeholder="dd/mm/yyyy"
-            value={date}
-            maxLength={10}
-            className="border-2 rounded-lg border-primary-white py-2 px-4 text-primary-white font-semibold placeholder-primary-white/70 md:w-40"
+            type="date"
+            className="border-2 rounded-lg border-primary-white py-2 px-4 text-primary-white font-semibold placeholder-primary-white/70 md:w-40 dark:[color-scheme:dark]"
             style={{ backgroundColor: "transparent" }}
             {...register("birthDate")}
-            onChange={handleDateChange}
           />
         </div>
 
@@ -224,6 +213,10 @@ export function RegisterForm() {
             </span>
           </div>
         </div>
+        <small className="text-primary-white text-center">
+          *A senha deve conter ao menos, <br /> um caractere maiúsculo, um
+          número e um símbolo.
+        </small>
       </div>
       <input
         type="submit"

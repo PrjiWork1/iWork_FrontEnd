@@ -92,6 +92,11 @@ export function AdForm() {
   };
 
   const [selectedType, setSelectedType] = useState("");
+  const [adModel, setAdModel] = useState("Normal");
+
+  const handleAddMoreItems = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+  };
 
   return (
     <form
@@ -117,11 +122,6 @@ export function AdForm() {
               id="adImageInput"
               accept="image/*"
               className="hidden inset-0"
-              // {...register("image", {
-              //     onChange: () => {
-              //       handleFileChange;
-              //     },
-              //   })}
               onChange={handleFileChange}
             />
             <label
@@ -137,19 +137,45 @@ export function AdForm() {
           </span>
         </div>
       </div>
-      {/* <div className="flex flex-col gap-2 mt-10">
+      <div className="flex flex-col gap-2 mt-10">
         <p className="text-primary-darkgray font-black mb-4 text-center">
           Modelo do anúncio
         </p>
         <div className="flex gap-3 items-center flex-col md:flex-row justify-evenly">
           <label
             htmlFor="adModel1"
-            className="border-2 rounded-lg border-primary-darkgray flex flex-col p-3 gap-3 items-center justify-center lg:w-1/4 cursor-pointer group hover:bg-primary-darkgray"
+            className={`border-2 rounded-lg border-primary-darkgray flex flex-col p-3 gap-3 items-center justify-center lg:w-1/4 cursor-pointer group hover:bg-primary-darkgray transition-colors duration-200 ${
+              adModel === "Normal" ? "bg-primary-darkgray" : "bg-primary-white"
+            }`}
           >
-            <p className="text-primary-darkgray font-black group-hover:text-primary-white">
+            <input
+              type="radio"
+              id="adModel1"
+              className="hidden"
+              defaultChecked
+              value="Normal"
+              {...register("adModel", {
+                onChange: (e) => {
+                  setAdModel(e.target.value);
+                },
+              })}
+            />
+            <p
+              className={`font-black group-hover:text-primary-white ${
+                adModel === "Normal"
+                  ? "text-primary-white"
+                  : "text-primary-darkgray"
+              }`}
+            >
               Normal
             </p>
-            <span className="text-primary-darkgray font-medium group-hover:text-primary-white">
+            <span
+              className={`font-medium group-hover:text-primary-white ${
+                adModel === "Normal"
+                  ? "text-primary-white"
+                  : "text-primary-darkgray"
+              }`}
+            >
               O item vendido será exatamente o do título do anúncio cadastrado
               neste formulário
             </span>
@@ -157,45 +183,90 @@ export function AdForm() {
 
           <label
             htmlFor="adModel2"
-            className="border-2 rounded-lg border-primary-darkgray flex flex-col p-3 gap-3 items-center justify-center lg:w-1/4 lg:p-4 lg:h-[11.5rem] cursor-pointer group hover:bg-primary-darkgray"
+            className={`border-2 rounded-lg border-primary-darkgray flex flex-col p-3 gap-3 items-center justify-center lg:w-1/4 lg:p-4 lg:h-[11.5rem] cursor-pointer group hover:bg-primary-darkgray transition-colors duration-200 ${
+              adModel === "Dinamico"
+                ? "bg-primary-darkgray"
+                : "bg-primary-white"
+            }`}
           >
-            <p className="text-primary-darkgray font-black group-hover:text-primary-white">
+            <input
+              type="radio"
+              id="adModel2"
+              className="hidden"
+              value="Dinamico"
+              {...register("adModel", {
+                onChange: (e) => {
+                  setAdModel(e.target.value);
+                },
+              })}
+            />
+            <p
+              className={`font-black group-hover:text-primary-white ${
+                adModel === "Dinamico"
+                  ? "text-primary-white"
+                  : "text-primary-darkgray"
+              }`}
+            >
               Dinâmico
             </p>
-            <span className="text-primary-darkgray font-medium group-hover:text-primary-white">
+            <span
+              className={`font-medium group-hover:text-primary-white ${
+                adModel === "Dinamico"
+                  ? "text-primary-white"
+                  : "text-primary-darkgray"
+              }`}
+            >
               Anuncie vários itens, dando opções para que o cliente escolha qual
               item deseja.
             </span>
           </label>
-          <input
-            type="radio"
-            id="adModel1"
-            name="adModel"
-            className="hidden"
-            value="Normal"
-          />
-          <input
-            type="radio"
-            id="adModel2"
-            name="adModel"
-            className="hidden"
-            value="Dinamico"
-          />
-        </div>
-      </div> */}
-      <div className="flex flex-col gap-2 mt-6">
-        <p className="text-primary-darkgray font-black">Valor do anúncio</p>
-        <div className="flex items-center">
-          <span className="ml-4 absolute font-bold text-primary-darkgray">
-            R$
-          </span>
-          <input
-            type="number"
-            className="input-number border-2 rounded-lg border-primary-darkgray py-2 px-10 text-primary-darkgray font-bold w-full"
-            {...register("price")}
-          />
         </div>
       </div>
+      {adModel === "Normal" ? (
+        <div className="flex flex-col gap-2 mt-6">
+          <p className="text-primary-darkgray font-black">Valor do anúncio</p>
+          <div className="flex items-center">
+            <span className="ml-4 absolute font-bold text-primary-darkgray">
+              R$
+            </span>
+            <input
+              type="number"
+              className="input-number border-2 rounded-lg border-primary-darkgray py-2 px-10 text-primary-darkgray font-bold w-full"
+              {...register("price")}
+            />
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div className="flex flex-col gap-2 mt-6">
+            <p className="text-primary-darkgray font-black">Item #1</p>
+            <input
+              type="text"
+              className="border-2 rounded-lg border-primary-darkgray py-2 px-4 text-primary-darkgray font-black"
+            />
+          </div>
+          <div className="flex flex-col gap-2 mt-3">
+            <p className="text-primary-darkgray font-black">
+              Valor do Item #1:
+            </p>
+            <div className="flex items-center">
+              <span className="ml-4 absolute font-bold text-primary-darkgray">
+                R$
+              </span>
+              <input
+                type="number"
+                className="input-number border-2 rounded-lg border-primary-darkgray py-2 px-10 text-primary-darkgray font-bold w-full"
+              />
+            </div>
+          </div>
+          <button
+            className="my-6 bg-primary-darkgray rounded text-primary-white p-2"
+            onClick={handleAddMoreItems}
+          >
+            Adicionar item
+          </button>
+        </div>
+      )}
       <div className="flex flex-col gap-2 mt-3">
         <p className="text-primary-darkgray font-black">Categoria do anúncio</p>
         <select

@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 export function AdForm() {
   const { register, handleSubmit, errors } = useAdForm();
   const [image, setImage] = useState<File | null>(null);
-  const [imagePath, setImagePath] = useState<string>();
   const [disabledButton, setDisabledButton] = useState<boolean>(false);
   const navigate = useNavigate();
 
@@ -39,21 +38,22 @@ export function AdForm() {
           "Content-Type": "multipart/form-data",
         },
       });
-      setImagePath(response.data.path);
+
+      return response.data.path;
+      // fazer uma função para adicionar o caminho + alguns numeros ou algo assim, para nao dar erro na imagem
     } catch (error) {
-      console.log("Ocorreu um erro subir a imagem à nuvem!");
+      console.log("Ocorreu um erro ao tentar subir a imagem à nuvem! " + error);
+      return notify("error", "Um erro ocorreu ao tentar criar o anúncio.");
     }
   };
 
-  const onSubmitFunc = (data: adschema) => {
+  const onSubmitFunc = async (data: adschema) => {
     setDisabledButton((prev) => !prev);
-    uploadImage();
+
+    postAd(data);
+
     setTimeout(() => {
-      postAd(data);
-      setTimeout(() => {
-        setDisabledButton((prev) => !prev);
-        navigate("/");
-      }, 2000);
+      setDisabledButton((prev) => !prev);
     }, 3000);
   };
 
@@ -64,12 +64,11 @@ export function AdForm() {
   };
 
   const postAd = async (data: adschema) => {
-    console.log(getAdType(data));
     try {
       await axiosApi.post("/Advertisement/CreateNormalAdvertisement", {
         title: data.title,
         description: data.description,
-        urlBanner: imagePath,
+        urlBanner: await uploadImage(),
         type: getAdType(data),
         iWorkPro: true,
         userId: "9006bf61-34f3-42e5-98cb-cbed2c1674f0",
@@ -79,6 +78,9 @@ export function AdForm() {
         isActive: true,
       });
       notify("success", "Seu anúncio foi criado!");
+      setTimeout(() => {
+        navigate("/");
+      }, 4000);
     } catch (error) {
       console.error("Erro ao fazer o POST: ", error);
       notify("error", "Um erro ocorreu ao tentar criar o anúncio.");
@@ -283,6 +285,7 @@ export function AdForm() {
         <p className="text-primary-darkgray font-black">Descrição do anúncio</p>
         <textarea
           className="border-2 rounded-lg border-primary-darkgray py-2 px-4 text-primary-darkgray font-bold resize-none h-52"
+          maxLength={200}
           {...register("description")}
         ></textarea>
       </div>

@@ -40,6 +40,9 @@ export function LoginForm() {
       }, 4000);
     } catch (error) {
       notify("error", "Ocorreu um erro ao realizar o login do usuário!");
+      setTimeout(() => {
+        setDisabledButton((prev) => !prev);
+      }, 4000);
     }
   };
 

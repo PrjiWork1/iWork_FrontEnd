@@ -7,6 +7,7 @@ import { Login } from "@pages/Login/index.tsx";
 import { NotFound } from "@pages/NotFound/index.tsx";
 import { AdProvider } from "@context/AdContext.tsx";
 import { AdItem } from "@pages/AdItem/index.tsx";
+import { PrivateRoute } from "./PrivateRoute.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +20,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/create-ad",
-        element: <Ad />,
+        element: (
+          <PrivateRoute>
+            <Ad />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/ad/:id",

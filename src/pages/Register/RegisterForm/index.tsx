@@ -57,12 +57,15 @@ export function RegisterForm() {
       setTimeout(() => {
         loginUser(data);
       }, 4000);
+      setTimeout(() => {
+        setDisabledButton((prev) => !prev);
+      }, 8000);
     } catch (error) {
       notify("error", "Ocorreu um erro ao registrar o usuário!");
+      setTimeout(() => {
+        setDisabledButton((prev) => !prev);
+      }, 4000);
     }
-    setTimeout(() => {
-      setDisabledButton((prev) => !prev);
-    }, 8000);
   };
 
   const loginUser = async (data: registerschema) => {

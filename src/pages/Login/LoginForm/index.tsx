@@ -34,6 +34,7 @@ export function LoginForm() {
       });
       notify("success", "Logado com sucesso!");
       sessionStorage.setItem("token_iWork", response.data);
+      sessionStorage.setItem("UserEmail_iWork", data.email);
       setTimeout(() => {
         setDisabledButton((prev) => !prev);
         navigate("/");

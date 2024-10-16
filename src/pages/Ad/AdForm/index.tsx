@@ -1,15 +1,18 @@
+import { UserContext } from "@context/UserContext";
 import { useAdForm } from "@hooks/useAdForm";
 import { adschema } from "@schemas/adSchema";
 import axiosApi from "@utils/axiosApi";
 import { notify } from "@utils/notify";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export function AdForm() {
   const { register, handleSubmit, errors } = useAdForm();
   const [image, setImage] = useState<File | null>(null);
   const [disabledButton, setDisabledButton] = useState<boolean>(false);
+
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const image: File | undefined = e.target.files?.[0];
@@ -71,8 +74,8 @@ export function AdForm() {
         urlBanner: await uploadImage(),
         type: getAdType(data),
         iWorkPro: true,
-        userId: "9006bf61-34f3-42e5-98cb-cbed2c1674f0",
-        categoryId: "ac5e18a7-5cea-403d-a434-be44168754d6",
+        userId: user?.id,
+        categoryId: "30ab50cd-2899-4ac4-bfa1-56249e985940",
         createdAt: new Date(),
         price: data.price,
         isActive: true,

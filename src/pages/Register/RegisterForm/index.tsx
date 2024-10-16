@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { maskCPF, maskData, maskPhone } from "@utils/input/Masks";
+import { maskCPF, maskPhone } from "@utils/input/Masks";
 import { notify } from "@utils/notify";
 import { useNavigate } from "react-router-dom";
 import { registerschema } from "@schemas/registerSchema";
@@ -76,6 +76,7 @@ export function RegisterForm() {
       });
       notify("success", "Usuário registrado com sucesso!");
       sessionStorage.setItem("token_iWork", response.data);
+      sessionStorage.setItem("UserEmail_iWork", data.email);
       setTimeout(() => {
         navigate("/");
       }, 4000);

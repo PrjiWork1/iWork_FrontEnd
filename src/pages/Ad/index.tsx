@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { AdForm } from "./AdForm";
+import { UserProvider } from "@context/UserContext";
 
 export function Ad() {
   useEffect(() => {
@@ -12,7 +13,9 @@ export function Ad() {
         Banner Anuncio
       </div>
       <div className="md:px-20 px-2 lg:flex lg:justify-center">
-        <AdForm />
+        <UserProvider>
+          <AdForm />
+        </UserProvider>
       </div>
     </div>
   );

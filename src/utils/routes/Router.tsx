@@ -8,15 +8,21 @@ import { NotFound } from "@pages/NotFound/index.tsx";
 import { AdProvider } from "@context/AdContext.tsx";
 import { AdItem } from "@pages/AdItem/index.tsx";
 import { PrivateRoute } from "./PrivateRoute.tsx";
+import { UserProvider } from "@context/UserContext.tsx";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: (
+          <UserProvider>
+            <Home />
+          </UserProvider>
+        ),
       },
       {
         path: "/create-ad",

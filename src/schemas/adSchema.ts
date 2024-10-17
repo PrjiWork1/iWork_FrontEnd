@@ -7,7 +7,7 @@ export const adSchema = z.object({
   description: z.string().min(12, "Você deve informar a descrição."),
   adModel: z.enum(['Normal', 'Dinamico']),
   type: z.enum(['Prata', 'Ouro', 'Diamante'], {
-    message: "Você deve escolher um tipo do anúncio."
+    message: "Você deve escolher o tipo do anúncio."
   }),
   // iWorkPro: z.boolean(),
   price: z.string().min(2, "Você deve informar o valor."),

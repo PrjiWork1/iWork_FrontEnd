@@ -10,10 +10,9 @@ createRoot(document.getElementById("root")!).render(
     <RouterProvider router={router} />
     <ToastContainer
       position="bottom-right"
-      autoClose={3000}
+      autoClose={2000}
       hideProgressBar={false}
       closeButton={false}
-      pauseOnHover={false}
       pauseOnFocusLoss={false}
       closeOnClick
     />

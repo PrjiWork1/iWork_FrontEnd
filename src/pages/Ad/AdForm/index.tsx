@@ -51,6 +51,10 @@ export function AdForm() {
   };
 
   const onSubmitFunc = async (data: adschema) => {
+    if (!image) {
+      return notify("error", "Você deve selecionar uma imagem.");
+    }
+
     setDisabledButton((prev) => !prev);
 
     postAd(data);
@@ -83,17 +87,11 @@ export function AdForm() {
       notify("success", "Seu anúncio foi criado!");
       setTimeout(() => {
         navigate("/");
-      }, 4000);
+      }, 3000);
     } catch (error) {
       console.error("Erro ao fazer o POST: ", error);
       notify("error", "Um erro ocorreu ao tentar criar o anúncio.");
     }
-  };
-
-  const onErrorFunc = () => {
-    Object.values(errors).forEach((error) => {
-      alert(error.message);
-    });
   };
 
   const [selectedType, setSelectedType] = useState("");
@@ -106,7 +104,7 @@ export function AdForm() {
   return (
     <form
       className="border-2 rounded border-primary-darkgray p-5 my-14 lg:w-2/3"
-      onSubmit={handleSubmit(onSubmitFunc, onErrorFunc)}
+      onSubmit={handleSubmit(onSubmitFunc)}
     >
       <div className="flex flex-col gap-2">
         <p className="text-primary-darkgray font-black">Nome do anúncio</p>
@@ -115,6 +113,11 @@ export function AdForm() {
           className="border-2 rounded-lg border-primary-darkgray py-2 px-4 text-primary-darkgray font-black"
           {...register("title")}
         />
+        {errors.title && (
+          <small className="text-primary-red font-semibold">
+            {errors.title.message}*
+          </small>
+        )}
       </div>
       <div className="flex flex-col gap-2 mt-6">
         <p className="text-primary-darkgray font-black mb-4">
@@ -240,6 +243,11 @@ export function AdForm() {
               {...register("price")}
             />
           </div>
+          {errors.price && (
+            <small className="text-primary-red font-semibold">
+              {errors.price.message}*
+            </small>
+          )}
         </div>
       ) : (
         <div>
@@ -291,6 +299,11 @@ export function AdForm() {
           maxLength={200}
           {...register("description")}
         ></textarea>
+        {errors.description && (
+          <small className="text-primary-red font-semibold">
+            {errors.description.message}*
+          </small>
+        )}
       </div>
       <div className="flex flex-col gap-2 mt-10">
         <p className="text-primary-darkgray font-black mb-4">Tipo do anúncio</p>
@@ -425,6 +438,11 @@ export function AdForm() {
             </div>
           </label>
         </div>
+        {errors.type && (
+          <small className="text-primary-red font-semibold">
+            {errors.type.message}*
+          </small>
+        )}
       </div>
       <div className="flex flex-col gap-2 mt-6">
         <p className="text-primary-darkgray font-black mb-4">Tipo do plano</p>
@@ -453,6 +471,11 @@ export function AdForm() {
             <span className="text-primary-yellow">Termos de Contrato</span>
           </p>
         </div>
+        {errors.agree && (
+          <small className="text-primary-red font-semibold">
+            {errors.agree.message}*
+          </small>
+        )}
       </div>
       <div className="mb-6 mt-3 flex justify-end">
         <input

@@ -79,21 +79,30 @@ export function RegisterForm() {
       sessionStorage.setItem("UserEmail_iWork", data.email);
       setTimeout(() => {
         navigate("/");
-      }, 4000);
+      }, 3000);
     } catch (error) {
       notify("error", "Ocorreu um erro ao realizar o login do usuário!");
     }
   };
 
   const onErrorFunc = () => {
-    if (Object.keys(errors).length === 8) {
-      notify("error", "Você deve informar seus dados.");
-    } else {
-      Object.values(errors).forEach((error) => {
-        notify("error", `${error.message}.`);
-      });
+    if (errors.password) {
+      notify(
+        "error",
+        "A senha deve conter pelo menos 12 caracteres, incluindo um caractere maiúsculo, um número e um símbolo."
+      );
     }
   };
+
+  const errorMessage =
+    errors.name?.message ||
+    errors.surname?.message ||
+    errors.cpf?.message ||
+    errors.birthDate?.message ||
+    errors.phone?.message ||
+    errors.email?.message ||
+    errors.password?.message ||
+    errors.confirmpassword?.message;
 
   return (
     <form
@@ -140,8 +149,9 @@ export function RegisterForm() {
             maxLength={14}
             className="border-2 rounded-lg border-primary-white py-2 px-4 text-primary-white font-semibold placeholder-primary-white/70 md:w-40"
             style={{ backgroundColor: "transparent" }}
-            {...register("cpf")}
-            onChange={handleCPFChange}
+            {...register("cpf", {
+              onChange: handleCPFChange,
+            })}
           />
 
           <input
@@ -159,8 +169,9 @@ export function RegisterForm() {
           maxLength={15}
           className="border-2 rounded-lg border-primary-white py-2 px-4 text-primary-white font-semibold placeholder-primary-white/70"
           style={{ backgroundColor: "transparent" }}
-          {...register("phone")}
-          onChange={handlePhoneChange}
+          {...register("phone", {
+            onChange: handlePhoneChange,
+          })}
         />
 
         <input
@@ -217,11 +228,14 @@ export function RegisterForm() {
             </span>
           </div>
         </div>
-        <small className="text-primary-white text-center">
-          *A senha deve conter ao menos, <br /> um caractere maiúsculo, um
-          número e um símbolo.
-        </small>
       </div>
+      {errorMessage && (
+        <div className="mb-1">
+          <small className="text-primary-yellow font-semibold">
+            *{errorMessage}
+          </small>
+        </div>
+      )}
       <input
         type="submit"
         value={"Registrar"}

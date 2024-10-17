@@ -20,12 +20,6 @@ export function LoginForm() {
     loginUser(data);
   };
 
-  const onErrorFunc = () => {
-    Object.values(errors).forEach((error) => {
-      notify("error", `${error.message}.`);
-    });
-  };
-
   const loginUser = async (data: loginschema) => {
     try {
       const response = await axiosApi.post("User/Login", {
@@ -38,7 +32,7 @@ export function LoginForm() {
       setTimeout(() => {
         setDisabledButton((prev) => !prev);
         navigate("/");
-      }, 4000);
+      }, 3000);
     } catch (error) {
       notify("error", "Ocorreu um erro ao realizar o login do usuário!");
       setTimeout(() => {
@@ -47,9 +41,11 @@ export function LoginForm() {
     }
   };
 
+  const errorMessage = errors.email?.message || errors.password?.message;
+
   return (
     <form
-      onSubmit={handleSubmit(onSubmitFunc, onErrorFunc)}
+      onSubmit={handleSubmit(onSubmitFunc)}
       className="bg-primary-darkblue rounded-xl p-2 md:px-20 md:py-10 flex flex-col items-center justify-center"
     >
       <p className="text-primary-white md:text-5xl text-3xl mb-10 font-bold tracking-wide">
@@ -109,6 +105,13 @@ export function LoginForm() {
           </p>
         </div>
       </div>
+      {errorMessage && (
+        <div className="mb-1">
+          <small className="text-primary-yellow font-semibold">
+            *{errorMessage}
+          </small>
+        </div>
+      )}
       <input
         type="submit"
         value={"Entrar"}

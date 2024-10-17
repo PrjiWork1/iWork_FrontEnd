@@ -5,8 +5,8 @@ export const registerSchema = z
     name: z.string().min(3, "Você deve informar seu nome."),
     surname: z.string().min(3, "Você deve informar seu sobrenome."),
     cpf: z.string().min(14, "Você deve informar seu CPF."),
-    birthDate: z.string().min(10, "Você deve informar sua Data de Nascimento"),
-    phone: z.string().min(15, "Você deve informar seu Telefone."),
+    birthDate: z.string().min(10, "Você deve informar sua data de nascimento"),
+    phone: z.string().min(15, "Você deve informar seu telefone."),
     email: z
       .string()
       .min(3, "Você deve informar seu email.")
@@ -17,16 +17,16 @@ export const registerSchema = z
         const hasUpperCase = /[A-Z]/.test(value);
         const hasNumber = /\d/.test(value);
         const hasSymbol = /[!@#$%^&*(),?":{}|<>]/.test(value);
-        return hasUpperCase && hasNumber && hasSymbol;
+        const hasEnoughLetters = value.length == 12
+        return hasUpperCase && hasNumber && hasSymbol && hasEnoughLetters;
       },
       {
         message:
-          "A senha deve conter pelo menos um caractere maiúsculo, um número e um símbolo.",
+          "Você deve informar sua senha.",
       }
     ),
     confirmpassword: z
       .string()
-      .min(12, "A confirmação de senha deve ter no mínimo 12 caracteres"),
   })
   .refine((field) => field.password === field.confirmpassword, {
     message: "As senhas devem ser iguais.",

@@ -52,7 +52,7 @@ export function HeaderMenu() {
                 to={"/user"}
                 className="text-primary-black font-medium cursor-pointer"
               >
-                Minha conta
+                Meu perfil
               </Link>
               <Link
                 to={"/login"}

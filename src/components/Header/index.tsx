@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { HiMiniUserCircle } from "react-icons/hi2";
 import { useEffect, useState } from "react";
+import { HeaderMenu } from "./HeaderMenu";
+import { UserProvider } from "@context/UserContext";
 
 export function Header() {
   const [isUserLogged, setIsUserLogged] = useState<boolean>(false);
@@ -43,14 +45,12 @@ export function Header() {
           </Link>
         )}
         {isUserLogged ? (
-          <div className="flex items-center gap-3">
-            <Link to="/user">
-              <HiMiniUserCircle size={40} color="#FFC700" />
-            </Link>
-          </div>
+          <UserProvider>
+            <HeaderMenu />
+          </UserProvider>
         ) : (
           <Link to="/login">
-            <HiMiniUserCircle size={40} color="#FFC700" />
+            <HiMiniUserCircle size={40} color="#FFC700" cursor={"pointer"} />
           </Link>
         )}
       </div>

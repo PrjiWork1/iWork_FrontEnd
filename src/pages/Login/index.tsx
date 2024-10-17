@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import { gradient, gradient2 } from "@utils/style/Gradients";
 import { LoginForm } from "./LoginForm";
+import { useEffect } from "react";
 
 export function Login() {
+  useEffect(() => {
+    sessionStorage.clear();
+  }, []);
+
   return (
     <div className="w-screen h-screen flex flex-col md:flex-row font-inter">
       <div

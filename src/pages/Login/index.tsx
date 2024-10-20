@@ -10,7 +10,7 @@ export function Login() {
 
   return (
     <div className="w-screen h-screen flex flex-col md:flex-row font-inter">
-      <div
+      <section
         className="md:flex-1 bg-cover bg-center flex flex-col items-center justify-center p-5 md:p-0 w-full"
         style={{
           backgroundImage: `${gradient}`,
@@ -31,15 +31,15 @@ export function Login() {
             Crie sua conta agora
           </button>
         </Link>
-      </div>
-      <div
+      </section>
+      <section
         className="md:flex-1 bg-cover bg-center flex items-center justify-center p-5 md:p-0"
         style={{
           backgroundImage: `${gradient2}`,
         }}
       >
         <LoginForm />
-      </div>
+      </section>
     </div>
   );
 }

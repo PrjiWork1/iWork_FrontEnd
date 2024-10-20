@@ -10,7 +10,7 @@ export const adSchema = z.object({
     message: "Você deve escolher o tipo do anúncio."
   }),
   // iWorkPro: z.boolean(),
-  price: z.string().min(2, "Você deve informar o valor."),
+  price: z.string().optional(),
   // category: z.string().refine((field) => field !== "select", {
   //   message: "Você precisa escolher uma categoria."
   // }),

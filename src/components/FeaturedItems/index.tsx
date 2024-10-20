@@ -19,7 +19,7 @@ export function FeaturedItems() {
 
   return (
     <div className="mb-14">
-      <div className="flex flex-col items-center md:block">
+      <section className="flex flex-col items-center md:block">
         <p className="text-primary-darkgreen font-black mb-5 md:text-center lg:text-start md:text-xl text-2xl">
           Em Destaque
         </p>
@@ -34,7 +34,7 @@ export function FeaturedItems() {
             ))}
           </ul>
         )}
-      </div>
+      </section>
     </div>
   );
 }

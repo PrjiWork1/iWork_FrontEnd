@@ -15,7 +15,7 @@ export function MostPopularItems() {
   }, []);
 
   return (
-    <div className="mb-14">
+    <section className="mb-14">
       <div className="flex flex-col items-center md:block">
         <p className="text-primary-darkgreen font-black mb-5 md:text-center lg:text-start md:text-xl text-2xl">
           Mais Populares
@@ -28,6 +28,6 @@ export function MostPopularItems() {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

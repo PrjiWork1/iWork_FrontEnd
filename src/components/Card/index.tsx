@@ -13,14 +13,14 @@ export function Card({ advertisement }: AdCardProps) {
         className="w-60 h-44 object-cover"
       />
       <p className="text-primary-black font-black">{advertisement.title}</p>
-      <div className="flex flex-col items-center gap-3 mt-2">
+      <section className="flex flex-col items-center gap-3 mt-2">
         <p className="text-primary-white font-extrabold bg-primary-darkblue p-2 rounded-2xl">
           R$ {advertisement.price}
         </p>
         <small className="text-black font-medium">
           @{advertisement.completeName}
         </small>
-      </div>
+      </section>
     </div>
   );
 }

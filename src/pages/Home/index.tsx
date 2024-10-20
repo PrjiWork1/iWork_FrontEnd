@@ -12,12 +12,12 @@ export function Home() {
           <div className="bg-primary-darkblue text-primary-white font-extrabold text-center py-20 text-3xl">
             Banner Home
           </div>
-          <div className="md:px-20">
+          <section className="md:px-20">
             <PopularCategories />
             <FeaturedItems />
             <MostPopularItems />
             <InfoCards />
-          </div>
+          </section>
         </div>
       </AdProvider>
     </div>

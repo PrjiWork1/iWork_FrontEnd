@@ -1,6 +1,6 @@
 export function PopularCategories() {
   return (
-    <div>
+    <section>
       <div className="flex flex-col items-center md:block">
         <p className="text-primary-darkgreen font-black my-10 md:text-center lg:text-start md:text-xl text-2xl">
           Categorias Populares
@@ -22,6 +22,6 @@ export function PopularCategories() {
           <div className="flex-grow border-t border-primary-black"></div>
         </div> */}
       </div>
-    </div>
+    </section>
   );
 }

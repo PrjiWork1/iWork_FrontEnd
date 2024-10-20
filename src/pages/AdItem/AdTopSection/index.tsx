@@ -13,7 +13,7 @@ export function AdTopSection({ ad }: AdProps) {
   };
 
   return (
-    <div className="p-10 flex gap-8 flex-col md:flex-row items-center md:items-stretch">
+    <section className="p-10 flex gap-8 flex-col md:flex-row items-center md:items-stretch">
       <img
         src={ad.urlBanner}
         alt={ad.title}
@@ -39,6 +39,6 @@ export function AdTopSection({ ad }: AdProps) {
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

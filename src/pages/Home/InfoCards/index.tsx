@@ -1,6 +1,6 @@
 export function InfoCards() {
   return (
-    <div className="mb-14">
+    <section className="mb-14">
       <div className="flex flex-col gap-12 md:flex-row md:gap-20 px-3 md:px-0">
         <div className="border border-black p-5">
           <p className="text-primary-black font-black text-lg text-center">
@@ -27,6 +27,6 @@ export function InfoCards() {
           </span>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

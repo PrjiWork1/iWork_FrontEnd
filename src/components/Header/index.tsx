@@ -17,7 +17,7 @@ export function Header() {
   }, []);
 
   return (
-    <div className="font-inter flex flex-row justify-between bg-primary-darkgreen px-5 md:px-10 py-3 items-center ">
+    <header className="font-inter flex flex-row justify-between bg-primary-darkgreen px-5 md:px-10 py-3 items-center ">
       <Link to="/">
         <p className="text-primary-yellow text-3xl font-extrabold mx-3">
           iWORK
@@ -54,6 +54,6 @@ export function Header() {
           </Link>
         )}
       </div>
-    </div>
+    </header>
   );
 }

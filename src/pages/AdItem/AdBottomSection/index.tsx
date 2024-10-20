@@ -6,7 +6,7 @@ type AdProps = {
 
 export function AdBottomSection({ ad }: AdProps) {
   return (
-    <div>
+    <section>
       <div className="p-5 flex gap-4 flex-col md:items-stretch">
         <p className="font-bold text-xl">Vendedor(a)</p>
         <div className="flex gap-6 items-center">
@@ -17,10 +17,10 @@ export function AdBottomSection({ ad }: AdProps) {
           <p className="font-medium text-xl">{ad.completeName}</p>
         </div>
       </div>
-      <div className="p-5 flex gap-4 flex-col bg-primary-darkgreen">
+      <div className="p-5 flex gap-4 flex-col">
         <p className="font-bold text-xl">Descrição do Anúncio</p>
         <p className="font-medium text-xl break-words">{ad.description}</p>
       </div>
-    </div>
+    </section>
   );
 }

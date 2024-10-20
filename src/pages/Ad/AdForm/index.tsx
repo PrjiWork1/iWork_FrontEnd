@@ -6,10 +6,20 @@ import { notify } from "@utils/notify";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+interface ItemAdvertisement {
+  name: string;
+  price: number;
+}
+
 export function AdForm() {
   const { register, handleSubmit, errors } = useAdForm();
   const [image, setImage] = useState<File | null>(null);
   const [disabledButton, setDisabledButton] = useState<boolean>(false);
+  const [selectedType, setSelectedType] = useState("");
+  const [adModel, setAdModel] = useState("Normal");
+  const [itemFields, setItemFields] = useState<ItemAdvertisement[]>([
+    { name: "", price: 0 },
+  ]);
 
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
@@ -71,34 +81,85 @@ export function AdForm() {
   };
 
   const postAd = async (data: adschema) => {
-    try {
-      await axiosApi.post("/Advertisement/CreateNormalAdvertisement", {
-        title: data.title,
-        description: data.description,
-        urlBanner: await uploadImage(),
-        type: getAdType(data),
-        iWorkPro: true,
-        userId: user?.id,
-        categoryId: "30ab50cd-2899-4ac4-bfa1-56249e985940",
-        createdAt: new Date(),
-        price: data.price,
-        isActive: true,
-      });
-      notify("success", "Seu anúncio foi criado!");
-      setTimeout(() => {
-        navigate("/");
-      }, 3000);
-    } catch (error) {
-      console.error("Erro ao fazer o POST: ", error);
-      notify("error", "Um erro ocorreu ao tentar criar o anúncio.");
+    if (adModel == "Normal") {
+      if (data.price === "")
+        return notify("error", "Você deve informar um valor");
+      try {
+        await axiosApi.post("/Advertisement/CreateNormalAdvertisement", {
+          title: data.title,
+          description: data.description,
+          urlBanner: await uploadImage(),
+          type: getAdType(data),
+          iWorkPro: true,
+          userId: user?.id,
+          categoryId: "30ab50cd-2899-4ac4-bfa1-56249e985940",
+          createdAt: new Date(),
+          price: data.price,
+          isActive: true,
+        });
+        notify("success", "Seu anúncio foi criado!");
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
+      } catch (error) {
+        console.error("Erro ao fazer o POST: ", error);
+        notify("error", "Um erro ocorreu ao tentar criar o anúncio.");
+      }
+    } else if (adModel == "Dinamico") {
+      try {
+        await axiosApi.post("/Advertisement/CreateDynamicAdvertisement", {
+          title: data.title,
+          description: data.description,
+          urlBanner: await uploadImage(),
+          type: getAdType(data),
+          iWorkPro: true,
+          userId: user?.id,
+          categoryId: "30ab50cd-2899-4ac4-bfa1-56249e985940",
+          createdAt: new Date(),
+          price: data.price,
+          itemAdvertisements: itemFields.filter(
+            (item) => item.name && item.price > 0
+          ),
+          isActive: true,
+        });
+        notify("success", "Seu anúncio foi criado!");
+        setItemFields([{ name: "", price: 0 }]);
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
+      } catch (error) {
+        console.error("Erro ao fazer o POST: ", error);
+        notify("error", "Um erro ocorreu ao tentar criar o anúncio.");
+      }
     }
   };
 
-  const [selectedType, setSelectedType] = useState("");
-  const [adModel, setAdModel] = useState("Normal");
-
   const handleAddMoreItems = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    setItemFields((prev) => [...prev, { name: "", price: 0 }]);
+  };
+
+  const handleRemoveItem = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    index: number
+  ) => {
+    e.preventDefault();
+    setItemFields((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleFieldChange = (
+    index: number,
+    field: keyof ItemAdvertisement,
+    value: string | number
+  ) => {
+    const newFields = [...itemFields];
+    if (field === "price") {
+      newFields[index][field] =
+        typeof value === "string" ? parseFloat(value) : value;
+    } else {
+      newFields[index][field] = value as string;
+    }
+    setItemFields(newFields);
   };
 
   return (
@@ -251,37 +312,69 @@ export function AdForm() {
         </div>
       ) : (
         <div>
-          <div className="flex flex-col gap-2 mt-6">
-            <p className="text-primary-darkgray font-black">Item #1</p>
-            <input
-              type="text"
-              className="border-2 rounded-lg border-primary-darkgray py-2 px-4 text-primary-darkgray font-black"
-            />
-          </div>
-          <div className="flex flex-col gap-2 mt-3">
-            <p className="text-primary-darkgray font-black">
-              Valor do Item #1:
-            </p>
-            <div className="flex items-center">
-              <span className="ml-4 absolute font-bold text-primary-darkgray">
-                R$
-              </span>
-              <input
-                type="number"
-                className="input-number border-2 rounded-lg border-primary-darkgray py-2 px-10 text-primary-darkgray font-bold w-full"
-              />
+          {itemFields.map((item, index) => (
+            <div key={index}>
+              <div className="flex flex-col gap-2 mt-6">
+                <p className="text-primary-darkgray font-black">
+                  Item #{index + 1}
+                </p>
+                <input
+                  type="text"
+                  className="border-2 rounded-lg border-primary-darkgray py-2 px-4 text-primary-darkgray font-bold"
+                  value={item.name}
+                  onChange={(e) =>
+                    handleFieldChange(index, "name", e.target.value)
+                  }
+                />
+              </div>
+              <div className="flex flex-col gap-2 mt-3">
+                <p className="text-primary-darkgray font-black">
+                  Valor do Item #{index + 1}:
+                </p>
+                <div className="flex items-center">
+                  <span className="ml-4 absolute font-bold text-primary-darkgray">
+                    R$
+                  </span>
+                  <input
+                    type="number"
+                    className="input-number border-2 rounded-lg border-primary-darkgray py-2 px-10 text-primary-darkgray font-bold w-full"
+                    value={item.price}
+                    onChange={(e) =>
+                      handleFieldChange(
+                        index,
+                        "price",
+                        parseFloat(e.target.value)
+                      )
+                    }
+                  />
+                </div>
+              </div>
+              {index > 0 && (
+                <button
+                  type="button"
+                  onClick={(e) => handleRemoveItem(e, index)}
+                  className="mt-3 bg-primary-darkgray rounded text-primary-white p-2"
+                >
+                  Remover Item
+                </button>
+              )}
             </div>
-          </div>
-          <button
-            className="my-6 bg-primary-darkgray rounded text-primary-white p-2"
-            onClick={handleAddMoreItems}
-          >
-            Adicionar item
-          </button>
+          ))}
+
+          {itemFields.length <= 4 && (
+            <button
+              className="mt-6 bg-primary-darkgray rounded text-primary-white p-2 w-full"
+              onClick={handleAddMoreItems}
+            >
+              Adicionar item
+            </button>
+          )}
         </div>
       )}
       <div className="flex flex-col gap-2 mt-3">
-        <p className="text-primary-darkgray font-black">Categoria do anúncio</p>
+        <p className="text-primary-darkgray font-black mt-3">
+          Categoria do anúncio
+        </p>
         <select
           id="adCategory"
           className="border-2 rounded-lg border-primary-darkgray py-2 px-4 text-primary-darkgray font-bold"

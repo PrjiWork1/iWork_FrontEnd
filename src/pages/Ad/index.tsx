@@ -7,11 +7,11 @@ export function Ad() {
       <div className="bg-primary-darkblue text-primary-white font-extrabold text-center py-20 text-3xl">
         Banner Anuncio
       </div>
-      <div className="md:px-20 px-2 lg:flex lg:justify-center">
+      <section className="md:px-20 px-2 lg:flex lg:justify-center">
         <UserProvider>
           <AdForm />
         </UserProvider>
-      </div>
+      </section>
     </div>
   );
 }

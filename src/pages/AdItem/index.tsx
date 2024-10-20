@@ -40,11 +40,11 @@ export function AdItem() {
         <div className="font-inter">
           <AdTopSection ad={ad} />
           <AdBottomSection ad={ad} />
-          <div className="mt-20 px-10">
+          <section className="mt-20 px-10">
             <AdProvider>
               <FeaturedItems />
             </AdProvider>
-          </div>
+          </section>
         </div>
       )}
     </div>

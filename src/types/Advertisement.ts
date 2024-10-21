@@ -1,5 +1,4 @@
 export type Advertisement = {
-  // AdType: NormalAd | DynamicAd;
   id: string;
   title: string;
   description: string;
@@ -14,10 +13,13 @@ export type Advertisement = {
   advertisementRate: number;
   createdAt: string;
   price: number;
+  itemAdvertisements: ItemsAdvertisements[] | null;
   isActive: boolean;
 };
 
 
-// interface NormalAd {}
+interface ItemsAdvertisements {
+  name: string;
+  price: number;
+}
 
-// interface DynamicAd {}

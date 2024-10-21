@@ -32,12 +32,32 @@ export function AdTopSection({ ad }: AdProps) {
             0
           </span>
         </p>
-        <div className="flex gap-3">
-          <p className="text-xl">R$ {ad.price.toFixed(2)}</p>
-          <button className="text-lg bg-primary-lightgreen rounded text-primary-white font-medium px-2 hover:bg-primary-darkgreen/90 transition">
-            Comprar
-          </button>
-        </div>
+        {ad.itemAdvertisements == null ? (
+          <div className="flex gap-3">
+            <p className="text-xl">R$ {ad.price.toFixed(2)}</p>
+            <button className="text-lg bg-primary-lightgreen rounded text-primary-white font-medium px-2 hover:bg-primary-darkgreen/90 transition">
+              Comprar
+            </button>
+          </div>
+        ) : (
+          <div className="flex gap-3">
+            <select
+              name="itemAdvertisements"
+              id="itemAdvertisements"
+              className="border p-2 rounded text-lg border-primary-black font-medium"
+            >
+              <option hidden>Selecione um item</option>
+              {ad.itemAdvertisements.map((item) => (
+                <option key={item.name} value={item.name}>
+                  {item.name} - R${item.price.toFixed(2)}
+                </option>
+              ))}
+            </select>
+            <button className="text-lg bg-primary-lightgreen rounded text-primary-white font-medium px-2 hover:bg-primary-darkgreen/90 transition">
+              Comprar
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

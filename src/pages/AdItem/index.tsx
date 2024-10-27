@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Advertisement } from "types/Advertisement";
 import { AdTopSection } from "./AdTopSection";
 import { AdBottomSection } from "./AdBottomSection";
-import { FeaturedItems } from "@components/FeaturedItems";
+import { ItemsSection } from "@components/ItemsSection";
 
 export function AdItem() {
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ export function AdItem() {
           <AdBottomSection ad={ad} />
           <section className="mt-20 px-10">
             <AdProvider>
-              <FeaturedItems />
+              <ItemsSection name="Em Destaque" />
             </AdProvider>
           </section>
         </div>

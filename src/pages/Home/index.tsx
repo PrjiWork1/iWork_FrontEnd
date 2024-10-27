@@ -1,8 +1,7 @@
 import { PopularCategories } from "./PopularCategories";
-import { MostPopularItems } from "./MostPopularItems";
 import { InfoCards } from "./InfoCards";
 import { AdProvider } from "@context/AdContext";
-import { FeaturedItems } from "@components/FeaturedItems";
+import { ItemsSection } from "@components/ItemsSection";
 
 export function Home() {
   return (
@@ -14,8 +13,8 @@ export function Home() {
           </div>
           <section className="md:px-20">
             <PopularCategories />
-            <FeaturedItems />
-            <MostPopularItems />
+            <ItemsSection name="Mais Populares" />
+            <ItemsSection name="Em Destaque" />
             <InfoCards />
           </section>
         </div>

@@ -9,6 +9,10 @@ import { AdProvider } from "@context/AdContext.tsx";
 import { AdItem } from "@pages/AdItem/index.tsx";
 import { PrivateRoute } from "./PrivateRoute.tsx";
 import { UserProvider } from "@context/UserContext.tsx";
+import { PrivateAdminRoute } from "./PrivateAdminRoute.tsx";
+import { AdminPanel } from "@pages/AdminPanel/index.tsx";
+import { AdminHome } from "@pages/AdminPanel/AdminHome/index.tsx";
+import { AdminAds } from "@pages/AdminPanel/AdminAds/index.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +44,20 @@ export const router = createBrowserRouter([
           </AdProvider>
         ),
       },
+    ],
+  },
+  {
+    path: "/adminPanel",
+    element: (
+      <UserProvider>
+        <PrivateAdminRoute>
+          <AdminPanel />
+        </PrivateAdminRoute>
+      </UserProvider>
+    ),
+    children: [
+      { path: "", element: <AdminHome /> },
+      { path: "adminAds", element: <AdminAds /> },
     ],
   },
   { path: "/register", element: <Register /> },

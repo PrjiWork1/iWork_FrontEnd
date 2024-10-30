@@ -1,6 +1,6 @@
 import { HiMiniUserCircle } from "react-icons/hi2";
 import { UserContext } from "@context/UserContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 interface MenuPosition {

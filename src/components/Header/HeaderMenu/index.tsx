@@ -1,6 +1,6 @@
 import { HiMiniUserCircle } from "react-icons/hi2";
 import { UserContext } from "@context/UserContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 interface MenuPosition {
@@ -58,6 +58,16 @@ export function HeaderMenu() {
             >
               Anunciar
             </Link>
+
+            {user?.role == "Admin" && (
+              <Link
+                to={"/adminPanel"}
+                className="text-primary-black font-medium cursor-pointer"
+              >
+                Painel Admin
+              </Link>
+            )}
+
             <Link
               to={"/user"}
               className="text-primary-black font-medium cursor-pointer"

@@ -1,3 +1,4 @@
+import { CategoryProvider } from "@context/CategoryContext";
 import { AdForm } from "./AdForm";
 import { UserProvider } from "@context/UserContext";
 
@@ -9,7 +10,9 @@ export function Ad() {
       </div>
       <section className="md:px-20 px-2 lg:flex lg:justify-center">
         <UserProvider>
-          <AdForm />
+          <CategoryProvider>
+            <AdForm />
+          </CategoryProvider>
         </UserProvider>
       </section>
     </div>

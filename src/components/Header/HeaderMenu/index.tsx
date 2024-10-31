@@ -60,25 +60,16 @@ export function HeaderMenu() {
             </Link>
 
             {user?.role == "Admin" && (
-              <Link
-                to={"/adminPanel"}
-                className="text-primary-black font-medium cursor-pointer"
-              >
+              <Link to={"/adminPanel"} className="headermenu-option">
                 Painel Admin
               </Link>
             )}
 
-            <Link
-              to={"/user"}
-              className="text-primary-black font-medium cursor-pointer"
-            >
+            <Link to={"/user"} className="headermenu-option">
               Meu perfil
             </Link>
 
-            <Link
-              to={"/login"}
-              className="text-primary-black font-medium cursor-pointer"
-            >
+            <Link to={"/login"} className="headermenu-option">
               Sair
             </Link>
           </div>

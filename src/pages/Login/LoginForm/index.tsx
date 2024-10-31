@@ -95,7 +95,7 @@ export function LoginForm() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between mt-3">
+        {/* <div className="flex items-center justify-between mt-3">
           <div className="flex gap-1 items-center">
             <input type="checkbox" className="size-4" />
             <p className="text-primary-white text-xs">Lembrar de mim</p>
@@ -103,7 +103,7 @@ export function LoginForm() {
           <p className="text-primary-white text-xs cursor-pointer hover:underline">
             Esqueceu sua senha?
           </p>
-        </div>
+        </div> */}
       </div>
       {errorMessage && (
         <div className="mb-1">
@@ -118,9 +118,9 @@ export function LoginForm() {
         className="w-full py-2 rounded text-lg bg-primary-white text-primary-black font-bold hover:opacity-85 transition cursor-pointer disabled:bg-primary-white/50 disabled:hover:opacity-100 disabled:cursor-not-allowed"
         disabled={disabledButton}
       />
-      <small className="mt-3 mb-3 md:mb-0 text-primary-white text-xs cursor-pointer hover:underline">
+      {/* <small className="mt-3 mb-3 md:mb-0 text-primary-white text-xs cursor-pointer hover:underline">
         Área de Administrador
-      </small>
+      </small> */}
     </form>
   );
 }

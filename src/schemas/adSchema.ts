@@ -11,9 +11,9 @@ export const adSchema = z.object({
   }),
   // iWorkPro: z.boolean(),
   price: z.string().optional(),
-  // category: z.string().refine((field) => field !== "select", {
-  //   message: "Você precisa escolher uma categoria."
-  // }),
+  category: z.string().refine((field) => field !== "select", {
+    message: "Você precisa escolher uma categoria."
+  }),
   agree: z.boolean().refine((field) => field === true, {
     message: "Você precisa concordar com os termos."
   })

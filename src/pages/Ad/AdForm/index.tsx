@@ -1,3 +1,4 @@
+import { CategoryContext } from "@context/CategoryContext";
 import { UserContext } from "@context/UserContext";
 import { useAdForm } from "@hooks/useAdForm";
 import { adschema } from "@schemas/adSchema";
@@ -23,6 +24,7 @@ export function AdForm() {
 
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
+  const { categories } = useContext(CategoryContext);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const image: File | undefined = e.target.files?.[0];
@@ -92,7 +94,7 @@ export function AdForm() {
           type: getAdType(data),
           iWorkPro: true,
           userId: user?.id,
-          categoryId: "30ab50cd-2899-4ac4-bfa1-56249e985940",
+          categoryId: data.category,
           createdAt: new Date(),
           price: data.price,
           isActive: true,
@@ -114,7 +116,7 @@ export function AdForm() {
           type: getAdType(data),
           iWorkPro: true,
           userId: user?.id,
-          categoryId: "30ab50cd-2899-4ac4-bfa1-56249e985940",
+          categoryId: data.category,
           createdAt: new Date(),
           price: data.price,
           itemAdvertisements: itemFields.filter(
@@ -378,12 +380,22 @@ export function AdForm() {
         <select
           id="adCategory"
           className="border-2 rounded-lg border-primary-darkgray py-2 px-4 text-primary-darkgray font-bold"
-          // {...register("category")}
+          {...register("category")}
         >
           <option value="select" hidden>
             Selecione
           </option>
+          {categories.map((item) => (
+            <option key={item.id} value={item.id}>
+              {item.description}
+            </option>
+          ))}
         </select>
+        {errors.category && (
+          <small className="text-primary-red font-semibold">
+            {errors.category.message}*
+          </small>
+        )}
       </div>
       <div className="flex flex-col gap-2 mt-3">
         <p className="text-primary-darkgray font-black">Descrição do anúncio</p>

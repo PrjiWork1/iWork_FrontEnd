@@ -16,3 +16,7 @@
   -webkit-appearance: none;
   margin: 0;
 }
+
+.headermenu-option {
+  @apply text-primary-black font-medium cursor-pointer hover:underline;
+}

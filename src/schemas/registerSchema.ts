@@ -17,7 +17,7 @@ export const registerSchema = z
         const hasUpperCase = /[A-Z]/.test(value);
         const hasNumber = /\d/.test(value);
         const hasSymbol = /[!@#$%^&*(),?":{}|<>]/.test(value);
-        const hasEnoughLetters = value.length == 12
+        const hasEnoughLetters = value.length >= 12
         return hasUpperCase && hasNumber && hasSymbol && hasEnoughLetters;
       },
       {

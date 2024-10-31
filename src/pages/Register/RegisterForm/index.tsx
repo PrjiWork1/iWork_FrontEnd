@@ -43,8 +43,7 @@ export function RegisterForm() {
     try {
       await axiosApi.post("User/Register", {
         completeName: `${data.name} ${data.surname}`,
-        userName: `${data.surname}_${data.name}`,
-        // criar uma função para gerar numeros randomicos para adicionar ao username
+        userName: `${data.surname}_${data.name}${new Date().getTime()}`,
         email: data.email,
         cpf: data.cpf,
         birthDate: data.birthDate,

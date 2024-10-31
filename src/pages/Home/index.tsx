@@ -3,7 +3,7 @@ import { InfoCards } from "./InfoCards";
 import { AdProvider } from "@context/AdContext";
 import { ItemsSection } from "@components/ItemsSection";
 
-import banner from "@assets/bannerHome.svg";
+import banner from "@assets/Banners/bannerHome.svg";
 
 export function Home() {
   return (

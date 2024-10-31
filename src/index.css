@@ -20,3 +20,7 @@
 .headermenu-option {
   @apply text-primary-black font-medium cursor-pointer hover:underline;
 }
+
+.categorycard {
+  @apply size-52 cursor-pointer hover:opacity-90 transition bg-primary-darkgreen w-auto;
+}

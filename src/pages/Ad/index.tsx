@@ -2,7 +2,7 @@ import { CategoryProvider } from "@context/CategoryContext";
 import { AdForm } from "./AdForm";
 import { UserProvider } from "@context/UserContext";
 
-import banner from "@assets/bannerAd.svg";
+import banner from "@assets/Banners/bannerAd.svg";
 
 export function Ad() {
   return (

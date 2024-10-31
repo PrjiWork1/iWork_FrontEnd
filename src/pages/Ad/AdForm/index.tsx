@@ -96,6 +96,7 @@ export function AdForm() {
           userId: user?.id,
           categoryId: data.category,
           createdAt: new Date(),
+          status: 0,
           price: data.price,
           isActive: true,
         });
@@ -119,6 +120,7 @@ export function AdForm() {
           categoryId: data.category,
           createdAt: new Date(),
           price: data.price,
+          status: 0,
           itemAdvertisements: itemFields.filter(
             (item) => item.name && item.price > 0
           ),

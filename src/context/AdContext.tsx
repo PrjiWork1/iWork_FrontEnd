@@ -22,7 +22,11 @@ export const AdProvider = ({ children }: ContextProps) => {
       let api = "/Advertisement/GetAllAdvertisements";
 
       try {
-        const response = await axiosApi.get(api);
+        const response = await axiosApi.get(api, {
+          params: {
+            isAdmin: false,
+          },
+        });
         const data = response.data;
 
         setAdvertisements(data);

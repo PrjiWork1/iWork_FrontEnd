@@ -331,6 +331,7 @@ export function AdForm() {
             <input
               type="number"
               className="input-number border-2 rounded-lg border-primary-darkgray py-2 px-10 text-primary-darkgray font-bold w-full"
+              onWheel={(e) => e.currentTarget.blur()}
               {...register("price")}
             />
           </div>
@@ -368,6 +369,7 @@ export function AdForm() {
                   <input
                     type="number"
                     className="input-number border-2 rounded-lg border-primary-darkgray py-2 px-10 text-primary-darkgray font-bold w-full"
+                    onWheel={(e) => e.currentTarget.blur()}
                     value={item.price}
                     onChange={(e) =>
                       handleFieldChange(

@@ -55,7 +55,6 @@ export function AdForm() {
       });
 
       return response.data.path;
-      // fazer uma função para adicionar o caminho + alguns numeros ou algo assim, para nao dar erro na imagem
     } catch (error) {
       console.log("Ocorreu um erro ao tentar subir a imagem à nuvem! " + error);
       return notify("error", "Um erro ocorreu ao tentar criar o anúncio.");
@@ -82,6 +81,24 @@ export function AdForm() {
     if (data.type === "Diamante") return 2;
   };
 
+  const updateAdStatus = async (id: string) => {
+    let api = "/Advertisement/UpdateStatusAdvertisement";
+
+    try {
+      await axiosApi.put(api, {
+        params: {
+          Id: id,
+        },
+        data: {
+          status: 1,
+        },
+      });
+      console.log("Sucesso ao atualizar o status do anúncio.");
+    } catch (error) {
+      console.error("Erro ao atualizar o status do anúncio: ", error);
+    }
+  };
+
   const postAd = async (data: adschema) => {
     if (adModel == "Normal") {
       if (data.price === "")
@@ -100,7 +117,12 @@ export function AdForm() {
           price: data.price,
           isActive: true,
         });
-        notify("success", "Seu anúncio foi criado!");
+        notify(
+          "success",
+          "Seu anúncio foi criado! Agora, ele irá ser analisado por um Administrador."
+        );
+        // updateAdStatus();
+        // deve arrumar no back para a requisição retornar o id do anuncio
         setTimeout(() => {
           navigate("/");
         }, 3000);
@@ -126,7 +148,11 @@ export function AdForm() {
           ),
           isActive: true,
         });
-        notify("success", "Seu anúncio foi criado!");
+        notify(
+          "success",
+          "Seu anúncio foi criado! Agora, ele irá ser analisado por um Administrador."
+        );
+        // updateAdStatus();
         setItemFields([{ name: "", price: 0 }]);
         setTimeout(() => {
           navigate("/");

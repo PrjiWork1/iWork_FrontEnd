@@ -10,8 +10,12 @@ type SectionProps = {
 
 export function ItemsSection({ name }: SectionProps) {
   const [Ads, setAds] = useState<Advertisement[]>([]);
-  const { advertisements } = useContext(AdContext);
+  const { advertisements, setIsAdmin } = useContext(AdContext);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setIsAdmin(false);
+  }, [setIsAdmin]);
 
   useEffect(() => {
     if (advertisements.length > 0) {

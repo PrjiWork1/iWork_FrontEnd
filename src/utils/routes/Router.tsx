@@ -57,7 +57,14 @@ export const router = createBrowserRouter([
     ),
     children: [
       { path: "", element: <AdminHome /> },
-      { path: "adminAds", element: <AdminAds /> },
+      {
+        path: "adminAds",
+        element: (
+          <AdProvider>
+            <AdminAds />
+          </AdProvider>
+        ),
+      },
     ],
   },
   { path: "/register", element: <Register /> },

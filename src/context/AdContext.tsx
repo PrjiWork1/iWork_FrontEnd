@@ -8,14 +8,19 @@ type ContextProps = {
 
 interface AdContextType {
   advertisements: Advertisement[];
+  isAdmin: boolean;
+  setIsAdmin: (value: boolean) => void;
 }
 
 export const AdContext = createContext<AdContextType>({
   advertisements: [],
+  isAdmin: false,
+  setIsAdmin: () => {},
 });
 
 export const AdProvider = ({ children }: ContextProps) => {
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,9 +28,7 @@ export const AdProvider = ({ children }: ContextProps) => {
 
       try {
         const response = await axiosApi.get(api, {
-          params: {
-            isAdmin: false,
-          },
+          params: { isAdmin },
         });
         const data = response.data;
 
@@ -36,10 +39,10 @@ export const AdProvider = ({ children }: ContextProps) => {
     };
 
     fetchData();
-  }, []);
+  }, [isAdmin]);
 
   return (
-    <AdContext.Provider value={{ advertisements }}>
+    <AdContext.Provider value={{ advertisements, isAdmin, setIsAdmin }}>
       {children}
     </AdContext.Provider>
   );

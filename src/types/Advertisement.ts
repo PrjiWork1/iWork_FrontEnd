@@ -13,6 +13,8 @@ export type Advertisement = {
   advertisementRate: number;
   createdAt: string;
   price: number;
+  status: number;
+  numberOfSales: number;
   itemAdvertisements: ItemsAdvertisements[] | null;
   isActive: boolean;
 };

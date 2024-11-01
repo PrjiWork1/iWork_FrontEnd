@@ -7,8 +7,18 @@ interface PrivateAdminRouteProps {
 }
 
 export function PrivateAdminRoute({ children }: PrivateAdminRouteProps) {
-  // const { user } = useContext(UserContext);
+  const { user, loading } = useContext(UserContext);
 
-  // return user?.role == "Admin" ? children : <Navigate to={"/"} />;
-  return true ? children : <Navigate to={"/"} />;
+  // Se ainda está carregando os dados do usuário
+  if (loading) {
+    return <div>Carregando...</div>; // Exibe um indicador de carregamento
+  }
+
+  // Se o usuário não tiver a role ou não for Admin, redireciona
+  if (!user || user.role !== "Admin") {
+    return <Navigate to="/" />;
+  }
+
+  // Se tudo estiver certo, renderiza os filhos
+  return children;
 }

@@ -8,6 +8,7 @@ type ContextProps = {
 
 interface UserContextType {
   user: User | undefined;
+  loading: boolean;
 }
 
 export const UserContext = createContext<UserContextType>({
@@ -19,11 +20,13 @@ export const UserContext = createContext<UserContextType>({
     role: "",
     userName: "",
   },
+  loading: true,
 });
 
 export const UserProvider = ({ children }: ContextProps) => {
   const [user, setUser] = useState<User | undefined>(undefined);
   const email = sessionStorage.getItem("UserEmail_iWork");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,6 +43,8 @@ export const UserProvider = ({ children }: ContextProps) => {
         setUser(data);
       } catch (error) {
         console.error("Erro ao obter o usuário: ", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -47,6 +52,8 @@ export const UserProvider = ({ children }: ContextProps) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, loading }}>
+      {children}
+    </UserContext.Provider>
   );
 };

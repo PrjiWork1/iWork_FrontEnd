@@ -2,8 +2,8 @@ import { Link, Outlet } from "react-router-dom";
 
 export function AdminPanel() {
   return (
-    <div className="flex flex-col md:flex-row w-screen h-screen font-inter">
-      <aside className="w-full md:w-1/4 py-4 bg-primary-darkgreen">
+    <div className="flex flex-col md:flex-row font-inter min-h-screen">
+      <aside className="flex flex-col w-full md:w-1/4 py-4 bg-primary-darkgreen">
         <Link to="/adminPanel">
           <p className="text-primary-yellow text-3xl font-extrabold text-center tracking-wide cursor-pointer">
             iWORK <span className="text-primary-white">Admin</span>
@@ -20,7 +20,7 @@ export function AdminPanel() {
           </li>
         </ul>
       </aside>
-      <section className="w-full h-full">
+      <section className="flex-grow h-full">
         <Outlet />
       </section>
     </div>

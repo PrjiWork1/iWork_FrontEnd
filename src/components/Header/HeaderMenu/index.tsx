@@ -63,13 +63,13 @@ export function HeaderMenu() {
               Anunciar
             </Link>
 
-            {user?.role == "Admin" && (
+            {user.role == "Admin" && (
               <Link to={"/adminPanel"} className="headermenu-option">
                 Painel Admin
               </Link>
             )}
 
-            <Link to={"/user"} className="headermenu-option">
+            <Link to={`/user/${user.email}`} className="headermenu-option">
               Meu perfil
             </Link>
 

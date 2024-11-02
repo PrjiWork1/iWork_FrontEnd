@@ -269,7 +269,7 @@ export function AdForm() {
               Normal
             </p>
             <span
-              className={`font-medium group-hover:text-primary-white ${
+              className={`font-medium group-hover:text-primary-white text-center ${
                 adModel === "Normal"
                   ? "text-primary-white"
                   : "text-primary-darkgray"
@@ -309,7 +309,7 @@ export function AdForm() {
               Dinâmico
             </p>
             <span
-              className={`font-medium group-hover:text-primary-white ${
+              className={`font-medium group-hover:text-primary-white text-center ${
                 adModel === "Dinamico"
                   ? "text-primary-white"
                   : "text-primary-darkgray"
@@ -473,7 +473,7 @@ export function AdForm() {
                 Prata
               </p>
               <span
-                className={`font-medium group-hover:text-primary-white ${
+                className={`font-medium group-hover:text-primary-white text-center ${
                   selectedType === "Prata"
                     ? "text-primary-white"
                     : "text-primary-darkgray"
@@ -514,7 +514,7 @@ export function AdForm() {
                 Ouro
               </p>
               <span
-                className={`font-medium group-hover:text-primary-white ${
+                className={`font-medium group-hover:text-primary-white text-center ${
                   selectedType === "Ouro"
                     ? "text-primary-white"
                     : "text-primary-darkgray"
@@ -558,7 +558,7 @@ export function AdForm() {
                 Diamante
               </p>
               <span
-                className={`font-medium group-hover:text-primary-white ${
+                className={`font-medium group-hover:text-primary-white text-center ${
                   selectedType === "Diamante"
                     ? "text-primary-white"
                     : "text-primary-darkgray"

@@ -13,6 +13,7 @@ import { PrivateAdminRoute } from "./PrivateAdminRoute.tsx";
 import { AdminPanel } from "@pages/AdminPanel/index.tsx";
 import { AdminHome } from "@pages/AdminPanel/AdminHome/index.tsx";
 import { AdminAds } from "@pages/AdminPanel/AdminAds/index.tsx";
+import { UserPage } from "@pages/UserPage/index.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +70,14 @@ export const router = createBrowserRouter([
   },
   { path: "/register", element: <Register /> },
   { path: "/login", element: <Login /> },
+  {
+    path: "/user/:email",
+    element: (
+      <UserProvider>
+        <UserPage />
+      </UserProvider>
+    ),
+  },
 
   { path: "/*", element: <NotFound /> },
 ]);

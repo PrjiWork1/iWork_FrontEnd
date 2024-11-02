@@ -1,3 +1,4 @@
+import { getAdModel, getPlanType } from "@utils/ad/Functions";
 import axiosApi from "@utils/axiosApi";
 import { notify } from "@utils/notify";
 import { formattedDate } from "@utils/text/FormattedTexts";
@@ -8,11 +9,6 @@ import { Advertisement } from "types/Advertisement";
 type AdRowProps = {
   advertisement: Advertisement;
   onUpdated: (adId: string) => void;
-};
-
-type ItemsAdvertisements = {
-  name: string;
-  price: number;
 };
 
 export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
@@ -35,17 +31,6 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const toggleIsMenuOpen = () => setIsMenuOpen((prev) => !prev);
-
-  const getPlanType = (n: number) => {
-    if (n === 0) return "Prata";
-    if (n === 1) return "Ouro";
-    if (n === 2) return "Diamante";
-  };
-
-  const getAdType = (items: ItemsAdvertisements[] | null) => {
-    if (items) return "Dinâmico";
-    if (!items) return "Normal";
-  };
 
   const handleUpdateAd = async (statusNum: number) => {
     let api = `/Advertisement/UpdateStatusAdvertisement${advertisement.id}`;
@@ -131,7 +116,7 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
               <li className="font-bold cursor-default">
                 Tipo do Anúncio:
                 <p className="text-primary-darkgreen">
-                  {getAdType(advertisement.itemAdvertisements)}
+                  {getAdModel(advertisement.itemAdvertisements)}
                 </p>
               </li>
               <li className="font-bold cursor-default">

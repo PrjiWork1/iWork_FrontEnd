@@ -2,6 +2,7 @@ import { CategoryContext } from "@context/CategoryContext";
 import { UserContext } from "@context/UserContext";
 import { useAdForm } from "@hooks/useAdForm";
 import { adschema } from "@schemas/adSchema";
+import { getAdType, getiWorkPro } from "@utils/ad/Functions";
 import axiosApi from "@utils/axiosApi";
 import { notify } from "@utils/notify";
 import { useContext, useState } from "react";
@@ -17,6 +18,7 @@ export function AdForm() {
   const [image, setImage] = useState<File | null>(null);
   const [disabledButton, setDisabledButton] = useState<boolean>(false);
   const [selectedType, setSelectedType] = useState("");
+  const [selectedPlan, setSelectedPlan] = useState("");
   const [adModel, setAdModel] = useState("Normal");
   const [itemFields, setItemFields] = useState<ItemAdvertisement[]>([
     { name: "", price: 0 },
@@ -25,6 +27,10 @@ export function AdForm() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const { categories } = useContext(CategoryContext);
+
+  if (!user) {
+    return <div>Carregando Usuário...</div>;
+  }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const image: File | undefined = e.target.files?.[0];
@@ -75,12 +81,6 @@ export function AdForm() {
     }, 3000);
   };
 
-  const getAdType = (data: adschema) => {
-    if (data.type === "Prata") return 0;
-    if (data.type === "Ouro") return 1;
-    if (data.type === "Diamante") return 2;
-  };
-
   const updateAdStatus = async (id: string) => {
     let api = "/Advertisement/UpdateStatusAdvertisement";
 
@@ -104,19 +104,21 @@ export function AdForm() {
       if (data.price === "")
         return notify("error", "Você deve informar um valor");
       try {
-        await axiosApi.post("/Advertisement/CreateNormalAdvertisement", {
-          title: data.title,
-          description: data.description,
-          urlBanner: await uploadImage(),
-          type: getAdType(data),
-          iWorkPro: true,
-          userId: user?.id,
-          categoryId: data.category,
-          createdAt: new Date(),
-          status: 0,
-          price: data.price,
-          isActive: true,
-        });
+        await axiosApi
+          .post("/Advertisement/CreateNormalAdvertisement", {
+            title: data.title,
+            description: data.description,
+            urlBanner: await uploadImage(),
+            type: getAdType(data.type),
+            iWorkPro: getiWorkPro(data.iWorkPro),
+            userId: user.id,
+            categoryId: data.category,
+            createdAt: new Date(),
+            status: 0,
+            price: data.price,
+            isActive: true,
+          })
+          .then((res) => console.log(res.data));
         notify(
           "success",
           "Seu anúncio foi criado! Agora, ele irá ser analisado por um Administrador."
@@ -136,9 +138,9 @@ export function AdForm() {
           title: data.title,
           description: data.description,
           urlBanner: await uploadImage(),
-          type: getAdType(data),
-          iWorkPro: true,
-          userId: user?.id,
+          type: getAdType(data.type),
+          iWorkPro: getiWorkPro(data.iWorkPro),
+          userId: user.id,
           categoryId: data.category,
           createdAt: new Date(),
           price: data.price,
@@ -455,7 +457,7 @@ export function AdForm() {
               <input
                 type="radio"
                 id="adType1"
-                className="peer hidden"
+                className="hidden"
                 value="Prata"
                 {...register("type", {
                   onChange: (e) => {
@@ -496,7 +498,7 @@ export function AdForm() {
               <input
                 type="radio"
                 id="adType2"
-                className="peer hidden"
+                className="hidden"
                 value="Ouro"
                 {...register("type", {
                   onChange: (e) => {
@@ -540,7 +542,7 @@ export function AdForm() {
               <input
                 type="radio"
                 id="adType3"
-                className="peer hidden"
+                className="hidden"
                 value="Diamante"
                 {...register("type", {
                   onChange: (e) => {
@@ -558,7 +560,7 @@ export function AdForm() {
                 Diamante
               </p>
               <span
-                className={`font-medium group-hover:text-primary-white peer-checked:text-primary-white ${
+                className={`font-medium group-hover:text-primary-white ${
                   selectedType === "Diamante"
                     ? "text-primary-white"
                     : "text-primary-darkgray"
@@ -581,18 +583,96 @@ export function AdForm() {
       </div>
       <div className="flex flex-col gap-2 mt-6">
         <p className="text-primary-darkgray font-black mb-4">Tipo do plano</p>
-        <div className="border-2 rounded-lg border-primary-darkgray p-5 text-primary-darkgray">
-          <span className="text-primary-darkgray font-black">
+
+        <label
+          className={`border-2 rounded-lg border-primary-darkgray p-5 text-primary-darkgray cursor-pointer group hover:bg-primary-darkgray transition-colors duration-200 ${
+            selectedPlan === "false"
+              ? "bg-primary-darkgray"
+              : "bg-primary-white"
+          }`}
+          htmlFor="planType1"
+        >
+          <input
+            type="radio"
+            id="planType1"
+            className="hidden"
+            value="false"
+            {...register("iWorkPro", {
+              onChange: (e) => {
+                setSelectedPlan(e.target.value);
+              },
+            })}
+          />
+          <span
+            className={`text-primary-darkgray font-black group-hover:text-primary-white ${
+              selectedPlan === "false"
+                ? "text-primary-white"
+                : "text-primary-darkgray"
+            }`}
+          >
+            Plano Básico
+          </span>
+          <p
+            className={`py-4 px-8 font-medium group-hover:text-primary-white ${
+              selectedPlan === "false"
+                ? "text-primary-white"
+                : "text-primary-darkgray"
+            }`}
+          >
+            Gratuito <br />
+            Pagamento protegido <br />
+            Saque padrão <br />
+            Perfil sem selo
+          </p>
+        </label>
+
+        {/* {user.iWorkPro == true && ( */}
+        <label
+          className={`border-2 rounded-lg border-primary-darkgray p-5 text-primary-darkgray mt-4 cursor-pointer group hover:bg-primary-darkgray transition-colors duration-200 ${
+            selectedPlan === "true" ? "bg-primary-darkgray" : "bg-primary-white"
+          }`}
+          htmlFor="planType2"
+        >
+          <input
+            type="radio"
+            id="planType2"
+            className="hidden"
+            value="true"
+            {...register("iWorkPro", {
+              onChange: (e) => {
+                setSelectedPlan(e.target.value);
+              },
+            })}
+          />
+          <span
+            className={`text-primary-darkgray font-black group-hover:text-primary-white ${
+              selectedPlan === "true"
+                ? "text-primary-white"
+                : "text-primary-darkgray"
+            }`}
+          >
             Plano iWork PRO
           </span>
-          <p className="py-4 px-8 font-medium">
+          <p
+            className={`py-4 px-8 font-medium group-hover:text-primary-white ${
+              selectedPlan === "true"
+                ? "text-primary-white"
+                : "text-primary-darkgray"
+            }`}
+          >
             Pagamento protegido <br />
             Saque acelerado <br />
-            Estoque automático <br />
             Mensagem automática <br />
             Selo PRO no seu perfil
           </p>
-        </div>
+        </label>
+        {/* )} */}
+
+        {errors.iWorkPro && (
+          <small className="text-primary-red font-semibold">
+            {errors.iWorkPro.message}*
+          </small>
+        )}
       </div>
       <div className="flex flex-col gap-2 mt-10">
         <div className="flex gap-3 items-center">

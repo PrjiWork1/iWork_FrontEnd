@@ -104,21 +104,19 @@ export function AdForm() {
       if (data.price === "")
         return notify("error", "Você deve informar um valor");
       try {
-        await axiosApi
-          .post("/Advertisement/CreateNormalAdvertisement", {
-            title: data.title,
-            description: data.description,
-            urlBanner: await uploadImage(),
-            type: getAdType(data.type),
-            iWorkPro: getiWorkPro(data.iWorkPro),
-            userId: user.id,
-            categoryId: data.category,
-            createdAt: new Date(),
-            status: 0,
-            price: data.price,
-            isActive: true,
-          })
-          .then((res) => console.log(res.data));
+        await axiosApi.post("/Advertisement/CreateNormalAdvertisement", {
+          title: data.title,
+          description: data.description,
+          urlBanner: await uploadImage(),
+          type: getAdType(data.type),
+          iWorkPro: getiWorkPro(data.iWorkPro),
+          userId: user.id,
+          categoryId: data.category,
+          createdAt: new Date(),
+          status: 0,
+          price: data.price,
+          isActive: true,
+        });
         notify(
           "success",
           "Seu anúncio foi criado! Agora, ele irá ser analisado por um Administrador."

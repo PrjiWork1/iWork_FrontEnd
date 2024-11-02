@@ -82,7 +82,7 @@ export function AdForm() {
   };
 
   const updateAdStatus = async (id: string) => {
-    let api = "/Advertisement/UpdateStatusAdvertisement";
+    let api = `/Advertisement/UpdateStatusAdvertisement${id}`;
 
     try {
       await axiosApi.put(api, {

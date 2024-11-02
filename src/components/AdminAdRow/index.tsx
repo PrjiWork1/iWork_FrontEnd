@@ -12,7 +12,8 @@ type AdRowProps = {
 };
 
 export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
-  const handleAcceptAd = () => {
+  const handleAcceptAd = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (confirm(`Você aprova o anúncio ${advertisement.title} ?`)) {
       handleUpdateAd(2);
       onUpdated(advertisement.id);
@@ -20,7 +21,8 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
     }
   };
 
-  const handleRefuseAd = () => {
+  const handleRefuseAd = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (confirm(`Você recusa o anúncio ${advertisement.title} ?`)) {
       handleUpdateAd(3);
       onUpdated(advertisement.id);
@@ -36,14 +38,8 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
     let api = `/Advertisement/UpdateStatusAdvertisement${advertisement.id}`;
 
     try {
-      await axiosApi.put(api, {
-        params: {
-          Id: advertisement.id,
-        },
-        data: {
-          status: statusNum,
-        },
-      });
+      const resp = await axiosApi.put(api, { status: statusNum });
+      console.log(resp);
       console.log(
         `Sucesso ao atualizar o status do anúncio, codigo de status ${statusNum}.`
       );
@@ -53,8 +49,11 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
   };
 
   return (
-    <div className="border" onClick={toggleIsMenuOpen}>
-      <section className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0 p-4 hover:bg-primary-lightgreen/80 cursor-pointer transition-all">
+    <div className="border rounded-md">
+      <section
+        className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0 p-4 hover:bg-primary-lightgreen/80 cursor-pointer transition-all"
+        onClick={toggleIsMenuOpen}
+      >
         <img
           src={advertisement.urlBanner}
           alt={advertisement.title}

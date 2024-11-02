@@ -27,6 +27,10 @@ export function HeaderMenu() {
     setMenuPosition(position);
   };
 
+  if (!user) {
+    return <div>Carregando usuário...</div>;
+  }
+
   return (
     <div>
       <HiMiniUserCircle
@@ -46,7 +50,7 @@ export function HeaderMenu() {
           <div className="text-white flex flex-col gap-3">
             <p className="text-primary-black font-medium">
               Logado como <br />
-              <span className="font-semibold">{user?.completeName}</span>
+              <span className="font-semibold">{user.completeName}</span>
             </p>
             <p className="text-primary-yellow font-extrabold text-shadow visible sm:hidden">
               iWork PRO

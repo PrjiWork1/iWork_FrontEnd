@@ -19,7 +19,7 @@ export function AdminHome() {
 
       <p className="text-base md:text-xl lg:text-3xl font-extrabold text-center tracking-wide"></p>
       <Link to="/">
-        <p className="text-base md:text-xl lg:text-3xl font-extrabold text-center tracking-wide cursor-pointer hover:text-primary-darkgreen transition">
+        <p className="text-base md:text-xl lg:text-3xl font-extrabold text-center tracking-wide cursor-pointer hover:text-primary-white transition-all bg-primary-lightgreen p-4 rounded-lg hover:bg-primary-darkgreen">
           Retornar à tela home
         </p>
       </Link>

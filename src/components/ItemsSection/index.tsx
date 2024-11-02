@@ -14,15 +14,19 @@ export function ItemsSection({ name }: SectionProps) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setIsAdmin(false);
+    setTimeout(() => {
+      setIsAdmin(false);
+    }, 100);
   }, [setIsAdmin]);
 
   useEffect(() => {
-    if (advertisements.length > 0) {
-      const adsToShow = advertisements.slice(0, 4);
-      setAds(adsToShow);
+    setTimeout(() => {
+      if (advertisements.length > 0) {
+        const adsToShow = advertisements.slice(0, 4);
+        setAds(adsToShow);
+      }
       setLoading(false);
-    }
+    }, 1000);
   }, [advertisements]);
 
   return (
@@ -31,8 +35,11 @@ export function ItemsSection({ name }: SectionProps) {
         <p className="text-primary-darkgreen font-black mb-5 md:text-center lg:text-start md:text-xl text-2xl">
           {name}
         </p>
+        {!loading && advertisements.length == 0 && (
+          <p className="text-center text-lg">Nenhum anúncio foi encontrado.</p>
+        )}
         {loading ? (
-          <p className="text-center text-lg">Carregando...</p>
+          <p className="text-center text-lg">Carregando Anúncios...</p>
         ) : (
           <ul className="flex flex-wrap md:justify-center flex-col gap-4 md:flex-row md:gap-20">
             {Ads.map((ad: Advertisement) => (

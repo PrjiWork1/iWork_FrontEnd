@@ -15,11 +15,13 @@ export function AdminAds() {
   }, [setIsAdmin]);
 
   useEffect(() => {
-    if (advertisements.length > 0) {
-      const adsToShow = advertisements.slice(0, 4);
-      setAds(adsToShow);
+    setTimeout(() => {
+      if (advertisements.length > 0) {
+        const adsToShow = advertisements.slice(0, 4);
+        setAds(adsToShow);
+      }
       setLoading(false);
-    }
+    }, 1000);
   }, [advertisements]);
 
   const handleUpdateAd = (adId: string) => {
@@ -28,15 +30,21 @@ export function AdminAds() {
 
   return (
     <div className="flex flex-col m-6 gap-10">
+      {!loading && advertisements.length == 0 && (
+        <p className="text-center text-lg">
+          Nenhum anúncio em análise foi encontrado.
+        </p>
+      )}
       {loading ? (
-        <p className="text-center text-lg">Carregando...</p>
+        <p className="text-center text-lg">Carregando Anúncios...</p>
       ) : (
         <ul>
-          {Ads.map((ad: Advertisement) => (
-            <li key={ad.id}>
-              <AdminAdRow advertisement={ad} onUpdated={handleUpdateAd} />
-            </li>
-          ))}
+          {advertisements.length > 0 &&
+            Ads.map((ad: Advertisement) => (
+              <li key={ad.id}>
+                <AdminAdRow advertisement={ad} onUpdated={handleUpdateAd} />
+              </li>
+            ))}
         </ul>
       )}
     </div>

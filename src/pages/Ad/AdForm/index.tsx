@@ -18,7 +18,7 @@ export function AdForm() {
   const [image, setImage] = useState<File | null>(null);
   const [disabledButton, setDisabledButton] = useState<boolean>(false);
   const [selectedType, setSelectedType] = useState("");
-  const [selectedPlan, setSelectedPlan] = useState("");
+  // const [selectedPlan, setSelectedPlan] = useState("");
   const [adModel, setAdModel] = useState("Normal");
   const [itemFields, setItemFields] = useState<ItemAdvertisement[]>([
     { name: "", price: 0 },
@@ -109,7 +109,7 @@ export function AdForm() {
           description: data.description,
           urlBanner: await uploadImage(),
           type: getAdType(data.type),
-          iWorkPro: getiWorkPro(data.iWorkPro),
+          // iWorkPro: getiWorkPro(data.iWorkPro),
           userId: user.id,
           categoryId: data.category,
           createdAt: new Date(),
@@ -137,7 +137,7 @@ export function AdForm() {
           description: data.description,
           urlBanner: await uploadImage(),
           type: getAdType(data.type),
-          iWorkPro: getiWorkPro(data.iWorkPro),
+          // iWorkPro: getiWorkPro(data.iWorkPro),
           userId: user.id,
           categoryId: data.category,
           createdAt: new Date(),
@@ -579,7 +579,8 @@ export function AdForm() {
           </small>
         )}
       </div>
-      <div className="flex flex-col gap-2 mt-6">
+
+      {/* <div className="flex flex-col gap-2 mt-6">
         <p className="text-primary-darkgray font-black mb-4">Tipo do plano</p>
 
         <label
@@ -624,7 +625,6 @@ export function AdForm() {
           </p>
         </label>
 
-        {/* {user.iWorkPro == true && ( */}
         <label
           className={`border-2 rounded-lg border-primary-darkgray p-5 text-primary-darkgray mt-4 cursor-pointer group hover:bg-primary-darkgray transition-colors duration-200 ${
             selectedPlan === "true" ? "bg-primary-darkgray" : "bg-primary-white"
@@ -664,14 +664,14 @@ export function AdForm() {
             Selo PRO no seu perfil
           </p>
         </label>
-        {/* )} */}
 
         {errors.iWorkPro && (
           <small className="text-primary-red font-semibold">
             {errors.iWorkPro.message}*
           </small>
         )}
-      </div>
+      </div> */}
+
       <div className="flex flex-col gap-2 mt-10">
         <div className="flex gap-3 items-center">
           <input

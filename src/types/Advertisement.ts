@@ -4,7 +4,7 @@ export type Advertisement = {
   description: string;
   urlBanner: string;
   type: number;
-  iWorkPro: boolean;
+  // iWorkPro: boolean;
   userId: string;
   userName: string;
   completeName: string;

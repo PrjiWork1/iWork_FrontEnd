@@ -52,9 +52,9 @@ export function HeaderMenu() {
               Logado como <br />
               <span className="font-semibold">{user.completeName}</span>
             </p>
-            <p className="text-primary-yellow font-extrabold text-shadow visible sm:hidden">
+            {/* <p className="text-primary-yellow font-extrabold text-shadow visible sm:hidden">
               iWork PRO
-            </p>
+            </p> */}
             <div className="border border-primary-darkgray"></div>
             <Link
               to="/create-ad"

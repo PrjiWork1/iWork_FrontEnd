@@ -15,7 +15,7 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
   const handleAcceptAd = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (confirm(`Você aprova o anúncio ${advertisement.title} ?`)) {
-      handleUpdateAd(2);
+      handleUpdateAd(1);
       onUpdated(advertisement.id);
       notify("success", `Você aprovou o anúncio ${advertisement.title}.`);
     }
@@ -24,7 +24,7 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
   const handleRefuseAd = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (confirm(`Você recusa o anúncio ${advertisement.title} ?`)) {
-      handleUpdateAd(3);
+      handleUpdateAd(2);
       onUpdated(advertisement.id);
       notify("error", `Você recusou o anúncio ${advertisement.title}.`);
     }

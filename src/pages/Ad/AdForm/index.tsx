@@ -81,24 +81,6 @@ export function AdForm() {
     }, 3000);
   };
 
-  const updateAdStatus = async (id: string) => {
-    let api = `/Advertisement/UpdateStatusAdvertisement${id}`;
-
-    try {
-      await axiosApi.put(api, {
-        params: {
-          Id: id,
-        },
-        data: {
-          status: 1,
-        },
-      });
-      console.log("Sucesso ao atualizar o status do anúncio.");
-    } catch (error) {
-      console.error("Erro ao atualizar o status do anúncio: ", error);
-    }
-  };
-
   const postAd = async (data: adschema) => {
     if (adModel == "Normal") {
       if (data.price === "")
@@ -121,8 +103,6 @@ export function AdForm() {
           "success",
           "Seu anúncio foi criado! Agora, ele irá ser analisado por um Administrador."
         );
-        // updateAdStatus();
-        // deve arrumar no back para a requisição retornar o id do anuncio
         setTimeout(() => {
           navigate("/");
         }, 3000);
@@ -152,7 +132,6 @@ export function AdForm() {
           "success",
           "Seu anúncio foi criado! Agora, ele irá ser analisado por um Administrador."
         );
-        // updateAdStatus();
         setItemFields([{ name: "", price: 0 }]);
         setTimeout(() => {
           navigate("/");

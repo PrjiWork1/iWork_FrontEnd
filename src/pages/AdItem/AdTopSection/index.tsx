@@ -1,3 +1,4 @@
+import { calcAdType } from "@utils/ad/Functions";
 import { Advertisement } from "types/Advertisement";
 
 type AdProps = {
@@ -5,13 +6,6 @@ type AdProps = {
 };
 
 export function AdTopSection({ ad }: AdProps) {
-  const calcAdType = () => {
-    const rate = ad.advertisementRate;
-    if (rate === 0.13) return "Diamante";
-    if (rate === 0.12) return "Ouro";
-    if (rate === 0.1) return "Prata";
-  };
-
   return (
     <section className="p-10 flex gap-8 flex-col md:flex-row items-center md:items-stretch">
       <img
@@ -23,7 +17,7 @@ export function AdTopSection({ ad }: AdProps) {
         <div className="flex items-center gap-3">
           <p className="font-bold text-xl">{ad.title}</p>
           <p className="font-medium text-primary-white bg-primary-darkblue rounded px-2">
-            {calcAdType()}
+            {calcAdType(ad.advertisementRate)}
           </p>
         </div>
         <p className="text-xl">

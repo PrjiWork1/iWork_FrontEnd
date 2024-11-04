@@ -9,18 +9,24 @@ type ContextProps = {
 interface AdContextType {
   advertisements: Advertisement[];
   isAdmin: boolean;
+  isLoading: boolean;
   setIsAdmin: (value: boolean) => void;
+  setUserId: (id: string) => void;
 }
 
 export const AdContext = createContext<AdContextType>({
   advertisements: [],
   isAdmin: false,
+  isLoading: true,
   setIsAdmin: () => {},
+  setUserId: () => "",
 });
 
 export const AdProvider = ({ children }: ContextProps) => {
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,17 +38,30 @@ export const AdProvider = ({ children }: ContextProps) => {
         });
         const data = response.data;
 
-        setAdvertisements(data);
+        if (userId) {
+          const newAds = data.filter(
+            (ad: Advertisement) => ad.userId === userId
+          );
+          setAdvertisements(newAds);
+        } else {
+          setAdvertisements(data);
+        }
       } catch (error) {
         console.error("Erro ao obter os anúncios: ", error);
+      } finally {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 200);
       }
     };
 
     fetchData();
-  }, [isAdmin]);
+  }, [isAdmin, userId]);
 
   return (
-    <AdContext.Provider value={{ advertisements, isAdmin, setIsAdmin }}>
+    <AdContext.Provider
+      value={{ advertisements, isLoading, isAdmin, setIsAdmin, setUserId }}
+    >
       {children}
     </AdContext.Provider>
   );

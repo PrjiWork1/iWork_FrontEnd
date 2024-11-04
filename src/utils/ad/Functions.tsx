@@ -24,3 +24,9 @@ export const getPlanType = (plan: number) => {
   if (plan === 1) return "Ouro";
   if (plan === 2) return "Diamante";
 };
+
+export const calcAdType = (rate: number) => {
+  if (rate === 0.13) return "Diamante";
+  if (rate === 0.12) return "Ouro";
+  if (rate === 0.1) return "Prata";
+};

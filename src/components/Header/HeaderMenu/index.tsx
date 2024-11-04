@@ -56,12 +56,15 @@ export function HeaderMenu() {
               iWork PRO
             </p> */}
             <div className="border border-primary-darkgray"></div>
-            <Link
-              to="/create-ad"
-              className="visible sm:hidden bg-primary-gray text-primary-yellow p-2 rounded-xl font-extrabold hover:bg-primary-yellow hover:text-primary-gray transition"
-            >
-              Anunciar
-            </Link>
+
+            {user.role !== "Admin" && (
+              <Link
+                to="/create-ad"
+                className="visible sm:hidden bg-primary-gray text-primary-yellow p-2 rounded-xl font-extrabold hover:bg-primary-yellow hover:text-primary-gray transition"
+              >
+                Anunciar
+              </Link>
+            )}
 
             {user.role == "Admin" && (
               <Link to={"/adminPanel"} className="headermenu-option">

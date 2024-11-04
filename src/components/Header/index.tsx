@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { HiMiniUserCircle } from "react-icons/hi2";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { HeaderMenu } from "./HeaderMenu";
-import { UserProvider } from "@context/UserContext";
+import { UserContext, UserProvider } from "@context/UserContext";
 
 export function Header() {
   const [isUserLogged, setIsUserLogged] = useState<boolean>(false);
@@ -16,6 +16,12 @@ export function Header() {
     handleIsUserLogged();
   }, []);
 
+  const { user } = useContext(UserContext);
+
+  if (!user) {
+    return <div>Carregando usuário...</div>;
+  }
+
   return (
     <header className="font-inter flex flex-row justify-between bg-primary-darkgreen px-5 md:px-10 py-3 items-center ">
       <Link to="/">
@@ -28,8 +34,10 @@ export function Header() {
         className="w-50 md:w-[40%] px-3 mt-3 md:mt-0 rounded outline-none focus:ring ring-primary-yellow/90 transition"
       /> */}
       <div
-        className={`flex flex-row text-center items-center  md:w-[20%] gap-2 md:gap-0 ${
-          isUserLogged ? "justify-between" : "justify-end"
+        className={`flex flex-row text-center items-center  md:w-[20%] gap-2 md:gap-0  ${
+          isUserLogged && user.role === "Admin"
+            ? "justify-between"
+            : "justify-end"
         }`}
       >
         {/* {isUserLogged && (
@@ -37,7 +45,7 @@ export function Header() {
             iWork PRO
           </p>
         )} */}
-        {isUserLogged && (
+        {isUserLogged && user.role === "Admin" && (
           <Link to="/create-ad" className="hidden sm:flex">
             <button className="cursor-pointer bg-primary-gray text-primary-yellow p-2 rounded-xl font-extrabold hover:bg-primary-yellow hover:text-primary-gray transition">
               Anunciar

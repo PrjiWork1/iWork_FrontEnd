@@ -18,6 +18,13 @@ export function AdminPanel() {
               </span>
             </Link>
           </li>
+          <li className="text-primary-white text-xl font-bold tracking-wide mt-4 md:ml-6 uppercase">
+            <Link to="/">
+              <span className="hover:text-primary-yellow cursor-pointer transition">
+                Retornar à tela home
+              </span>
+            </Link>
+          </li>
         </ul>
       </aside>
       <section className="flex-grow h-full">

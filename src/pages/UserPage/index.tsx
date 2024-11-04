@@ -59,7 +59,7 @@ export function UserPage() {
           Anúncios do Usuário
         </p>
         <AdProvider>
-          <ItemsSection name="" userId={user.id} />
+          <ItemsSection title="" userId={user.id} />
         </AdProvider>
       </section>
     </div>

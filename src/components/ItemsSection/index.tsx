@@ -1,17 +1,20 @@
 import { Card } from "@components/Card";
 import { AdContext } from "@context/AdContext";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Advertisement } from "types/Advertisement";
 
 type SectionProps = {
-  name: string;
+  title?: string;
   userId?: string;
 };
 
-export function ItemsSection({ name, userId }: SectionProps) {
+export function ItemsSection({ title, userId }: SectionProps) {
   const { advertisements, setIsAdmin, setUserId, isLoading } =
     useContext(AdContext);
+  const [errorMessage, setErrorMessage] = useState(
+    "Nenhum anúncio foi encontrado."
+  );
 
   useEffect(() => {
     setTimeout(() => {
@@ -20,6 +23,7 @@ export function ItemsSection({ name, userId }: SectionProps) {
 
     if (userId) {
       setUserId(userId);
+      setErrorMessage("Este usuário não possui nenhum anúncio.");
     }
   }, []);
 
@@ -27,10 +31,10 @@ export function ItemsSection({ name, userId }: SectionProps) {
     <div className="mb-14">
       <section className="flex flex-col items-center md:block">
         <p className="text-primary-darkgreen font-black mb-5 md:text-center lg:text-start md:text-xl text-2xl">
-          {name}
+          {title}
         </p>
         {!isLoading && advertisements.length == 0 && (
-          <p className="text-center text-lg">Nenhum anúncio foi encontrado.</p>
+          <p className="text-center text-lg">{errorMessage}</p>
         )}
         {isLoading ? (
           <p className="text-center text-lg">Carregando Anúncios...</p>

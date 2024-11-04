@@ -13,8 +13,8 @@ export function Home() {
           <img src={banner} alt="home banner" />
           <section className="md:px-20">
             <PopularCategories />
-            <ItemsSection name="Mais Populares" />
-            <ItemsSection name="Em Destaque" />
+            <ItemsSection title="Mais Populares" />
+            <ItemsSection title="Em Destaque" />
             <InfoCards />
           </section>
         </div>

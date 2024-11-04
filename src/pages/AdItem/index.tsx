@@ -42,7 +42,7 @@ export function AdItem() {
           <AdBottomSection ad={ad} />
           <section className="mt-20 px-10">
             <AdProvider>
-              <ItemsSection name="Em Destaque" />
+              <ItemsSection title="Em Destaque" />
             </AdProvider>
           </section>
         </div>

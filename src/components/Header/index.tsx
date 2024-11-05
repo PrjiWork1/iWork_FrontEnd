@@ -35,7 +35,7 @@ export function Header() {
       /> */}
       <div
         className={`flex flex-row text-center items-center  md:w-[20%] gap-2 md:gap-0  ${
-          isUserLogged && user.role === "Admin"
+          isUserLogged && user.role !== "Admin"
             ? "justify-between"
             : "justify-end"
         }`}
@@ -45,7 +45,7 @@ export function Header() {
             iWork PRO
           </p>
         )} */}
-        {isUserLogged && user.role === "Admin" && (
+        {isUserLogged && user.role !== "Admin" && (
           <Link to="/create-ad" className="hidden sm:flex">
             <button className="cursor-pointer bg-primary-gray text-primary-yellow p-2 rounded-xl font-extrabold hover:bg-primary-yellow hover:text-primary-gray transition">
               Anunciar

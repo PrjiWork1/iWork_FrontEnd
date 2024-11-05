@@ -25,7 +25,7 @@ export function ItemsSection({ title, userId }: SectionProps) {
       setUserId(userId);
       setErrorMessage("Este usuário não possui nenhum anúncio.");
     }
-  }, []);
+  }, [advertisements]);
 
   return (
     <div className="mb-14">

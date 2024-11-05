@@ -36,16 +36,14 @@ export const AdProvider = ({ children }: ContextProps) => {
         const response = await axiosApi.get(api, {
           params: { isAdmin },
         });
-        const data = response.data;
+
+        let data = response.data;
 
         if (userId) {
-          const newAds = data.filter(
-            (ad: Advertisement) => ad.userId === userId
-          );
-          setAdvertisements(newAds);
-        } else {
-          setAdvertisements(data);
+          data = data.filter((ad: Advertisement) => ad.userId === userId);
         }
+
+        setAdvertisements(data);
       } catch (error) {
         console.error("Erro ao obter os anúncios: ", error);
       } finally {

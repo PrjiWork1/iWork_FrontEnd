@@ -1,36 +1,55 @@
 import axiosApi from "@utils/axiosApi";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { User } from "types/User";
 
 import userImage from "@assets/user-image.png";
 import { ItemsSection } from "@components/ItemsSection";
-import { AdProvider } from "@context/AdContext";
+import { AdContext, AdProvider } from "@context/AdContext";
+import { Advertisement } from "types/Advertisement";
 
 export function UserPage() {
   const { email } = useParams();
+  const { advertisements } = useContext(AdContext);
+
   const [user, setUser] = useState<User | undefined>(undefined);
+  const [userAds, setUserAds] = useState<Advertisement[]>([]);
 
   useEffect(() => {
-    const getUser = async () => {
-      let api = "/User/GetUserByEmail";
-
-      try {
-        const response = await axiosApi.get(api, {
-          params: {
-            email: email,
-          },
-        });
-        const data = response.data;
-
-        setUser(data);
-      } catch (error) {
-        console.error("Erro ao obter o usuário: ", error);
-      }
-    };
-
     getUser();
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      getUserAds();
+    }
+  }, [user]);
+
+  const getUser = async () => {
+    let api = "/User/GetUserByEmail";
+
+    try {
+      const response = await axiosApi.get(api, {
+        params: {
+          email: email,
+        },
+      });
+      const data = response.data;
+
+      setUser(data);
+
+      getUserAds();
+    } catch (error) {
+      console.error("Erro ao obter o usuário: ", error);
+    }
+  };
+
+  const getUserAds = () => {
+    const ads = advertisements.filter(
+      (ad: Advertisement) => ad.userId === user?.id
+    );
+    setUserAds(ads);
+  };
 
   if (!user) {
     return <div>Carregando usuário...</div>;
@@ -59,7 +78,11 @@ export function UserPage() {
           Anúncios do Usuário
         </p>
         <AdProvider>
-          <ItemsSection title="" userId={user.id} />
+          <ItemsSection
+            title=""
+            ads={userAds}
+            errorMessage="Este usuário não possui nenhum anúncio."
+          />
         </AdProvider>
       </section>
     </div>

@@ -38,11 +38,7 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
     let api = `/Advertisement/UpdateStatusAdvertisement${advertisement.id}`;
 
     try {
-      const resp = await axiosApi.put(api, { status: statusNum });
-      console.log(resp);
-      console.log(
-        `Sucesso ao atualizar o status do anúncio, codigo de status ${statusNum}.`
-      );
+      await axiosApi.put(api, { status: statusNum });
     } catch (error) {
       console.error("Erro ao atualizar o status do anúncio: ", error);
     }

@@ -10,6 +10,7 @@ export function AdItem() {
   const navigate = useNavigate();
   const { id } = useParams();
   const { advertisements } = useContext(AdContext);
+
   const [ad, setAd] = useState<Advertisement | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -30,6 +31,21 @@ export function AdItem() {
     }
   }, [id, advertisements, navigate]);
 
+  useEffect(() => {
+    if (ad) {
+      getRelatedAds();
+    }
+  }, [ad]);
+
+  const [relatedAds, setRelatedAds] = useState<Advertisement[]>([]);
+
+  const getRelatedAds = () => {
+    const ads = advertisements.filter(
+      (dataAd: Advertisement) => dataAd.categoryId === ad!.categoryId
+    );
+    setRelatedAds(ads);
+  };
+
   if (loading) {
     return <p>Carregando...</p>;
   }
@@ -42,7 +58,7 @@ export function AdItem() {
           <AdBottomSection ad={ad} />
           <section className="mt-20 px-10">
             <AdProvider>
-              <ItemsSection title="Em Destaque" />
+              <ItemsSection title="Anúncios Relacionados" ads={relatedAds} />
             </AdProvider>
           </section>
         </div>

@@ -14,6 +14,7 @@ import { AdminHome } from "@pages/AdminPanel/AdminHome/index.tsx";
 import { AdminAds } from "@pages/AdminPanel/AdminAds/index.tsx";
 import { UserPage } from "@pages/UserPage/index.tsx";
 import { PrivateUserRoute } from "./PrivateUserRote.tsx";
+import { CategoryPage } from "@pages/CategoryPage/index.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -24,9 +25,11 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: (
-          <UserProvider>
-            <Home />
-          </UserProvider>
+          <AdProvider>
+            <UserProvider>
+              <Home />
+            </UserProvider>
+          </AdProvider>
         ),
       },
       {
@@ -44,6 +47,14 @@ export const router = createBrowserRouter([
         element: (
           <AdProvider>
             <AdItem />
+          </AdProvider>
+        ),
+      },
+      {
+        path: "/category/:name",
+        element: (
+          <AdProvider>
+            <CategoryPage />
           </AdProvider>
         ),
       },
@@ -75,9 +86,11 @@ export const router = createBrowserRouter([
   {
     path: "/user/:email",
     element: (
-      <UserProvider>
-        <UserPage />
-      </UserProvider>
+      <AdProvider>
+        <UserProvider>
+          <UserPage />
+        </UserProvider>
+      </AdProvider>
     ),
   },
 

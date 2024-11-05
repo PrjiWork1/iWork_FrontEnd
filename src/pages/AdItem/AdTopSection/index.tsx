@@ -1,4 +1,6 @@
+import { PurchaseModal } from "@components/PurchaseModal";
 import { calcAdType } from "@utils/ad/Functions";
+import { useState } from "react";
 import { Advertisement } from "types/Advertisement";
 
 type AdProps = {
@@ -6,6 +8,11 @@ type AdProps = {
 };
 
 export function AdTopSection({ ad }: AdProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleShowModal = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <section className="p-10 flex gap-8 flex-col md:flex-row items-center md:items-stretch">
       <img
@@ -26,33 +33,36 @@ export function AdTopSection({ ad }: AdProps) {
             0
           </span>
         </p>
-        {ad.itemAdvertisements == null ? (
-          <div className="flex gap-3">
+        <div className="flex gap-3">
+          {ad.itemAdvertisements == null ? (
             <p className="text-xl">R$ {ad.price.toFixed(2)}</p>
-            <button className="text-lg bg-primary-lightgreen rounded text-primary-white font-medium px-2 hover:bg-primary-darkgreen/90 transition">
-              Comprar
-            </button>
-          </div>
-        ) : (
-          <div className="flex gap-3">
+          ) : (
             <select
               name="itemAdvertisements"
               id="itemAdvertisements"
               className="border p-2 rounded text-lg border-primary-black font-medium"
             >
-              <option hidden>Selecione um item</option>
+              <option hidden>Escolha um item</option>
               {ad.itemAdvertisements.map((item) => (
                 <option key={item.name} value={item.name}>
                   {item.name} - R${item.price.toFixed(2)}
                 </option>
               ))}
             </select>
-            <button className="text-lg bg-primary-lightgreen rounded text-primary-white font-medium px-2 hover:bg-primary-darkgreen/90 transition">
-              Comprar
-            </button>
-          </div>
-        )}
+          )}
+          <button
+            className="text-lg bg-primary-lightgreen rounded text-primary-white font-medium px-2 hover:bg-primary-darkgreen/90 transition"
+            onClick={handleShowModal}
+          >
+            Comprar
+          </button>
+        </div>
       </div>
+      <PurchaseModal
+        ad={ad}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(!isModalOpen)}
+      />
     </section>
   );
 }

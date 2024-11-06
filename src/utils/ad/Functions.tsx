@@ -1,3 +1,5 @@
+import { Advertisement } from "types/Advertisement";
+
 type ItemsAdvertisements = {
   name: string;
   price: number;
@@ -29,4 +31,14 @@ export const calcAdType = (rate: number) => {
   if (rate === 0.13) return "Diamante";
   if (rate === 0.12) return "Ouro";
   if (rate === 0.1) return "Prata";
+};
+
+export const getPriceRange = (advertisement: Advertisement) => {
+  const prices =
+    advertisement.itemAdvertisements?.map((item) => item.price) || [];
+  const minPrice = prices.length > 0 ? Math.min(...prices) : 0;
+  const maxPrice = prices.length > 0 ? Math.max(...prices) : 0;
+
+  const priceRange = prices.length > 0 ? `${minPrice} - R$ ${maxPrice}` : "";
+  return priceRange;
 };

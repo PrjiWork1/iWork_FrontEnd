@@ -5,6 +5,7 @@ import { purchasemodalschema } from "@schemas/purchasemodalSchema";
 import { IoIosClose } from "react-icons/io";
 
 import { motion } from "framer-motion";
+import { getPriceRange } from "@utils/ad/Functions";
 
 type ModalProps = {
   ad: Advertisement;
@@ -14,12 +15,6 @@ type ModalProps = {
 
 export function PurchaseModal({ ad, isOpen, onClose }: ModalProps) {
   if (!isOpen) return null;
-
-  const prices = ad.itemAdvertisements?.map((item) => item.price) || [];
-  const minPrice = prices.length > 0 ? Math.min(...prices) : 0;
-  const maxPrice = prices.length > 0 ? Math.max(...prices) : 0;
-
-  const priceRange = prices.length > 0 ? `${minPrice} - R$ ${maxPrice}` : "";
 
   const modalVariants = {
     hidden: { opacity: 0, x: "-100%" },
@@ -58,7 +53,7 @@ export function PurchaseModal({ ad, isOpen, onClose }: ModalProps) {
             <p className="font-bold text-lg sm:text-xl">{ad.title}</p>
             <p className="font-medium">@{ad.completeName}</p>
             <p className="font-bold text-lg sm:text-xl">
-              R$ {ad.price || priceRange}
+              R$ {ad.price || getPriceRange(ad)}
             </p>
             <button className="text-base sm:text-lg bg-primary-lightgreen rounded text-primary-white font-medium px-3 py-1 mt-2 hover:bg-primary-darkgreen/90 transition">
               Comprar

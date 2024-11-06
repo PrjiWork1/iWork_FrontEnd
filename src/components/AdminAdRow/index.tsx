@@ -1,4 +1,4 @@
-import { getAdModel, getPlanType } from "@utils/ad/Functions";
+import { getAdModel, getPlanType, getPriceRange } from "@utils/ad/Functions";
 import axiosApi from "@utils/axiosApi";
 import { notify } from "@utils/notify";
 import { formattedDate } from "@utils/text/FormattedTexts";
@@ -62,7 +62,7 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
           {advertisement.categoryDescription}
         </p>
         <p className="font-bold text-lg cursor-default">
-          R$ {advertisement.price}
+          R$ {advertisement.price || getPriceRange(advertisement)}
         </p>
         <div className="flex gap-3 text-3xl cursor-default">
           <IoMdCheckmark
@@ -89,32 +89,40 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
               className="bg-primary-darkgray size-60 object-cover"
             />
             <ul className="flex flex-col gap-3">
-              <li className="font-bold cursor-default">
-                Nome: {advertisement.title}
-              </li>
-              <li className="font-bold cursor-default">
+              <li className="font-bold">Nome: {advertisement.title}</li>
+              <li className="font-bold">
                 Categoria: {advertisement.categoryDescription}
               </li>
-              <li className="font-bold cursor-default">
-                Valor: R$ {advertisement.price}
+              <li className="font-bold">
+                Valor: R$ {advertisement.price || getPriceRange(advertisement)}
               </li>
-              <li className="font-bold cursor-default">
+              {advertisement.itemAdvertisements && (
+                <li className="font-bold">
+                  Itens do Anúncio:
+                  {advertisement.itemAdvertisements?.map((item, index) => (
+                    <p>
+                      {index + 1}. {item.name} - R${item.price.toFixed(2)}
+                    </p>
+                  ))}
+                </li>
+              )}
+              <li className="font-bold">
                 Descrição:
                 <p>{advertisement.description}</p>
               </li>
-              <li className="font-bold cursor-default">
+              <li className="font-bold">
                 Tipo do Plano:
                 <p className="text-primary-darkblue">
                   {getPlanType(advertisement.type)}
                 </p>
               </li>
-              <li className="font-bold cursor-default">
+              <li className="font-bold">
                 Tipo do Anúncio:
                 <p className="text-primary-darkgreen">
                   {getAdModel(advertisement.itemAdvertisements)}
                 </p>
               </li>
-              <li className="font-bold cursor-default">
+              <li className="font-bold">
                 Criado em: {formattedDate(advertisement.createdAt)}
               </li>
             </ul>

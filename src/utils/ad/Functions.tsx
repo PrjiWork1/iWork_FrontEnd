@@ -5,7 +5,7 @@ type ItemsAdvertisements = {
   price: number;
 };
 
-export const getAdModel = (items: ItemsAdvertisements[] | null) => {
+export const getAdModel = (items: ItemsAdvertisements[] | []) => {
   if (items) return "Dinâmico";
   if (!items) return "Normal";
 };

@@ -1,7 +1,7 @@
 import { getAdModel, getPlanType, getPriceRange } from "@utils/ad/Functions";
 import axiosApi from "@utils/axiosApi";
 import { notify } from "@utils/notify";
-import { formattedDate } from "@utils/text/FormattedTexts";
+import { formattedDateHours } from "@utils/text/FormattedTexts";
 import { useState } from "react";
 import { IoMdCheckmark, IoMdClose } from "react-icons/io";
 import { Advertisement } from "types/Advertisement";
@@ -83,11 +83,13 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
       {isMenuOpen && (
         <section className="border-t">
           <div className="flex flex-col md:flex-row gap-10 p-4">
-            <img
-              src={advertisement.urlBanner}
-              alt={advertisement.title}
-              className="bg-primary-darkgray size-60 object-cover"
-            />
+            <div>
+              <img
+                src={advertisement.urlBanner}
+                alt={advertisement.title}
+                className="bg-primary-darkgray size-60 object-cover"
+              />
+            </div>
             <ul className="flex flex-col gap-3">
               <li className="font-bold">Nome: {advertisement.title}</li>
               <li className="font-bold">
@@ -99,7 +101,7 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
               {advertisement.itemAdvertisements && (
                 <li className="font-bold">
                   Itens do Anúncio:
-                  {advertisement.itemAdvertisements?.map((item, index) => (
+                  {advertisement.itemAdvertisements.map((item, index) => (
                     <p>
                       {index + 1}. {item.name} - R${item.price.toFixed(2)}
                     </p>
@@ -123,7 +125,7 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
                 </p>
               </li>
               <li className="font-bold">
-                Criado em: {formattedDate(advertisement.createdAt)}
+                Criado em: {formattedDateHours(advertisement.createdAt)}
               </li>
             </ul>
           </div>

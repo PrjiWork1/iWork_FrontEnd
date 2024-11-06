@@ -1,4 +1,4 @@
-export const formattedDate = (data: string | Date) => {
+export const formattedDateHours = (data: string | Date) => {
   const dataObj = new Date(data);
 
   const dataFormatada = dataObj.toLocaleDateString("pt-BR", {
@@ -14,4 +14,16 @@ export const formattedDate = (data: string | Date) => {
   });
 
   return `${dataFormatada} às ${horaFormatada}`;
+};
+
+export const formattedDate = (data: string | Date) => {
+  const dataObj = new Date(data);
+
+  const dataFormatada = dataObj.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+
+  return `${dataFormatada}`;
 };

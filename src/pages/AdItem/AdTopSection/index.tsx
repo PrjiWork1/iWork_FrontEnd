@@ -34,7 +34,7 @@ export function AdTopSection({ ad }: AdProps) {
           </span>
         </p>
         <div className="flex gap-3">
-          {ad.itemAdvertisements == null ? (
+          {!ad.itemAdvertisements ? (
             <p className="text-xl">R$ {ad.price.toFixed(2)}</p>
           ) : (
             <select

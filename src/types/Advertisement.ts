@@ -16,7 +16,7 @@ export type Advertisement = {
   price: number;
   status: number;
   numberOfSales: number;
-  itemAdvertisements: ItemsAdvertisements[] | null;
+  itemAdvertisements: ItemsAdvertisements[] | [];
   isActive: boolean;
 };
 

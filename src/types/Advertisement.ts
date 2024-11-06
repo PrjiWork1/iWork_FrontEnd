@@ -7,6 +7,7 @@ export type Advertisement = {
   // iWorkPro: boolean;
   userId: string;
   userName: string;
+  userEmail: string;
   completeName: string;
   categoryId: string;
   categoryDescription: string;

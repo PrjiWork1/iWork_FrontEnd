@@ -101,7 +101,7 @@ export function AdForm() {
         });
         notify(
           "success",
-          "Seu anúncio foi criado! Agora, ele irá ser analisado por um Administrador."
+          "Seu anúncio foi criado! Agora ele será analisado por um Administrador."
         );
         setTimeout(() => {
           navigate("/");
@@ -130,7 +130,7 @@ export function AdForm() {
         });
         notify(
           "success",
-          "Seu anúncio foi criado! Agora, ele irá ser analisado por um Administrador."
+          "Seu anúncio foi criado! Agora ele será analisado por um Administrador."
         );
         setItemFields([{ name: "", price: 0 }]);
         setTimeout(() => {

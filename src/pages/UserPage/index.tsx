@@ -64,8 +64,8 @@ export function UserPage() {
             className="size-24 object-cover"
             alt={user.completeName}
           />
-          <p className="text-primary-white font-medium text-xl text-center">
-            Usuário <span className="text-primary-yellow">{user.role}</span>
+          <p className="text-primary-yellow font-medium text-xl text-center">
+            {user.role == "Admin" ? <p>Administrador</p> : <p>Usuário</p>}
           </p>
           <p className="text-primary-white font-medium text-xl text-center">
             {user.completeName}

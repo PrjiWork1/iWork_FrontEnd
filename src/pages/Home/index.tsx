@@ -1,5 +1,4 @@
 import { PopularCategories } from "./PopularCategories";
-import { InfoCards } from "./InfoCards";
 import { AdContext, AdProvider } from "@context/AdContext";
 import { ItemsSection } from "@components/ItemsSection";
 
@@ -51,7 +50,7 @@ export function Home() {
             <PopularCategories />
             <ItemsSection title="Mais Populares" ads={popularAds} />
             <ItemsSection title="Em Destaque" ads={recentAds} />
-            <InfoCards />
+            {/* <InfoCards /> */}
           </section>
         </div>
       </AdProvider>

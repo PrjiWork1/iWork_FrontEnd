@@ -41,7 +41,12 @@ export function Header() {
           </UserProvider>
         ) : (
           <Link to="/login">
-            <HiMiniUserCircle size={40} color="#FFC700" cursor={"pointer"} />
+            <HiMiniUserCircle
+              size={40}
+              color="#FFC700"
+              cursor={"pointer"}
+              data-testid="userIcon"
+            />
           </Link>
         )}
       </div>

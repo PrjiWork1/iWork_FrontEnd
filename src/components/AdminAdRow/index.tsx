@@ -48,6 +48,7 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
       <section
         className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-0 p-4 hover:bg-primary-lightgreen/80 cursor-pointer transition-all"
         onClick={toggleIsMenuOpen}
+        data-testid="adRow"
       >
         <img
           src={advertisement.urlBanner}

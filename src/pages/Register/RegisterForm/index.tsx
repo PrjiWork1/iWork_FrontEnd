@@ -36,6 +36,8 @@ export function RegisterForm() {
 
   const onSubmitFunc = (data: registerschema) => {
     setDisabledButton((prev) => !prev);
+    data.name = data.name.trim();
+    data.surname = data.surname.trim();
     postUser(data);
   };
 

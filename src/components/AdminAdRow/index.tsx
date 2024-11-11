@@ -1,7 +1,6 @@
 import { getAdModel, getPlanType, getPriceRange } from "@utils/ad/Functions";
 import axiosApi from "@utils/axiosApi";
 import { notify } from "@utils/notify";
-import { formattedDateHours } from "@utils/text/FormattedTexts";
 import { useState } from "react";
 import { IoMdCheckmark, IoMdClose } from "react-icons/io";
 import { Advertisement } from "types/Advertisement";
@@ -55,7 +54,11 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
           alt={advertisement.title}
           className="size-20 object-cover cursor-default"
         />
-        <p className="font-bold text-lg cursor-default">
+        <p
+          className={`font-bold text-lg cursor-default ${
+            advertisement.title.length >= 30 ? "w-1/4 truncate" : "w-auto"
+          }`}
+        >
           {advertisement.title}
         </p>
         <p className="font-bold text-lg cursor-default">
@@ -123,9 +126,6 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
                 <p className="text-primary-darkgreen">
                   {getAdModel(advertisement.itemAdvertisements)}
                 </p>
-              </li>
-              <li className="font-bold">
-                Criado em: {formattedDateHours(advertisement.createdAt)}
               </li>
             </ul>
           </div>

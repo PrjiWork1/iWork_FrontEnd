@@ -56,7 +56,7 @@ export function UserPage() {
   }
 
   return (
-    <div className="bg-primary-lightgreen flex flex-col font-inter">
+    <div className="bg-primary-white flex flex-col font-inter">
       <section className="mt-3 flex border-2 bg-primary-darkgreen border-primary-gray rounded py-4 px-20 self-center">
         <div className="flex flex-col items-center gap-3">
           <img

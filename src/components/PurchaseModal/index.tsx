@@ -47,7 +47,7 @@ export function PurchaseModal({ ad, isOpen, onClose }: ModalProps) {
           <img
             src={ad.urlBanner}
             alt={ad.title}
-            className="w-full sm:w-60 h-44 object-cover  rounded-lg order-2 md:order-1"
+            className="w-full sm:w-60 h-56 object-cover rounded-lg order-2 md:order-1"
           />
           <div className="flex flex-col gap-2 order-2 md:order-1">
             <p className="font-bold text-lg sm:text-xl">{ad.title}</p>

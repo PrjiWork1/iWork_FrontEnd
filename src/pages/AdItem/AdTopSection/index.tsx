@@ -18,7 +18,7 @@ export function AdTopSection({ ad }: AdProps) {
       <img
         src={ad.urlBanner}
         alt={ad.title}
-        className="w-60 h-44 object-cover"
+        className="w-60 h-56 object-cover"
       />
       <div className="flex flex-col justify-around gap-5 md:gap-0 items-center md:items-stretch">
         <div className="flex items-center gap-3">

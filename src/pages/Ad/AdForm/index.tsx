@@ -67,7 +67,6 @@ export function AdForm() {
           "Content-Type": "multipart/form-data",
         },
       });
-
       return response.data.path;
     } catch (error) {
       console.log("Ocorreu um erro ao tentar subir a imagem à nuvem! " + error);

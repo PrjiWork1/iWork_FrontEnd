@@ -11,7 +11,7 @@ export function Card({ advertisement }: AdCardProps) {
       <img
         src={advertisement.urlBanner}
         alt={advertisement.title}
-        className="w-full h-44 object-cover"
+        className="w-full h-60 object-cover"
       />
       <p className="text-primary-black font-black">{advertisement.title}</p>
       <section className="flex flex-col items-center gap-3 mt-2">

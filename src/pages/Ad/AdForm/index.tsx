@@ -42,8 +42,16 @@ export function AdForm() {
       "image/svg+xml",
     ];
 
+    const maxSize = 5 * 1024 * 1024; // Limite de 5 MB em bytes
+
     if (image && imageTypes.includes(image.type)) {
-      setImage(image);
+      if (image.size <= maxSize) {
+        setImage(image);
+      } else {
+        notify("error", "O tamanho da imagem excede o limite de 5 MB.");
+      }
+    } else {
+      notify("error", "Por favor, selecione um arquivo de imagem válido.");
     }
   };
 
@@ -191,7 +199,7 @@ export function AdForm() {
       </div>
       <div className="flex flex-col gap-2 mt-6">
         <p className="text-primary-darkgray font-black mb-4">
-          Envie aqui a imagem de capa do anúncio
+          Imagem de capa do anúncio
         </p>
         <div className="flex gap-3 items-center flex-col md:flex-row">
           <div className="relative inline-block">
@@ -214,6 +222,10 @@ export function AdForm() {
             {image ? image.name : "Envie aqui sua imagem"}
           </span>
         </div>
+
+        <small className="font-semibold mt-3">
+          Obs: A imagem deve ter no máximo 5 MB de tamanho.
+        </small>
       </div>
       <div className="flex flex-col gap-2 mt-10">
         <p className="text-primary-darkgray font-black mb-4 text-center">

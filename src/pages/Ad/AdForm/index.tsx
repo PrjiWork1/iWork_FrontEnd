@@ -177,7 +177,7 @@ export function AdForm() {
       onSubmit={handleSubmit(onSubmitFunc)}
     >
       <div className="flex flex-col gap-2">
-        <p className="text-primary-darkgray font-black">Nome do anúncio</p>
+        <p className="text-primary-darkgray font-black">Título do anúncio</p>
         <input
           type="text"
           className="border-2 rounded-lg border-primary-darkgray py-2 px-4 text-primary-darkgray font-black"
@@ -326,7 +326,7 @@ export function AdForm() {
             <div key={index}>
               <div className="flex flex-col gap-2 mt-6">
                 <p className="text-primary-darkgray font-black">
-                  Item #{index + 1}
+                  Título do Item #{index + 1}
                 </p>
                 <input
                   type="text"

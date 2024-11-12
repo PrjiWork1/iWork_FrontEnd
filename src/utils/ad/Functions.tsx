@@ -6,8 +6,8 @@ type ItemsAdvertisements = {
 };
 
 export const getAdModel = (items: ItemsAdvertisements[] | []) => {
-  if (items) return "Dinâmico";
-  if (!items) return "Normal";
+  if (items.length === 0) return "Normal";
+  return "Dinâmico";
 };
 
 export const getAdType = (type: string) => {

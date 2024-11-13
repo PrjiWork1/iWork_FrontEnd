@@ -5,7 +5,7 @@ import { User } from "types/User";
 
 import userImage from "@assets/user-image.png";
 import { ItemsSection } from "@components/ItemsSection";
-import { AdContext, AdProvider } from "@context/AdContext";
+import { AdContext } from "@context/AdContext";
 import { Advertisement } from "types/Advertisement";
 
 export function UserPage() {
@@ -65,7 +65,7 @@ export function UserPage() {
             alt={user.completeName}
           />
           <p className="text-primary-yellow font-medium text-xl text-center">
-            {user.role == "Admin" ? <p>Administrador</p> : <p>Usuário</p>}
+            {user.role == "Admin" ? "Administrador" : "Usuário"}
           </p>
           <p className="text-primary-white font-medium text-xl text-center">
             {user.completeName}
@@ -77,13 +77,11 @@ export function UserPage() {
         <p className="text-primary-white bg-primary-darkgreen font-medium text-xl text-center">
           Anúncios do Usuário
         </p>
-        <AdProvider>
-          <ItemsSection
-            title=""
-            ads={userAds}
-            errorMessage="Este usuário não possui nenhum anúncio."
-          />
-        </AdProvider>
+        <ItemsSection
+          title=""
+          ads={userAds}
+          errorMessage="Este usuário não possui nenhum anúncio."
+        />
       </section>
     </div>
   );

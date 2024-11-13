@@ -48,3 +48,23 @@ export const mockedAd2 = {
     ],
     isActive: true,
 };
+
+export const mockedAds = [mockedAd, mockedAd2]
+
+export const mockedUser = {
+    id: "user-1",
+    completeName: "Mock Person",
+    userName: "Person_mock",
+    email: "personmock@gmail.com",
+    isActive: true
+};
+
+
+export const mockedContextData = {
+    advertisements: mockedAds,
+    isAdmin: false,
+    isLoading: false,
+    setAdvertisements: jest.fn(),
+    setIsAdmin: jest.fn(),
+};
+

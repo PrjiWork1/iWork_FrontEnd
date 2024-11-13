@@ -18,7 +18,7 @@ export function CategoryPage() {
 
   const [categoryAds, setCategoryAds] = useState<Advertisement[]>([]);
 
-  const category = name!.replace(/_/g, " ");
+  const category = name ? name.replace(/_/g, " ") : "";
 
   const getAdsByCategory = () => {
     const ads = advertisements.filter(

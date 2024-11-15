@@ -15,6 +15,9 @@ import { AdminAds } from "@pages/AdminPanel/AdminAds/index.tsx";
 import { UserPage } from "@pages/UserPage/index.tsx";
 import { PrivateUserRoute } from "./PrivateUserRote.tsx";
 import { CategoryPage } from "@pages/CategoryPage/index.tsx";
+import { PaymentSucessPage } from "@pages/PaymentSuccessPage/index.tsx";
+import { PaymentFailurePage } from "@pages/PaymentFailurePage/index.tsx";
+import { PrivateCheckoutRoute } from "./PrivateCheckoutRoute.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +94,22 @@ export const router = createBrowserRouter([
           <UserPage />
         </UserProvider>
       </AdProvider>
+    ),
+  },
+  {
+    path: "/success",
+    element: (
+      <PrivateCheckoutRoute>
+        <PaymentSucessPage />
+      </PrivateCheckoutRoute>
+    ),
+  },
+  {
+    path: "/failure",
+    element: (
+      <PrivateCheckoutRoute>
+        <PaymentFailurePage />
+      </PrivateCheckoutRoute>
     ),
   },
 

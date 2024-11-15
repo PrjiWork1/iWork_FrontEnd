@@ -102,7 +102,7 @@ export function AdminAdRow({ advertisement, onUpdated }: AdRowProps) {
               <li className="font-bold">
                 Valor: R$ {advertisement.price || getPriceRange(advertisement)}
               </li>
-              {advertisement.itemAdvertisements && (
+              {advertisement.itemAdvertisements.length > 0 && (
                 <li className="font-bold">
                   Itens do Anúncio:
                   {advertisement.itemAdvertisements.map((item, index) => (

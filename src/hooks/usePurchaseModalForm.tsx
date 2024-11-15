@@ -6,9 +6,13 @@ import {
 } from "@schemas/purchasemodalSchema";
 
 export const usePurchaseModalForm = () => {
-  const { register, handleSubmit } = useForm<purchasemodalschema>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<purchasemodalschema>({
     resolver: zodResolver(purchasemodalSchema),
   });
 
-  return { register, handleSubmit };
+  return { register, handleSubmit, errors };
 };

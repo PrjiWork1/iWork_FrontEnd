@@ -5,7 +5,12 @@ import { purchasemodalschema } from "@schemas/purchasemodalSchema";
 import { IoIosClose } from "react-icons/io";
 
 import { motion } from "framer-motion";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "@context/UserContext";
 import { getPriceRange } from "@utils/ad/Functions";
+import { notify } from "@utils/notify";
+import axiosApi from "@utils/axiosApi";
 
 type ModalProps = {
   ad: Advertisement;
@@ -21,10 +26,72 @@ export function PurchaseModal({ ad, isOpen, onClose }: ModalProps) {
     visible: { opacity: 1, x: "0%" },
   };
 
-  const { register, handleSubmit } = usePurchaseModalForm();
+  const { register, handleSubmit, errors } = usePurchaseModalForm();
+
+  const { user } = useContext(UserContext);
+
+  const navigator = useNavigate();
 
   const onSubmitFunc = async (data: purchasemodalschema) => {
-    console.log(data);
+    if (!user) {
+      return navigator("/login");
+    }
+
+    if (user.id == ad.userId)
+      return notify("error", "Você não pode comprar o seu próprio serviço!");
+
+    handlePurchaseService(data);
+  };
+
+  const getSelectedItems = (data: purchasemodalschema) => {
+    const info = data.selectedItems
+      ? data.selectedItems
+          .map((selectedItemName) => {
+            // Encontre o item correspondente em `ad.itemAdvertisements`
+            const item = ad.itemAdvertisements.find(
+              (adItem) => adItem.name === selectedItemName
+            );
+            return item
+              ? {
+                  title: item.name,
+                  unitprice: item.price,
+                  id: ad.id,
+                }
+              : null;
+          })
+          .filter((item) => item !== null)
+      : [
+          {
+            title: ad.title,
+            unitprice: ad.price,
+            id: ad.id,
+          },
+        ];
+
+    return info;
+  };
+
+  const handlePurchaseService = async (data: purchasemodalschema) => {
+    try {
+      const requestBody = {
+        description: data.description,
+        items: getSelectedItems(data),
+      };
+
+      const resp = await axiosApi.post("Preference", requestBody);
+
+      sessionStorage.setItem(
+        "purchaseServiceData",
+        JSON.stringify(requestBody)
+      );
+      notify("success", "Sucesso! Redirecionando-se para a tela de pagamento.");
+      setTimeout(() => {
+        window.location.href = resp.data.preference;
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+      notify("error", "Ocorreu um erro ao comprar o serviço!");
+    }
   };
 
   return (
@@ -61,7 +128,7 @@ export function PurchaseModal({ ad, isOpen, onClose }: ModalProps) {
           </div>
         </div>
 
-        {ad.itemAdvertisements && (
+        {ad.itemAdvertisements.length > 0 && (
           <div>
             <p className="font-medium mt-5 text-lg">
               Escolha os itens que você deseja
@@ -75,7 +142,7 @@ export function PurchaseModal({ ad, isOpen, onClose }: ModalProps) {
                   <input
                     type="checkbox"
                     value={item.name}
-                    className="cursor-pointer"
+                    className="cursor-pointer size-4"
                     {...register("selectedItems")}
                   />
                   <span>
@@ -92,8 +159,13 @@ export function PurchaseModal({ ad, isOpen, onClose }: ModalProps) {
           className="border rounded-lg py-2 px-4 resize-none w-full h-32 sm:h-40 mt-3 font-medium"
           maxLength={350}
           placeholder="Insira aqui como você gostaria que fosse desenvolvido o serviço que está comprando."
-          {...register("optionalDescription")}
+          {...register("description")}
         ></textarea>
+        {errors.description && (
+          <small className="text-primary-red font-semibold">
+            {errors.description.message}*
+          </small>
+        )}
       </motion.form>
     </div>
   );

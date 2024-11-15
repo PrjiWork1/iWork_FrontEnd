@@ -1,10 +1,9 @@
 import { z } from "zod";
 
 export const purchasemodalSchema = z.object({
-    optionalDescription: z
+    description: z
         .string()
-        // .min(10, "Você deve informar uma descrição.")
-        .optional(),
+        .min(5, "Você deve informar uma descrição."),
     selectedItems: z
         .array(z.string())
         .optional()

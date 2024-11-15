@@ -1,4 +1,5 @@
 import { PurchaseModal } from "@components/PurchaseModal";
+import { UserProvider } from "@context/UserContext";
 import { calcAdType } from "@utils/ad/Functions";
 import { useState } from "react";
 import { Advertisement } from "types/Advertisement";
@@ -34,9 +35,7 @@ export function AdTopSection({ ad }: AdProps) {
           </span>
         </p>
         <div className="flex gap-3">
-          {!ad.itemAdvertisements ? (
-            <p className="text-xl">R$ {ad.price.toFixed(2)}</p>
-          ) : (
+          {ad.itemAdvertisements.length > 0 ? (
             <select
               name="itemAdvertisements"
               id="itemAdvertisements"
@@ -49,6 +48,8 @@ export function AdTopSection({ ad }: AdProps) {
                 </option>
               ))}
             </select>
+          ) : (
+            <p className="text-xl">R$ {ad.price.toFixed(2)}</p>
           )}
           <button
             className="text-lg bg-primary-lightgreen rounded text-primary-white font-medium px-2 hover:bg-primary-darkgreen/90 transition"
@@ -58,11 +59,13 @@ export function AdTopSection({ ad }: AdProps) {
           </button>
         </div>
       </div>
-      <PurchaseModal
-        ad={ad}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(!isModalOpen)}
-      />
+      <UserProvider>
+        <PurchaseModal
+          ad={ad}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(!isModalOpen)}
+        />
+      </UserProvider>
     </section>
   );
 }

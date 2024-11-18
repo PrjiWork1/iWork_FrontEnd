@@ -3,6 +3,7 @@ import { loginschema } from "@schemas/loginSchema";
 import axiosApi from "@utils/axiosApi";
 import { notify } from "@utils/notify";
 import { useState } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
@@ -112,12 +113,17 @@ export function LoginForm() {
           </small>
         </div>
       )}
-      <input
+      <button
         type="submit"
-        value={"Entrar"}
-        className="w-full py-2 rounded text-lg bg-primary-white text-primary-black font-bold hover:opacity-85 transition cursor-pointer disabled:bg-primary-white/50 disabled:hover:opacity-100 disabled:cursor-not-allowed"
+        className="w-full py-2 rounded text-lg bg-primary-white text-primary-black font-bold hover:opacity-85 transition cursor-pointer disabled:bg-primary-white/50 disabled:hover:opacity-100 disabled:cursor-not-allowed flex items-center justify-center"
         disabled={disabledButton}
-      />
+      >
+        {disabledButton ? (
+          <AiOutlineLoading3Quarters color="black" className="animate-spin" />
+        ) : (
+          "Entrar"
+        )}
+      </button>
       {/* <small className="mt-3 mb-3 md:mb-0 text-primary-white text-xs cursor-pointer hover:underline">
         Área de Administrador
       </small> */}

@@ -1,7 +1,7 @@
 import { PurchaseModal } from "@components/PurchaseModal";
-import { UserProvider } from "@context/UserContext";
+import { UserContext, UserProvider } from "@context/UserContext";
 import { calcAdType } from "@utils/ad/Functions";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Advertisement } from "types/Advertisement";
 
 type AdProps = {
@@ -13,6 +13,12 @@ export function AdTopSection({ ad }: AdProps) {
   const handleShowModal = () => {
     setIsModalOpen(true);
   };
+
+  const { user } = useContext(UserContext);
+
+  if (!user) {
+    return <div>Carregando usuário...</div>;
+  }
 
   return (
     <section className="p-10 flex gap-8 flex-col md:flex-row items-center md:items-stretch">
@@ -51,12 +57,14 @@ export function AdTopSection({ ad }: AdProps) {
           ) : (
             <p className="text-xl">R$ {ad.price.toFixed(2)}</p>
           )}
-          <button
-            className="text-lg bg-primary-lightgreen rounded text-primary-white font-medium px-2 hover:bg-primary-darkgreen/90 transition"
-            onClick={handleShowModal}
-          >
-            Comprar
-          </button>
+          {user.role !== "Admin" && (
+            <button
+              className="text-lg bg-primary-lightgreen rounded text-primary-white font-medium px-2 hover:bg-primary-darkgreen/90 transition"
+              onClick={handleShowModal}
+            >
+              Comprar
+            </button>
+          )}
         </div>
       </div>
       <UserProvider>

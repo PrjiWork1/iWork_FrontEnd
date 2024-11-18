@@ -5,6 +5,7 @@ import { Advertisement } from "types/Advertisement";
 import { AdTopSection } from "./AdTopSection";
 import { AdBottomSection } from "./AdBottomSection";
 import { ItemsSection } from "@components/ItemsSection";
+import { UserProvider } from "@context/UserContext";
 
 export function AdItem() {
   const navigate = useNavigate();
@@ -54,7 +55,9 @@ export function AdItem() {
     <div>
       {ad && (
         <div className="font-inter">
-          <AdTopSection ad={ad} />
+          <UserProvider>
+            <AdTopSection ad={ad} />
+          </UserProvider>
           <AdBottomSection ad={ad} />
           <section className="mt-20 px-10">
             <AdProvider>

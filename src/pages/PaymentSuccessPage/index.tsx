@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 type purchaseAdType = {
   title: string;
@@ -7,6 +7,7 @@ type purchaseAdType = {
 };
 
 export function PaymentSucessPage() {
+  const [searchParams] = useSearchParams();
   const purchasedAd = sessionStorage.getItem("purchaseServiceData");
   const data = JSON.parse(purchasedAd!);
 
@@ -29,6 +30,7 @@ export function PaymentSucessPage() {
         <p className="text-2xl font-semibold text-center">
           Compra realizada com sucesso!
         </p>
+        {/* <p>{searchParams.get("status")}</p> */}
         <div className="w-1/2 font-semibold text-lg flex flex-col gap-2">
           {data.items.length > 1 && "Itens Adquiridos"}
           {data.items.map((item: purchaseAdType) => (

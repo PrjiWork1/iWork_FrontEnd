@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { registerschema } from "@schemas/registerSchema";
 import { useRegisterForm } from "@hooks/useRegisterForm";
 import axiosApi from "@utils/axiosApi";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export function RegisterForm() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -237,12 +238,17 @@ export function RegisterForm() {
           </small>
         </div>
       )}
-      <input
+      <button
         type="submit"
-        value={"Registrar"}
-        className="w-full py-2 rounded text-lg bg-primary-white text-primary-black font-bold hover:opacity-85 transition cursor-pointer disabled:bg-primary-white/50 disabled:hover:opacity-100 disabled:cursor-not-allowed"
+        className="w-full py-2 rounded text-lg bg-primary-white text-primary-black font-bold hover:opacity-85 transition cursor-pointer disabled:bg-primary-white/50 disabled:hover:opacity-100 disabled:cursor-not-allowed flex items-center justify-center"
         disabled={disabledButton}
-      />
+      >
+        {disabledButton ? (
+          <AiOutlineLoading3Quarters color="black" className="animate-spin" />
+        ) : (
+          "Registrar"
+        )}
+      </button>
     </form>
   );
 }

@@ -7,7 +7,7 @@ import banner from "@assets/Banners/bannerAd.svg";
 export function Ad() {
   return (
     <div className="font-inter">
-      <img src={banner} alt="ad banner" />
+      <img src={banner} alt="ad banner" data-testid="ad-banner" />
       <section className="md:px-20 px-2 lg:flex lg:justify-center">
         <UserProvider>
           <CategoryProvider>

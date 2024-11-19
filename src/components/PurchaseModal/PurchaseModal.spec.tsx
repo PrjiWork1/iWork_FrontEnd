@@ -2,9 +2,14 @@ import { render, screen } from "@testing-library/react";
 import { PurchaseModal } from ".";
 import { Advertisement } from "types/Advertisement";
 import { mockedAd, mockedAd2 } from "@utils/test/mockedData";
+import { BrowserRouter } from "react-router-dom";
 
 const renderComponent = (ad: Advertisement) => {
-  render(<PurchaseModal isOpen ad={ad} onClose={() => jest.fn()} />);
+  render(
+    <BrowserRouter>
+      <PurchaseModal isOpen ad={ad} onClose={() => jest.fn()} />
+    </BrowserRouter>
+  );
 };
 
 describe("<PurchaseModal />", () => {

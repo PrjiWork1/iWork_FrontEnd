@@ -34,7 +34,7 @@ export function PaymentSucessPage() {
         <div className="w-1/2 font-semibold text-lg flex flex-col gap-2">
           {data.items.length > 1 && "Itens Adquiridos"}
           {data.items.map((item: purchaseAdType) => (
-            <div>
+            <div key={item.id}>
               <p>
                 Título do {data.items.length > 1 ? "item" : "serviço"}:{" "}
                 {item.title}

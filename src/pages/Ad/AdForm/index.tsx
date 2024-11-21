@@ -71,10 +71,6 @@ export function AdForm() {
       return response.data.path;
     } catch (error) {
       console.log("Ocorreu um erro ao tentar subir a imagem à nuvem! " + error);
-      return notify(
-        "error",
-        "Um erro ocorreu ao tentar subir a imagem à nuvem."
-      );
     }
   };
 

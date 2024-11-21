@@ -178,6 +178,13 @@ export function AdForm() {
     setItemFields(newFields);
   };
 
+  const handleGoToTermsPage = () => {
+    window.open(
+      "https://prjiworkfatectq.blob.core.windows.net/iwork-docs/Termos_Uso_IWORK.pdf",
+      "_blank"
+    );
+  };
+
   return (
     <form
       className="border-2 rounded border-primary-darkgray p-5 my-14 lg:w-2/3"
@@ -671,7 +678,12 @@ export function AdForm() {
           />
           <p className="text-primary-darkgray font-semibold">
             Li e aceito todos os{" "}
-            <span className="text-primary-yellow">Termos de Contrato</span>
+            <span
+              className="text-primary-yellow cursor-pointer hover:underline"
+              onClick={handleGoToTermsPage}
+            >
+              Termos de Contrato
+            </span>
           </p>
         </div>
         {errors.agree && (

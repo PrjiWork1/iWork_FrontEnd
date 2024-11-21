@@ -28,8 +28,8 @@ describe("<PaymentSucessPage />", () => {
   it("should display items", () => {
     const purchaseData = {
       items: [
-        { title: "Ad A", unitprice: 100, id: "1" },
-        { title: "Ad B", unitprice: 200, id: "2" },
+        { name: "Ad A", price: 100, id: "1" },
+        { name: "Ad B", price: 200, id: "2" },
       ],
       description: "Teste",
     };

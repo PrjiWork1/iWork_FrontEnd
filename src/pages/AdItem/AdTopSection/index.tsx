@@ -16,10 +16,6 @@ export function AdTopSection({ ad }: AdProps) {
 
   const { user } = useContext(UserContext);
 
-  if (!user) {
-    return <div>Carregando usuário...</div>;
-  }
-
   return (
     <section className="p-10 flex gap-8 flex-col md:flex-row items-center md:items-stretch">
       <img
@@ -37,7 +33,7 @@ export function AdTopSection({ ad }: AdProps) {
         <p className="text-xl">
           Vendas{" "}
           <span className="bg-primary-darkgreen px-2 rounded text-primary-white">
-            0
+            {ad.numberOfSales}
           </span>
         </p>
         <div className="flex gap-3">
@@ -57,7 +53,7 @@ export function AdTopSection({ ad }: AdProps) {
           ) : (
             <p className="text-xl">R$ {ad.price.toFixed(2)}</p>
           )}
-          {user.role !== "Admin" && (
+          {user?.role == "User" && (
             <button
               className="text-lg bg-primary-lightgreen rounded text-primary-white font-medium px-2 hover:bg-primary-darkgreen/90 transition"
               onClick={handleShowModal}

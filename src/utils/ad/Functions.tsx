@@ -42,3 +42,9 @@ export const getPriceRange = (advertisement: Advertisement) => {
   const priceRange = prices.length > 0 ? `${minPrice} - R$ ${maxPrice}` : "";
   return priceRange;
 };
+
+export const getApiStatus = (status: string) => {
+  if (status === "approved") return 0;
+  if (status === "failure") return 1;
+  if (status === "pending") return 2;
+};

@@ -1,8 +1,11 @@
+import { getApiStatus } from "@utils/ad/Functions";
+import axiosApi from "@utils/axiosApi";
+import { useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
 type purchaseAdType = {
-  title: string;
-  unitprice: number;
+  name: string;
+  price: number;
   id: string;
 };
 
@@ -14,6 +17,57 @@ export function PaymentSucessPage() {
   const handleReturnToHome = () => {
     sessionStorage.removeItem("purchaseServiceData");
   };
+
+  const handleCreateHiringAdvertisement = async () => {
+    try {
+      const resp = await axiosApi.post(
+        "HiringAdvertisement/CreateHiringAdvertisement",
+        {
+          advertisementId: data.advertisementId,
+          contractorId: data.contractorId,
+          advertiserId: data.advertiserId,
+          preferenceId: searchParams.get("preference_id"),
+          advertisementTemplate: data.advertisementTemplate,
+          advertisementType: data.advertisementType,
+          hiringStatus: getApiStatus(searchParams.get("status")!),
+          description: data.description,
+          items: data.items ? data.items : [],
+          price: data.items.length == 1 ? data.items[0].unitprice : 0,
+          isActive: true,
+        }
+      );
+
+      console.log(resp);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleUptadeAdnumberOfSales = async (
+    advertisementId: string,
+    currentNumberOfSales: number
+  ) => {
+    try {
+      const resp = await axiosApi.put(
+        `Advertisement/UpdateNumberOfSalesAdvertisement${advertisementId}`,
+        {
+          numberOfSales: currentNumberOfSales + 1,
+        }
+      );
+
+      console.log(resp);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleCreateHiringAdvertisement();
+    handleUptadeAdnumberOfSales(
+      data.advertisementId,
+      data.advertisementNumOfSales
+    );
+  }, [purchasedAd]);
 
   return (
     <div className="bg-primary-lightgray w-screen h-screen font-inter flex items-center justify-center flex-col">
@@ -37,11 +91,11 @@ export function PaymentSucessPage() {
             <div key={item.id}>
               <p>
                 Título do {data.items.length > 1 ? "item" : "serviço"}:{" "}
-                {item.title}
+                {item.name}
               </p>
               <p>
                 Preço do {data.items.length > 1 ? "item" : "serviço"}: R${" "}
-                {item.unitprice.toFixed(2)}
+                {item.price}
               </p>
             </div>
           ))}

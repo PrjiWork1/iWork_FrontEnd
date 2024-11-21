@@ -124,9 +124,6 @@ export function LoginForm() {
           "Entrar"
         )}
       </button>
-      {/* <small className="mt-3 mb-3 md:mb-0 text-primary-white text-xs cursor-pointer hover:underline">
-        Área de Administrador
-      </small> */}
     </form>
   );
 }

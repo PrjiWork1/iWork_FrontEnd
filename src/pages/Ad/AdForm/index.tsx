@@ -6,6 +6,7 @@ import { getAdType, getiWorkPro } from "@utils/ad/Functions";
 import axiosApi from "@utils/axiosApi";
 import { notify } from "@utils/notify";
 import { useContext, useState } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 
 interface ItemAdvertisement {
@@ -70,7 +71,10 @@ export function AdForm() {
       return response.data.path;
     } catch (error) {
       console.log("Ocorreu um erro ao tentar subir a imagem à nuvem! " + error);
-      return notify("error", "Um erro ocorreu ao tentar criar o anúncio.");
+      return notify(
+        "error",
+        "Um erro ocorreu ao tentar subir a imagem à nuvem."
+      );
     }
   };
 
@@ -681,12 +685,20 @@ export function AdForm() {
         )}
       </div>
       <div className="mb-6 mt-3 flex justify-end">
-        <input
+        <button
           type="submit"
-          value="Anunciar"
           className="cursor-pointer bg-primary-yellow font-semibold text-primary-darkgray rounded px-3 py-1 hover:bg-primary-yellow/70 transition disabled:bg-primary-white/50 disabled:hover:opacity-100 disabled:cursor-not-allowed"
           disabled={disabledButton}
-        />
+        >
+          {disabledButton ? (
+            <AiOutlineLoading3Quarters
+              color="black"
+              className="animate-spin m-2"
+            />
+          ) : (
+            "Anunciar"
+          )}
+        </button>
       </div>
     </form>
   );

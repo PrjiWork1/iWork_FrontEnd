@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "@context/UserContext";
-import { getPriceRange } from "@utils/ad/Functions";
+import { getAdModel, getPriceRange } from "@utils/ad/Functions";
 import { notify } from "@utils/notify";
 import axiosApi from "@utils/axiosApi";
 
@@ -71,6 +71,46 @@ export function PurchaseModal({ ad, isOpen, onClose }: ModalProps) {
     return info;
   };
 
+  const getItemsToData = (data: purchasemodalschema) => {
+    const info = data.selectedItems
+      ? data.selectedItems
+          .map((selectedItemName) => {
+            const item = ad.itemAdvertisements.find(
+              (adItem) => adItem.name === selectedItemName
+            );
+            return item
+              ? {
+                  name: item.name,
+                  price: item.price,
+                }
+              : null;
+          })
+          .filter((item) => item !== null)
+      : [
+          {
+            name: ad.title,
+            price: ad.price,
+          },
+        ];
+
+    return info;
+  };
+
+  const handleSavePurchaseData = (data: purchasemodalschema) => {
+    const purchaseData = {
+      description: data.description,
+      items: getItemsToData(data),
+      advertisementId: ad.id,
+      contractorId: ad.userId,
+      advertiserId: user?.id,
+      advertisementTemplate: getAdModel(ad.itemAdvertisements),
+      advertisementType: ad.type,
+      advertisementNumOfSales: ad.numberOfSales,
+    };
+
+    sessionStorage.setItem("purchaseServiceData", JSON.stringify(purchaseData));
+  };
+
   const handlePurchaseService = async (data: purchasemodalschema) => {
     try {
       const requestBody = {
@@ -80,10 +120,8 @@ export function PurchaseModal({ ad, isOpen, onClose }: ModalProps) {
 
       const resp = await axiosApi.post("Preference", requestBody);
 
-      sessionStorage.setItem(
-        "purchaseServiceData",
-        JSON.stringify(requestBody)
-      );
+      handleSavePurchaseData(data);
+
       notify("success", "Sucesso! Redirecionando-se para a tela de pagamento.");
       setTimeout(() => {
         window.location.href = resp.data.preference;

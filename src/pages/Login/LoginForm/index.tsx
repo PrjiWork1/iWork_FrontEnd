@@ -47,7 +47,7 @@ export function LoginForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmitFunc)}
-      className="bg-primary-darkblue rounded-xl p-2 md:px-20 md:py-10 flex flex-col items-center justify-center"
+      className="bg-primary-darkblue rounded-xl px-2 py-8 md:px-20 md:py-10 flex flex-col items-center justify-center"
     >
       <p className="text-primary-white md:text-5xl text-3xl mb-10 font-bold tracking-wide">
         Login

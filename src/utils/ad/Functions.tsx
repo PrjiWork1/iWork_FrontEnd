@@ -10,6 +10,11 @@ export const getAdModel = (items: ItemsAdvertisements[] | []) => {
   return "Dinâmico";
 };
 
+export const getAdModelEnum = (items: ItemsAdvertisements[] | []) => {
+  if (items.length === 0) return 0; // Normal
+  return 1; // Dinamico
+};
+
 export const getAdType = (type: string) => {
   if (type === "Prata") return 0;
   if (type === "Ouro") return 1;

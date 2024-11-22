@@ -32,7 +32,7 @@ export function PaymentSucessPage() {
           hiringStatus: getApiStatus(searchParams.get("status")!),
           description: data.description,
           items: data.items ? data.items : [],
-          price: data.items.length == 1 ? data.items[0].unitprice : 0,
+          price: data.items.length == 1 ? data.items[0].price : 0,
           isActive: true,
         }
       );
@@ -70,8 +70,8 @@ export function PaymentSucessPage() {
   }, [purchasedAd]);
 
   return (
-    <div className="bg-primary-lightgray w-screen h-screen font-inter flex items-center justify-center flex-col">
-      <div className="border bg-primary-white border-primary-black py-6 w-1/2 rounded-lg flex flex-col justify-around gap-10 items-center">
+    <div className="bg-primary-lightgray font-inter flex items-center justify-center flex-col">
+      <div className="border bg-primary-white border-primary-black py-6 md:w-1/2 rounded-lg flex flex-col justify-around gap-10 items-center md:m-10">
         <svg
           viewBox="0 0 24 24"
           className="text-primary-darkgreen w-16 h-16 mx-auto my-6"
@@ -84,7 +84,6 @@ export function PaymentSucessPage() {
         <p className="text-2xl font-semibold text-center">
           Compra realizada com sucesso!
         </p>
-        {/* <p>{searchParams.get("status")}</p> */}
         <div className="w-1/2 font-semibold text-lg flex flex-col gap-2">
           {data.items.length > 1 && "Itens Adquiridos"}
           {data.items.map((item: purchaseAdType) => (

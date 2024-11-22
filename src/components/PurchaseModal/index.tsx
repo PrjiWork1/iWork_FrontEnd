@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "@context/UserContext";
-import { getAdModel, getPriceRange } from "@utils/ad/Functions";
+import { getAdModelEnum, getPriceRange } from "@utils/ad/Functions";
 import { notify } from "@utils/notify";
 import axiosApi from "@utils/axiosApi";
 
@@ -103,7 +103,7 @@ export function PurchaseModal({ ad, isOpen, onClose }: ModalProps) {
       advertisementId: ad.id,
       contractorId: ad.userId,
       advertiserId: user?.id,
-      advertisementTemplate: getAdModel(ad.itemAdvertisements),
+      advertisementTemplate: getAdModelEnum(ad.itemAdvertisements),
       advertisementType: ad.type,
       advertisementNumOfSales: ad.numberOfSales,
     };

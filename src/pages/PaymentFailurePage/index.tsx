@@ -7,7 +7,7 @@ export function PaymentFailurePage() {
 
   return (
     <div className="bg-primary-lightgray w-screen h-screen font-inter flex items-center justify-center flex-col">
-      <div className="border bg-primary-white border-primary-black py-6 w-1/2 rounded-lg flex flex-col justify-around gap-10 items-center">
+      <div className="border bg-primary-white border-primary-black py-6 md:w-1/2 rounded-lg flex flex-col justify-around gap-10 items-center">
         <svg
           viewBox="0 0 24 24"
           className="text-primary-red w-16 h-16 mx-auto my-6"

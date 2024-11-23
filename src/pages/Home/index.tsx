@@ -24,11 +24,11 @@ export function Home() {
   const getPopularAds = () => {
     if (advertisements) {
       const ads = advertisements
-        .slice()
         .sort(
           (a: Advertisement, b: Advertisement) =>
             b.numberOfSales - a.numberOfSales
-        );
+        )
+        .slice(0, 3);
       setPopularAds(ads);
     }
   };

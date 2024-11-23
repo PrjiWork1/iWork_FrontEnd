@@ -45,10 +45,12 @@ export function UserPage() {
   };
 
   const getUserAds = () => {
-    const ads = advertisements.filter(
-      (ad: Advertisement) => ad.userId === user?.id
-    );
-    setUserAds(ads);
+    if (advertisements) {
+      const ads = advertisements.filter(
+        (ad: Advertisement) => ad.userId === user?.id
+      );
+      setUserAds(ads);
+    }
   };
 
   if (!user) {

@@ -21,10 +21,12 @@ export function CategoryPage() {
   const category = name ? name.replace(/_/g, " ") : "";
 
   const getAdsByCategory = () => {
-    const ads = advertisements.filter(
-      (ad: Advertisement) => ad.categoryDescription === category
-    );
-    setCategoryAds(ads);
+    if (advertisements) {
+      const ads = advertisements.filter(
+        (ad: Advertisement) => ad.categoryDescription === category
+      );
+      setCategoryAds(ads);
+    }
   };
 
   return (

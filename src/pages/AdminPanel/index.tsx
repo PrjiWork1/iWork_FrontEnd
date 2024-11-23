@@ -10,7 +10,7 @@ export function AdminPanel() {
           </p>
         </Link>
         <div className="border-2 border-primary-white mt-4"></div>
-        <ul className="flex justify-center md:flex-col md:justify-normal gap-3">
+        <ul className="flex justify-center md:flex-col md:justify-normal gap-3 items-center md:items-start m-4 md:m-0">
           <li className="text-primary-white text-xl lg:text-2xl font-bold tracking-wide mt-4 md:ml-6 uppercase">
             <Link to="/adminPanel/adminAds">
               <span className="hover:text-primary-yellow cursor-pointer transition">

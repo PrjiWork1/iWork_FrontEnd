@@ -4,6 +4,7 @@ import { useAdForm } from "@hooks/useAdForm";
 import { adschema } from "@schemas/adSchema";
 import { getAdType, getiWorkPro } from "@utils/ad/Functions";
 import axiosApi from "@utils/axiosApi";
+import { TermsLink } from "@utils/links";
 import { notify } from "@utils/notify";
 import { useContext, useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -176,13 +177,6 @@ export function AdForm() {
       newFields[index][field] = value as string;
     }
     setItemFields(newFields);
-  };
-
-  const handleGoToTermsPage = () => {
-    window.open(
-      "https://prjiworkfatectq.blob.core.windows.net/iwork-docs/Termos_Uso_IWORK.pdf",
-      "_blank"
-    );
   };
 
   return (
@@ -678,12 +672,13 @@ export function AdForm() {
           />
           <p className="text-primary-darkgray font-semibold">
             Li e aceito todos os{" "}
-            <span
+            <a
               className="text-primary-yellow cursor-pointer hover:underline"
-              onClick={handleGoToTermsPage}
+              href={TermsLink}
+              target="_blank"
             >
               Termos de Contrato
-            </span>
+            </a>
           </p>
         </div>
         {errors.agree && (

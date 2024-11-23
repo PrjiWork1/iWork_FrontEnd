@@ -1,0 +1,1 @@
+export const TermsLink = "https://prjiworkfatectq.blob.core.windows.net/iwork-docs/Termos_Uso_IWORK.pdf"

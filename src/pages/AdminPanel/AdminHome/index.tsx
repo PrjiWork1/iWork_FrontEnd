@@ -5,7 +5,7 @@ export function AdminHome() {
         Seja bem-vindo à área administrativa!
       </p>
 
-      <p className="text-base md:text-xl lg:text-3xl font-extrabold text-center tracking-wide break-words w-[50rem]">
+      <p className="text-base md:text-xl lg:text-3xl font-extrabold text-center tracking-wide break-words md:w-[50rem]">
         Aqui você pode gerenciar e revisar os anúncios enviados para a
         plataforma.
         <br />

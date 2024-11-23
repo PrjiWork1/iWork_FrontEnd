@@ -28,7 +28,7 @@ export function CategoryPage() {
   };
 
   return (
-    <div className="p-8 font-inter mb-10">
+    <div className="p-8 font-inter mb-10 text-center md:text-start">
       <ItemsSection title={`Categoria ${category}`} ads={categoryAds} />
     </div>
   );

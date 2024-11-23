@@ -1,9 +1,13 @@
+import { TermsLink } from "@utils/links";
+
 export function FooterInstitutionalLinks() {
   return (
     <ul className="text-primary-white flex flex-col gap-4">
       <li className="font-extrabold text-xl">Institucional</li>
       <li>
-        <span className="footer-option">Termos de uso</span>
+        <a className="footer-option" href={TermsLink} target="_blank">
+          Termos de uso
+        </a>
       </li>
       <li>
         <span className="footer-option">Política de privacidade</span>

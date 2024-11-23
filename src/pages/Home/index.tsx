@@ -22,23 +22,27 @@ export function Home() {
   const [recentAds, setRecentAds] = useState<Advertisement[]>([]);
 
   const getPopularAds = () => {
-    const ads = advertisements
-      .slice()
-      .sort(
-        (a: Advertisement, b: Advertisement) =>
-          b.numberOfSales - a.numberOfSales
-      );
-    setPopularAds(ads);
+    if (advertisements) {
+      const ads = advertisements
+        .slice()
+        .sort(
+          (a: Advertisement, b: Advertisement) =>
+            b.numberOfSales - a.numberOfSales
+        );
+      setPopularAds(ads);
+    }
   };
 
   const getRecentAds = () => {
-    const ads = advertisements
-      .slice()
-      .sort(
-        (a: Advertisement, b: Advertisement) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
-    setRecentAds(ads);
+    if (advertisements) {
+      const ads = advertisements
+        .slice()
+        .sort(
+          (a: Advertisement, b: Advertisement) =>
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+      setRecentAds(ads);
+    }
   };
 
   return (

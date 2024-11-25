@@ -2,7 +2,7 @@ import { CategoryContext } from "@context/CategoryContext";
 import { UserContext } from "@context/UserContext";
 import { useAdForm } from "@hooks/useAdForm";
 import { adschema } from "@schemas/adSchema";
-import { getAdType, getiWorkPro } from "@utils/ad/Functions";
+import { getAdType } from "@utils/ad/Functions";
 import axiosApi from "@utils/axiosApi";
 import { TermsLink } from "@utils/links";
 import { notify } from "@utils/notify";
@@ -20,7 +20,6 @@ export function AdForm() {
   const [image, setImage] = useState<File | null>(null);
   const [disabledButton, setDisabledButton] = useState<boolean>(false);
   const [selectedType, setSelectedType] = useState("");
-  // const [selectedPlan, setSelectedPlan] = useState("");
   const [adModel, setAdModel] = useState("Normal");
   const [itemFields, setItemFields] = useState<ItemAdvertisement[]>([
     { name: "", price: 0 },
@@ -70,9 +69,7 @@ export function AdForm() {
         },
       });
       return response.data.path;
-    } catch (error) {
-      console.log("Ocorreu um erro ao tentar subir a imagem à nuvem! " + error);
-    }
+    } catch (error) {}
   };
 
   const onSubmitFunc = async (data: adschema) => {
@@ -99,7 +96,6 @@ export function AdForm() {
           description: data.description,
           urlBanner: await uploadImage(),
           type: getAdType(data.type),
-          // iWorkPro: getiWorkPro(data.iWorkPro),
           userId: user.id,
           categoryId: data.category,
           createdAt: new Date(),
@@ -125,7 +121,6 @@ export function AdForm() {
           description: data.description,
           urlBanner: await uploadImage(),
           type: getAdType(data.type),
-          // iWorkPro: getiWorkPro(data.iWorkPro),
           userId: user.id,
           categoryId: data.category,
           createdAt: new Date(),
@@ -570,98 +565,6 @@ export function AdForm() {
           </small>
         )}
       </div>
-
-      {/* <div className="flex flex-col gap-2 mt-6">
-        <p className="text-primary-darkgray font-black mb-4">Tipo do plano</p>
-
-        <label
-          className={`border-2 rounded-lg border-primary-darkgray p-5 text-primary-darkgray cursor-pointer group hover:bg-primary-darkgray transition-colors duration-200 ${
-            selectedPlan === "false"
-              ? "bg-primary-darkgray"
-              : "bg-primary-white"
-          }`}
-          htmlFor="planType1"
-        >
-          <input
-            type="radio"
-            id="planType1"
-            className="hidden"
-            value="false"
-            {...register("iWorkPro", {
-              onChange: (e) => {
-                setSelectedPlan(e.target.value);
-              },
-            })}
-          />
-          <span
-            className={`text-primary-darkgray font-black group-hover:text-primary-white ${
-              selectedPlan === "false"
-                ? "text-primary-white"
-                : "text-primary-darkgray"
-            }`}
-          >
-            Plano Básico
-          </span>
-          <p
-            className={`py-4 px-8 font-medium group-hover:text-primary-white ${
-              selectedPlan === "false"
-                ? "text-primary-white"
-                : "text-primary-darkgray"
-            }`}
-          >
-            Gratuito <br />
-            Pagamento protegido <br />
-            Saque padrão <br />
-            Perfil sem selo
-          </p>
-        </label>
-
-        <label
-          className={`border-2 rounded-lg border-primary-darkgray p-5 text-primary-darkgray mt-4 cursor-pointer group hover:bg-primary-darkgray transition-colors duration-200 ${
-            selectedPlan === "true" ? "bg-primary-darkgray" : "bg-primary-white"
-          }`}
-          htmlFor="planType2"
-        >
-          <input
-            type="radio"
-            id="planType2"
-            className="hidden"
-            value="true"
-            {...register("iWorkPro", {
-              onChange: (e) => {
-                setSelectedPlan(e.target.value);
-              },
-            })}
-          />
-          <span
-            className={`text-primary-darkgray font-black group-hover:text-primary-white ${
-              selectedPlan === "true"
-                ? "text-primary-white"
-                : "text-primary-darkgray"
-            }`}
-          >
-            Plano iWork PRO
-          </span>
-          <p
-            className={`py-4 px-8 font-medium group-hover:text-primary-white ${
-              selectedPlan === "true"
-                ? "text-primary-white"
-                : "text-primary-darkgray"
-            }`}
-          >
-            Pagamento protegido <br />
-            Saque acelerado <br />
-            Mensagem automática <br />
-            Selo PRO no seu perfil
-          </p>
-        </label>
-
-        {errors.iWorkPro && (
-          <small className="text-primary-red font-semibold">
-            {errors.iWorkPro.message}*
-          </small>
-        )}
-      </div> */}
 
       <div className="flex flex-col gap-2 mt-10">
         <div className="flex gap-3 items-center">

@@ -114,16 +114,6 @@ export function RegisterForm() {
       <p className="text-primary-white md:text-5xl mb-10 text-3xl font-bold tracking-wide">
         Registro
       </p>
-      {/* <button className="bg-primary-darkgreen">
-            entrar com google
-          </button> */}
-      {/* <div className="flex items-center justify-center my-4 w-full">
-            <div className=" border-2 border-primary-white w-full rounded-full"></div>
-            <span className="mx-4 font-bold text-primary-white text-center">
-              ou
-            </span>
-            <div className="flex-grow border-2 border-primary-white w-full rounded-full"></div>
-          </div> */}
       <div className="flex flex-col gap-3 mb-8">
         <div className="flex gap-3 md:flex-row flex-col">
           <input

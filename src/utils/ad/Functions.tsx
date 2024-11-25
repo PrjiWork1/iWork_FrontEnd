@@ -21,11 +21,6 @@ export const getAdType = (type: string) => {
   if (type === "Diamante") return 2;
 };
 
-export const getiWorkPro = (iWorkPro: string) => {
-  if (iWorkPro === "true") return true;
-  if (iWorkPro === "false") return false;
-};
-
 export const getPlanType = (plan: number) => {
   if (plan === 0) return "Prata";
   if (plan === 1) return "Ouro";

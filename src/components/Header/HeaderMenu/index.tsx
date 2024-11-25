@@ -52,9 +52,6 @@ export function HeaderMenu() {
               Logado como <br />
               <span className="font-semibold">{user.completeName}</span>
             </p>
-            {/* <p className="text-primary-yellow font-extrabold text-shadow visible sm:hidden">
-              iWork PRO
-            </p> */}
             <div className="border border-primary-darkgray"></div>
 
             {user.role !== "Admin" && (

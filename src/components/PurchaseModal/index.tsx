@@ -127,7 +127,6 @@ export function PurchaseModal({ ad, isOpen, onClose }: ModalProps) {
         window.location.href = resp.data.preference;
       }, 2000);
     } catch (error) {
-      console.log(error);
       notify("error", "Ocorreu um erro ao comprar o serviço!");
     }
   };

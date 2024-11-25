@@ -9,9 +9,6 @@ export const adSchema = z.object({
   type: z.enum(['Prata', 'Ouro', 'Diamante'], {
     message: "Você deve escolher o tipo do anúncio."
   }),
-  // iWorkPro: z.string({
-  //   message: "Você precisa escolher o tipo do plano."
-  // }),
   price: z.string().optional(),
   category: z.string().refine((field) => field !== "select", {
     message: "Você precisa escolher uma categoria."

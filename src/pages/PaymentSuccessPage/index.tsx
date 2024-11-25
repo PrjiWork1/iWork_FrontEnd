@@ -20,27 +20,20 @@ export function PaymentSucessPage() {
 
   const handleCreateHiringAdvertisement = async () => {
     try {
-      const resp = await axiosApi.post(
-        "HiringAdvertisement/CreateHiringAdvertisement",
-        {
-          advertisementId: data.advertisementId,
-          contractorId: data.contractorId,
-          advertiserId: data.advertiserId,
-          preferenceId: searchParams.get("preference_id"),
-          advertisementTemplate: data.advertisementTemplate,
-          advertisementType: data.advertisementType,
-          hiringStatus: getApiStatus(searchParams.get("status")!),
-          description: data.description,
-          items: data.items ? data.items : [],
-          price: data.items.length == 1 ? data.items[0].price : 0,
-          isActive: true,
-        }
-      );
-
-      console.log(resp);
-    } catch (error) {
-      console.log(error);
-    }
+      await axiosApi.post("HiringAdvertisement/CreateHiringAdvertisement", {
+        advertisementId: data.advertisementId,
+        contractorId: data.contractorId,
+        advertiserId: data.advertiserId,
+        preferenceId: searchParams.get("preference_id"),
+        advertisementTemplate: data.advertisementTemplate,
+        advertisementType: data.advertisementType,
+        hiringStatus: getApiStatus(searchParams.get("status")!),
+        description: data.description,
+        items: data.items ? data.items : [],
+        price: data.items.length == 1 ? data.items[0].price : 0,
+        isActive: true,
+      });
+    } catch (error) {}
   };
 
   const handleUptadeAdnumberOfSales = async (
@@ -48,17 +41,13 @@ export function PaymentSucessPage() {
     currentNumberOfSales: number
   ) => {
     try {
-      const resp = await axiosApi.put(
+      await axiosApi.put(
         `Advertisement/UpdateNumberOfSalesAdvertisement${advertisementId}`,
         {
           numberOfSales: currentNumberOfSales + 1,
         }
       );
-
-      console.log(resp);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
